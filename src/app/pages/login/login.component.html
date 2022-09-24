@@ -1,0 +1,32 @@
+<div class="back">
+    <i title="Volver al Inicio" class="fa-solid fa-circle-left puntero"
+    routerLink="/inicio"></i>
+</div>
+
+<div class="background animation fadeIn fast">
+    <div class="center-login">
+        <h1><span>(€)</span>Finanzas personales</h1>
+        <h2> Esta versión es una demostración, todos los datos mostrados son inventados. 
+            <p>(usuario: admin, contraseña: contabilidad)</p>
+        </h2>
+        <form [formGroup]="login" (ngSubmit)="entrar()">
+    
+            <div class="login">
+                <small *ngIf="usuarioValido">El usuario es incorrecto</small>
+                <input type="text" placeholder="Usuario"
+                    formControlName = "login">
+            </div>
+
+            <div class="login">
+                <small *ngIf="passwordValido">El password es incorrecto</small>
+                <input type="password" placeholder="contraseña"
+                    formControlName = "password">
+            </div>
+    
+            <button class="btn puntero">
+                Entrar
+            </button>
+    
+        </form>
+    </div>
+</div>
