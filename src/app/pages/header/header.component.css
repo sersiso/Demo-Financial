@@ -8,7 +8,8 @@ header {
 .menu {
     position: absolute;
     right: 30px;
-    top: 24px;
+    top: 45px;
+    display: flex;
 }
 
 .menu li {
@@ -22,8 +23,12 @@ header {
     margin: 0 15px;
 }
 
-header h1 {
-    font-size: 20px;
-    font-weight: bold;
+.title-user {
+    font-size: 16px;
+    margin-right: 25px;
+}
+
+.logo img {
+    width: 200px;
 }
 

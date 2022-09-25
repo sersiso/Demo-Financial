@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
 
   datosEmpresa:empresaModel;
   currentRoute: string;
+  imgLogo:string = '../../assets/img/logo-financial-demo.svg';
 
   constructor( public auth: LoginService, 
               private router: Router) { }

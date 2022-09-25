@@ -4,8 +4,6 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { usuarioModel } from 'src/app/models/user.models';
-import { HeaderComponent } from '../header/header.component';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +15,7 @@ export class LoginComponent implements OnInit {
   login: FormGroup;
   usuarioRecibido: usuarioModel;
   token:string;
+  imgLogo:string = '../../assets/img/logo-financial-demo.svg';
 
   constructor( private fb:FormBuilder, 
                 private router: Router, 

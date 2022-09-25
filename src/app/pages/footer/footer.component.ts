@@ -8,6 +8,9 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class FooterComponent implements OnInit {
 
+  rutaImg:string = '../../assets/img/logo-sergio-sierra.svg';
+  urlMiWeb:string = 'http://www.sergiossoto.com';
+
   constructor( public _SERVICE: LoginService ) { }
 
   ngOnInit(): void {

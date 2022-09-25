@@ -79,23 +79,27 @@ table {
   }
 
   .background {
-    background: linear-gradient(rgb(195, 210, 226), rgb(255, 255, 255));
+    /* background: linear-gradient(rgb(195, 210, 226), rgb(255, 255, 255)); */
+    background-color: #f1f1f1;
     height: 100%;
   }
 
   .font {
+    /* font-family: monospace !important; */
     font-family: Verdana, Geneva, Tahoma, sans-serif !important;
   }
 
-  .btn {
-    padding: 10px 20px;
-    font-size: 17px;
-    background-color: #839ebf;
-    color: #fff;
-    border: none;
+.btn {
+  font-family: monospace !important;
+  padding: 10px 20px;
+  font-size: 17px;
+  background-color: #839ebf;
+  color: #fff;
+  border: none;
 }
 
 .btn-cuadrado {
+  font-family: monospace !important;
   padding: 20px;
   font-size: 17px;
   background-color: #839ebf;
@@ -115,4 +119,12 @@ table {
 .container {
   width: 80%;
   margin: 0 auto;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.box-s {
+  box-shadow: 1px 1px 16px 0 #ccc;
 }

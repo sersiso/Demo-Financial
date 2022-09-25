@@ -1,29 +1,46 @@
 <div [style.display]="auth.quitarHeaderFooter()"
     class="animated fadeIn fast">
     <header *ngIf="auth.estaAutenticado() === true">
-        <h1>
-            {{ datosEmpresa.nombre }} <span>({{ datosEmpresa.fundadaEn }})</span>
-        </h1>
-        <ul class="menu">
-            <li><i title="Inicio"  class="fa-solid fa-house"></i></li>
-            <li><i title="Anotar Movimiento"  class="fa-solid fa-file-pen"></i></li>
-            <li><i title="Ver Cuentas"  class="fa-solid fa-book-open"></i></li>
-            <li><i title="Opciones"  class="fa-solid fa-gear"></i></li>
-            <li>
-                <i title="Cerrar sesión" class="fa-solid fa-right-to-bracket puntero"
-                (click)="salir()"></i>
-            </li>
-        </ul>
+
+        <div class="logo">
+            <img class="puntero" title="Ir a la página principal" [src]="imgLogo" routerLink="/inicio">
+        </div>
+
+        <nav>
+            <ul class="menu">
+                <li>
+                    <h1 class="title-user">¡Hola, {{ datosEmpresa.nombre }}!
+                        <span>| Año de trabajo {{ datosEmpresa.fundadaEn }}</span>
+                    </h1>
+                </li>
+                <li><i title="Inicio"  class="fa-solid fa-house"></i></li>
+                <li><i title="Anotar Movimiento"  class="fa-solid fa-file-pen"></i></li>
+                <li><i title="Ver Cuentas"  class="fa-solid fa-book-open"></i></li>
+                <li><i title="Opciones"  class="fa-solid fa-gear"></i></li>
+                <li>
+                    <i title="Cerrar sesión" class="fa-solid fa-right-to-bracket puntero"
+                    (click)="salir()"></i>
+                </li>
+            </ul>
+        </nav>
+
     </header>
     
     <header *ngIf="auth.estaAutenticado() === false">
+
         <h1>
-            {{ datosEmpresa.nombre }} <span>({{ datosEmpresa.fundadaEn }})</span>
+            <div class="logo">
+                <img class="puntero" title="Ir a la página principal" [src]="imgLogo" routerLink="/inicio">
+            </div>
         </h1>
-        <ul class="menu">
-            <li routerLink="/login">
-                <i title="Iniciar sesion" class="fa-solid fa-user puntero"></i>
-            </li>
-        </ul>
+
+        <nav>
+            <ul class="menu">
+                <li routerLink="/login">
+                    <i title="Iniciar sesion" class="fa-solid fa-user puntero"></i>
+                </li>
+            </ul>
+        </nav>
+
     </header>
 </div>

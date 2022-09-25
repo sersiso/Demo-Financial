@@ -14,7 +14,8 @@ export class LoginService {
   };
 
   private empresa: empresaModel = {
-    nombre: 'Sergio, SL',
+    nombre: 'Sergio',
+    apellido: 'Sierra',
     direccion: 'C/ Mirlo, 22',
     ciudad: 'Granada',
     fundadaEn: '2022',
