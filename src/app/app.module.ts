@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { MiEspacioComponent } from './pages/mi-espacio/mi-espacio.component';
+import { MovimientoComponent } from './pages/movimiento/movimiento.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MiEspacioComponent } from './pages/mi-espacio/mi-espacio.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    MiEspacioComponent
+    MiEspacioComponent,
+    MovimientoComponent
   ],
   imports: [
     BrowserModule,

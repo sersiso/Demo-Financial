@@ -80,13 +80,13 @@ table {
 
   .background {
     /* background: linear-gradient(rgb(195, 210, 226), rgb(255, 255, 255)); */
-    background-color: #f1f1f1;
+    background-color: #f8f8f8;
     height: 100%;
   }
 
   .font {
-    /* font-family: monospace !important; */
-    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-family: sans-serif !important; 
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif !important; */
   }
 
 .btn {
@@ -126,5 +126,5 @@ table {
 }
 
 .box-s {
-  box-shadow: 1px 1px 16px 0 #ccc;
+  box-shadow: 1px 1px 0 0 #ccc;
 }

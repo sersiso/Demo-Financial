@@ -1,1 +1,81 @@
-<p>mi-espacio works!</p>
+<div class="container-guard animated fadeIn fast">
+
+    <div class="saldos">
+        <ul>
+            <li>
+                <i class="fa-solid fa-wallet"></i> 
+                Mi Activo: <span [style.color]="colorActivo">{{ activo + moneda }}</span>
+            </li>
+            <li>
+                <i class="fa-solid fa-handshake-simple"></i> 
+                Debo: <span [style.color]="colorDeuda">{{ deuda + moneda }}</span>
+            </li>
+            <li>
+                <i class="fa-solid fa-money-bills"></i> 
+                Balance: <span class="resaltado" [style.color]="colorBalance">{{ balance + moneda }}</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="bloque">
+
+        <div class="acciones">
+            <button routerLink="/nuevo-apunte" type="button" class="puntero">
+                <i title="Nuevo Movimiento"  class="fa-solid fa-file-pen"></i>
+                <p>Nuevo movimiento</p>
+            </button>
+            <button type="button" class="puntero">
+                <i class="fa-solid fa-book"></i> 
+                <p>Añadir cuenta</p>
+            </button>
+            <button type="button" class="puntero">
+                <i title="Ver Cuentas"  class="fa-solid fa-book-open"></i>
+                <p>Ver cuentas</p>
+            </button>
+            <button type="button" class="puntero">
+                <i title="Opciones"  class="fa-solid fa-gear"></i> 
+                <p>Opciones</p>
+            </button>
+        </div>
+    
+        <div class="buscar-movimientos">
+            <h1 class="bold">Movimientos</h1>
+        </div>
+    
+        <div class="tabla">
+            
+            <table class="default">
+    
+                <tr>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Cuenta</th>
+                    <th>Contrapartida</th>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                    <th></th>
+                </tr>
+
+                <tr *ngFor="let movimiento of movimientos; let i = index"
+                    class="info-tr">
+                    <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo}}</td>
+                    <td>{{ movimiento.concepto }}</td>
+                    <td>{{ movimiento.cuentaContable }}</td>
+                    <td>{{ movimiento.contrapartida }}</td>
+                    <td>{{ movimiento.tipo }}</td>
+                    <td>{{ movimiento.cantidad + moneda }}</td>
+                    <td class="info-button flex-button">
+                        <button [routerLink]="['/movimiento', movimiento.id]" class='puntero mod' title='Modificar' type="button">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button (click)="borrarFila(movimiento.id)" class="puntero del" title="Eliminar" type="button">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                
+            </table>
+        </div>
+    </div>
+</div> 

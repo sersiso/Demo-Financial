@@ -1,6 +1,6 @@
 <div [style.display]="auth.quitarHeaderFooter()"
     class="animated fadeIn fast">
-    <header *ngIf="auth.estaAutenticado() === true">
+    <header *ngIf="auth.estaAutenticado() === true" class="animated fadeIn fast">
 
         <div class="logo">
             <img class="puntero" title="Ir a la página principal" [src]="imgLogo" routerLink="/inicio">
@@ -13,10 +13,11 @@
                         <span>| Año de trabajo {{ datosEmpresa.fundadaEn }}</span>
                     </h1>
                 </li>
-                <li><i title="Inicio"  class="fa-solid fa-house"></i></li>
-                <li><i title="Anotar Movimiento"  class="fa-solid fa-file-pen"></i></li>
-                <li><i title="Ver Cuentas"  class="fa-solid fa-book-open"></i></li>
-                <li><i title="Opciones"  class="fa-solid fa-gear"></i></li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/mi-espacio']" title="Mi espacio">
+                        <i class="fa-solid fa-house puntero"></i>
+                    </a>
+                </li>
                 <li>
                     <i title="Cerrar sesión" class="fa-solid fa-right-to-bracket puntero"
                     (click)="salir()"></i>
@@ -26,7 +27,7 @@
 
     </header>
     
-    <header *ngIf="auth.estaAutenticado() === false">
+    <header *ngIf="auth.estaAutenticado() === false" class="animated fadeIn fast">
 
         <h1>
             <div class="logo">

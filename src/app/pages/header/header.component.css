@@ -1,6 +1,5 @@
 header {
     background-color: #fff;
-    border-bottom: 1px solid #ccc;
     padding: 30px 30px;
     color: #839ebf;
 }
@@ -31,4 +30,26 @@ header {
 .logo img {
     width: 200px;
 }
+
+.active a {
+    color: #455467;
+    transition: all ease-in-out 0.3s;
+}
+
+.active a:hover {
+    color: #839ebf;
+    transition: all ease-in-out 0.3s;
+}
+
+a {
+    color: #839ebf;
+    transition: all ease-in-out 0.3s;
+}
+
+a:hover {
+    color: #455467;
+    transition: all ease-in-out 0.3s;
+}
+
+
 
