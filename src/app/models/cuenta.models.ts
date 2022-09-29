@@ -2,7 +2,7 @@ export class Cuentas {
 
     id:string;
     fechaDeCreacion:string;
-    tipo:string;
+    tipo:any;
     identificador:string;
     nombreCuenta:string;
     descripcion:string;

@@ -10,6 +10,9 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { MiEspacioComponent } from './pages/mi-espacio/mi-espacio.component';
 import { MovimientoComponent } from './pages/movimiento/movimiento.component';
+import { CuentaComponent } from './pages/cuenta/cuenta.component';
+import { CuentasComponent } from './pages/cuentas/cuentas.component';
+import { MilesPipe } from './pipes/miles.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { MovimientoComponent } from './pages/movimiento/movimiento.component';
     HeaderComponent,
     FooterComponent,
     MiEspacioComponent,
-    MovimientoComponent
+    MovimientoComponent,
+    CuentaComponent,
+    CuentasComponent,
+    MilesPipe
   ],
   imports: [
     BrowserModule,

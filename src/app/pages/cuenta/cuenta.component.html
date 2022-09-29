@@ -1,0 +1,98 @@
+<div class="container nuevacuenta animated fadeIn fast">
+
+    <div class="bloque-float animated fadeIn fast">
+        <h1>Nueva cuenta</h1>
+        <button routerLink="/mi-espacio" class="btn-sinfondo puntero">
+            <span>Atrás</span><i class="fa-solid fa-circle-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="animated fadeIn fast info-cuenta bloque-content">
+
+        <form [formGroup]="cuenta" (ngSubmit)="guardarCuenta()">
+
+            <label>Fecha de creación</label>
+            <input class="corto" type="text" placeholder="Fecha de creación"
+                    formControlName="fechaDeCreacion">
+
+            <label>Nombre de la Cuenta</label>
+            <input class="largo" type="text" placeholder="Nombre" maxlength="15" minlength="2" required
+                    formControlName="nombreCuenta">
+                    <small *ngIf="nombreNoValido" class="animated fadeIn fast">
+                        Debes introducir un nombre
+                    </small>
+
+            <label>Tipo de cuenta / Código de cuenta</label>
+            <select class="corto"
+                    formControlName="tipo">
+                <option value="" selected>[ Selecciona un tipo de cuenta ]</option>
+                <option *ngFor="let tipo of tiposCuenta" [ngValue]="tipo" >
+                    {{ tipo.nombre }}
+                </option>
+            </select>
+            <span> / </span>
+            <input class="muycorto" type="text" required
+                    formControlName="identificador">
+                    <small *ngIf="tipoNoValido" class="animated fadeIn fast">
+                        Debes introducir un tipo de cuenta
+                    </small>
+
+            <label>Descripción</label>
+            <input class="muylargo" type="text" placeholder="Breve descripción" maxlength="50" minlength="2" required
+                    formControlName="descripcion">
+                    <small *ngIf="descripcionNoValido" class="animated fadeIn fast">
+                        Debes introducir una descripción correcta
+                    </small>
+
+            <label>Saldo inicial</label>
+            <input class="corto" type="text" placeholder="Saldo inicial"  maxlength="10" minlength="1" required
+                    formControlName="cantidad">
+            <span> , </span>
+            <input class="muycorto" type="text"  maxlength="2" minlength="2" required
+                    formControlName="decimales">
+            <span> {{ moneda }} </span>
+            <small *ngIf="saldoNoValido" class="animated fadeIn fast">
+                Debes introducir solo números y si no tiene saldo, pon 0,00.
+            </small>
+            <small *ngIf="decimalesNoValido" class="animated fadeIn fast">
+                2 decimales
+            </small>
+
+            <button class="btn puntero" type="submit">
+                Guardar
+            </button>
+
+        </form>
+
+        <div class="instrucciones">
+            <ul>
+                <h2>Tipos de cuentas</h2>
+                <li>
+                    <strong class="bold">Bancaría:</strong> Esta cuenta es un activo. Este tipo de cuentas se utlizan 
+                    para reflejar el dinero que circula en el banco.
+                </li>
+                <li>
+                    <strong class="bold">Efectivo:</strong> Esta cuenta es un activo. En ella se refleja el dinero 
+                    en efectivo que se tiene.
+                </li>
+                <li>
+                    <strong class="bold">Cliente:</strong> Esta cuenta es un activo. Se anotan las deudas a C/P (corto plazo)
+                    que clientes o deudores tienen contigo.
+                </li>
+                <li>
+                    <strong class="bold">Acreedor:</strong> Esta cuenta es un pasivo. Se anotan las deudas a C/P (corto plazo)
+                    que tú tienes con proveedores o acreedores.
+                </li>
+                <li>
+                    <strong class="bold">Deudas Acreedores L/P:</strong> Esta cuenta es un pasivo. Se anotan las 
+                    deudas a L/P (largo plazo) que tú tienes con proveedores o acreedores.
+                </li>
+                <li>
+                    <strong class="bold">Deudas Cliente L/P:</strong> Esta cuenta es un activo. Se anotan las 
+                    deudas a L/P (largo plazo) que clientes o deudores tienen contigo.
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

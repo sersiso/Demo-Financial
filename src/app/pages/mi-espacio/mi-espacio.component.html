@@ -4,15 +4,19 @@
         <ul>
             <li>
                 <i class="fa-solid fa-wallet"></i> 
-                Mi Activo: <span [style.color]="colorActivo">{{ activo + moneda }}</span>
+                Mi Activo: <span [style.color]="colorActivo">{{ activo | miles }}{{ moneda }}</span>
+            </li>
+            <li>
+                <i class="fa-solid fa-wallet"></i> 
+                Dinero Disponible: <span [style.color]="colorActivo">{{ disponible | miles }}{{ moneda }}</span>
             </li>
             <li>
                 <i class="fa-solid fa-handshake-simple"></i> 
-                Debo: <span [style.color]="colorDeuda">{{ deuda + moneda }}</span>
+                Debo: <span [style.color]="colorDeuda">{{ deuda | miles }}{{ moneda }}</span>
             </li>
             <li>
                 <i class="fa-solid fa-money-bills"></i> 
-                Balance: <span class="resaltado" [style.color]="colorBalance">{{ balance + moneda }}</span>
+                Balance: <span class="resaltado" [style.color]="colorBalance">{{ balance | miles }}{{ moneda }}</span>
             </li>
         </ul>
     </div>
@@ -20,26 +24,59 @@
     <div class="bloque">
 
         <div class="acciones">
-            <button routerLink="/nuevo-apunte" type="button" class="puntero">
-                <i title="Nuevo Movimiento"  class="fa-solid fa-file-pen"></i>
-                <p>Nuevo movimiento</p>
-            </button>
-            <button type="button" class="puntero">
-                <i class="fa-solid fa-book"></i> 
-                <p>Añadir cuenta</p>
-            </button>
-            <button type="button" class="puntero">
-                <i title="Ver Cuentas"  class="fa-solid fa-book-open"></i>
-                <p>Ver cuentas</p>
-            </button>
-            <button type="button" class="puntero">
-                <i title="Opciones"  class="fa-solid fa-gear"></i> 
-                <p>Opciones</p>
-            </button>
+
+            <div class="botones">
+                <button routerLink="/nuevo-apunte" type="button" class="puntero">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Apunte nuevo</span>
+                </button>
+                <button routerLink="/cuenta" type="button" class="puntero">
+                    <i class="fa-solid fa-book"></i> 
+                    <span>Nueva cuenta</span>
+                </button>
+                <button routerLink="/cuentas" type="button" class="puntero">
+                    <i title="Ver Cuentas"  class="fa-solid fa-book-open"></i>
+                    <span>Ver cuentas</span>
+                </button>
+            </div>
+
+            <div class="buscador">
+
+                <form>
+                    <div class="busqueda">
+                        <input type="radio" name="tiempo" value="tiempo">
+                        <select>
+                            <option>Últimos 15 días</option>
+                            <option>Último mes</option>
+                            <option>Últimos 3 meses</option>
+                        </select>
+                    </div>
+
+                    <div class="busqueda">
+                        <input type="radio" name="tiempo" value="fecha">
+                        <select>
+                            <option>12</option>
+                        </select>
+                        <span> / </span>
+                        <select>
+                            <option>05</option>
+                        </select>
+                        <span> / </span>
+                        <select>
+                            <option>2022</option>
+                        </select>
+                    </div>
+
+                    <button class="bnt puntero" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
+                </form>
+            </div>
         </div>
     
         <div class="buscar-movimientos">
-            <h1 class="bold">Movimientos</h1>
+            <h1 class="bold">Movimientos de los últimos 15 días</h1>
         </div>
     
         <div class="tabla">
@@ -63,7 +100,7 @@
                     <td>{{ movimiento.cuentaContable }}</td>
                     <td>{{ movimiento.contrapartida }}</td>
                     <td>{{ movimiento.tipo }}</td>
-                    <td>{{ movimiento.cantidad + moneda }}</td>
+                    <td>{{ movimiento.cantidad | miles }}{{ moneda }}</td>
                     <td class="info-button flex-button">
                         <button [routerLink]="['/movimiento', movimiento.id]" class='puntero mod' title='Modificar' type="button">
                             <i class="fa-solid fa-pen-to-square"></i>
@@ -73,9 +110,10 @@
                         </button>
                     </td>
                 </tr>
-
                 
             </table>
+
         </div>
+        <div class="space" [style.display]="estado"></div>
     </div>
 </div> 

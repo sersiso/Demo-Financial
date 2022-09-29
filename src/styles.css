@@ -90,22 +90,31 @@ table {
   }
 
 .btn {
-  font-family: monospace !important;
   padding: 10px 20px;
   font-size: 17px;
   background-color: #839ebf;
   color: #fff;
   border: none;
+  display: table;
 }
 
 .btn-cuadrado {
-  font-family: monospace !important;
   padding: 20px;
   font-size: 17px;
   background-color: #839ebf;
   color: #fff;
   border: none;
   border-radius: 10px;
+}
+
+.btn-sinfondo {
+  padding: 20px;
+  font-size: 35px;
+  background-color: transparent;
+  color: #839ebf;
+  border: none;
+  position: absolute;
+  right: 10px;
 }
 
 .btn:hover {
@@ -121,10 +130,96 @@ table {
   margin: 0 auto;
 }
 
+.container-guard {
+  width: 100%;
+}
+
+.container-box {
+  width: 70%;
+  margin: 40px auto;
+  border: 1px solid #dcdcdc;
+  background-color: #fff;
+}
+
+.bloque {
+  background-color: #fff;
+  padding: 40px;
+}
+
+.bloque-float {
+  padding: 60px 0 0 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 0 40px 0;
+}
+
+.bloque-float span {
+  font-size: 20px;
+  margin: 8px 10px 0 0;
+  display: block;
+  float: left;
+}
+
+.bloque-content {
+  padding: 0 40px;
+  margin: 0 0 60px 0;
+  position: relative;
+}
+
 .bold {
   font-weight: bold;
 }
 
 .box-s {
   box-shadow: 1px 1px 0 0 #ccc;
+}
+
+h1 {
+  font-size: 30px;
+  padding: 0;
+  color: #839ebf;
+}
+
+label {
+  display: block;
+  padding: 0 0 5px 0;
+  margin: 20px 0 0 0;
+  color: #839ebf;
+  font-weight: bold;
+}
+
+select.corto {
+  width: 50%;
+}
+
+input.muycorto{
+  width: 50px;
+}
+
+input.corto{
+  width: 100px;
+}
+
+input.largo{
+  width: 250px;
+}
+
+input.muylargo{
+  width: 85%;
+}
+
+input.muycorto, input.corto, input.largo, input.muylargo, select.corto {
+  padding: 15px 20px;
+  font-size: 16px;
+  font-family: sans-serif;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+}
+
+small {
+  display: block;
+  margin: 5px 0 0 0;
+  color: #d14141;
+  font-size: 13px;
 }
