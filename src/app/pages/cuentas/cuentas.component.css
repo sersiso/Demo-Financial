@@ -1,0 +1,65 @@
+.cuenta-info {
+    background-color: #fff;
+    height: max-content;
+    border: 1px solid #dcdcdc;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 0 5px 0;
+}
+
+.cuenta-info .cabecera {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.cuenta-info .cabecera h2 {
+    flex: 1;
+    padding: 0 2% 0 0;
+}
+
+.cuenta-info .cabecera span {
+    padding: 0 30px 5px 0;
+}
+
+.cantidad {
+    width: 100%;
+}
+
+.cantidades {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.cantidades span {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.mostrar-cuentas h2.title-h2 {
+    display: block;
+    padding: 0 0 5px 0;
+    margin: 20px 0 0 0;
+    color: #839ebf;
+    font-weight: bold;
+}
+
+.space {
+    height: 400px;
+}
+
+.cabecera button {
+    margin-right: 1px;
+}
+
+span.descripcion {
+    display: flex;
+    padding: 8px 0 0 0 !important;
+    margin: 8px 0 0 0 !important;
+    color: #a9a9a9;
+    font-size: 14px;
+    border-top: 1px solid #dcdcdc;
+}

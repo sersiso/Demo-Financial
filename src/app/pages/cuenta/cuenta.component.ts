@@ -44,7 +44,7 @@ export class CuentaComponent implements OnInit {
       fechaDeCreacion: [{ value: this.fecha, disabled: true }, Validators.required],
       tipo: ['', Validators.required],
       identificador: [ { value: this.codigo, disabled: true }, Validators.required],
-      nombreCuenta: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
+      nombreCuenta: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       descripcion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       cantidad: ['', [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
       decimales: ['', [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(2), Validators.maxLength(2)]],

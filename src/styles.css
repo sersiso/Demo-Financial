@@ -107,6 +107,17 @@ table {
   border-radius: 10px;
 }
 
+.btn-redondo {
+  font-size: 17px;
+  background-color: #839ebf;
+  color: #fff;
+  border: none;
+  border-radius: 510px;
+  margin: 0 0 0 10px;
+  width: 40px;
+  height: 40px;
+}
+
 .btn-sinfondo {
   padding: 20px;
   font-size: 35px;
@@ -181,6 +192,12 @@ h1 {
   color: #839ebf;
 }
 
+p.p-h1 {
+  color: #5f9ea0;
+  font-size: 20px;
+  padding: 10px 0 0 0;
+}
+
 label {
   display: block;
   padding: 0 0 5px 0;
@@ -189,12 +206,21 @@ label {
   font-weight: bold;
 }
 
-select.corto {
-  width: 50%;
+.color-text{
+  color: #839ebf;
 }
 
-input.muycorto{
-  width: 50px;
+select.corto {
+  width: 79%;
+}
+
+.select {
+  display: flex;
+  align-items: center;
+}
+
+input.muycorto {
+  width: 3%;
 }
 
 input.corto{
@@ -223,3 +249,4 @@ small {
   color: #d14141;
   font-size: 13px;
 }
+

@@ -1,8 +1,12 @@
 <div class="container nuevacuenta animated fadeIn fast">
 
     <div class="bloque-float animated fadeIn fast">
-        <h1>Nueva cuenta</h1>
-        <button routerLink="/mi-espacio" class="btn-sinfondo puntero">
+        <h1>Modificar Cuenta 
+            <p class="p-h1">
+                "{{ cuentaRecuperada[0].nombreCuenta }}"
+            </p>
+        </h1>
+        <button routerLink="/cuentas" class="btn-sinfondo puntero">
             <span>Atrás</span><i class="fa-solid fa-circle-arrow-left"></i>
         </button>
     </div>
@@ -10,6 +14,10 @@
     <div class="animated fadeIn fast info-cuenta bloque-content">
 
         <form [formGroup]="cuenta" (ngSubmit)="guardarCuenta()">
+
+            <label>id</label>
+            <input class="muylargo" type="text" placeholder="Fecha de creación"
+                    formControlName="id">
 
             <label>Fecha de creación</label>
             <input class="muylargo" type="text" placeholder="Fecha de creación"
@@ -26,9 +34,9 @@
             <div class="select">
                 <select class="corto"
                         formControlName="tipo">
-                    <option value="" selected>[ Selecciona un tipo de cuenta ]</option>
-                    <option *ngFor="let tipo of tiposCuenta" [ngValue]="tipo" >
-                        {{ tipo.nombre }}
+                    <option *ngFor="let tipoCuenta of tiposCuenta"
+                            [selected]="tipoCuenta.nombre === cuentaRecuperada[0].tipo.nombre">
+                        {{ tipoCuenta.nombre }}
                     </option>
                 </select>
                 <span> / </span>
@@ -46,22 +54,8 @@
                         Debes introducir una descripción correcta
                     </small>
 
-            <label>Saldo inicial</label>
-            <input class="corto" type="text" placeholder="Saldo inicial"  maxlength="10" minlength="1" required
-                    formControlName="cantidad">
-            <span> , </span>
-            <input class="muycorto" type="text"  maxlength="2" minlength="2" required
-                    formControlName="decimales">
-            <span> {{ moneda }} </span>
-            <small *ngIf="saldoNoValido" class="animated fadeIn fast">
-                Debes introducir solo números y si no tiene saldo, pon 0,00.
-            </small>
-            <small *ngIf="decimalesNoValido" class="animated fadeIn fast">
-                2 decimales
-            </small>
-
             <button class="btn puntero" type="submit">
-                Guardar
+                Guardar cambios
             </button>
 
         </form>

@@ -7,6 +7,12 @@ import { Movimientos } from '../models/movimientos.models';
 })
 export class InfoService {
 
+  colores:colores = {
+    verde: '#5f9ea0',
+    rojo: '#ff7f50',
+    blanco: '#fff'
+  }
+
   private moneda:moneda = {
     simboloMoneda: '€',
     nombreMoneda: 'Euro'
@@ -36,17 +42,19 @@ export class InfoService {
       codigo: 'CA',
     },
     {
-      nombre: 'Dedudas Acreedor L/P',
+      nombre: 'Deudas Acreedor L/P',
       codigo: 'DALP',
     },
     {
-      nombre: 'Dedudas Cliente L/P',
+      nombre: 'Deudas Cliente L/P',
       codigo: 'DCLP',
     },
+    //Si se agregan más tipos, hacerlo también en la función "nombreCodigos"
   ]
 
   private movimientos:Movimientos[] = [
     {
+      asiento: 1,
       id: 'asd56aa822ff5sfa',
       dia: '23',
       mes: '09',
@@ -58,6 +66,7 @@ export class InfoService {
       tipo: 'Ingreso',
     },
     {
+      asiento: 2,
       id: 'I2jdlsiHGdsljs39a',
       dia: '26',
       mes: '09',
@@ -96,7 +105,7 @@ export class InfoService {
       nombreCuenta: 'Efectivo',
       descripcion: 'Dinero en efectivo',
       debe: '640.50',
-      haber: '0',
+      haber: '0.00',
       saldo: '640.50'
     },
     {
@@ -126,6 +135,20 @@ export class InfoService {
       debe: '310.20',
       haber: '0.00',
       saldo: '310.20'
+    },
+    {
+      id: '1664545442338',
+      fechaDeCreacion: '30/09/2022',
+      tipo: {
+              nombre: 'Deudas Acreedor L/P',
+              codigo: 'DALP',
+            },
+      identificador: '5',
+      nombreCuenta: 'Banco Caixa',
+      descripcion: 'Crédito con el banco',
+      debe: '0.00',
+      haber: '1200.00',
+      saldo: '1200.00'
     },
 
   ]
@@ -160,20 +183,37 @@ export class InfoService {
     return fechaCompleta;
   }
 
+  nombreCodigos(){
+    let codigos = {
+      CBanco: this.tipoCuenta[0].codigo, 
+      CEfectivo: this.tipoCuenta[1].codigo, 
+      CCliente: this.tipoCuenta[2].codigo,
+      CAcreedor: this.tipoCuenta[3].codigo, 
+      DAcreedorLP: this.tipoCuenta[4].codigo,
+      DClienteLP: this.tipoCuenta[5].codigo  
+    }
+    return codigos;
+  }
+
 
   //Setters
   setCuenta( info:Cuentas ){
       this.cuentas.push(info);
   }
 
+  modificarCuenta( info:Cuentas, idRecibido:any ){
+      let indice = this.cuentas.findIndex( i => i.id === idRecibido);
+      this.cuentas[indice] = info;
+  }
+
   
+  //Funciones 
   genenarIdAutomatico(){
     let id:number;
     id = this.hora + this.dia + this.mes + this.anyo; 
     return id;
   }
   
-
   mostrarActivo(){
     let infoCuentas:any, peticion:any, codigos:any, lista = [], resultado:number;
     infoCuentas = this.getInfoCuentas();
@@ -241,13 +281,35 @@ export class InfoService {
 
   }
 
-
-  //Suma los valores de un array
   sumarArray( arrayNumeros ) {
     let suma = 0;
       arrayNumeros.forEach( ( resp:number ) => { suma += resp; });
         return suma;
   }
+
+  buscarCuenta( termino:string ){
+    let cuentasArray = [];
+    termino = termino.toLocaleLowerCase();
+    for (let cuenta of this.cuentas) {
+      let nombreDevuelto = cuenta.nombreCuenta.toLocaleLowerCase();
+      if ( nombreDevuelto.indexOf( termino ) >=0 ){
+        cuentasArray.push( cuenta );
+      }
+    }
+    return cuentasArray;
+  } 
+
+  buscarCuentaId( termino:string ){
+    let cuentasArray = [];
+    termino = termino.toLocaleLowerCase();
+    for (let cuenta of this.cuentas) {
+      let nombreDevuelto = cuenta.id.toLocaleLowerCase();
+      if ( nombreDevuelto.indexOf( termino ) >=0 ){
+        cuentasArray.push( cuenta );
+      }
+    }
+    return cuentasArray;
+  } 
 
   //Variables para fechas
   hoy = new Date();
@@ -268,6 +330,12 @@ export interface tipo {
 export interface moneda {
   simboloMoneda:string,
   nombreMoneda:string
+}
+
+export interface colores {
+  verde: string,
+  rojo: string,
+  blanco: string
 }
 
 

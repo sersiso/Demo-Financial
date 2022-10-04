@@ -36,13 +36,18 @@
                 </button>
                 <button routerLink="/cuentas" type="button" class="puntero">
                     <i title="Ver Cuentas"  class="fa-solid fa-book-open"></i>
-                    <span>Ver cuentas</span>
+                    <span>Administrar cuentas</span>
                 </button>
             </div>
 
             <div class="buscador">
 
                 <form>
+                    <div class="busqueda">
+                        <input type="radio" name="asiento" value="asiento">
+                        <input type="text" placeholder="Asiento" class="corto">
+                    </div>
+
                     <div class="busqueda">
                         <input type="radio" name="tiempo" value="tiempo">
                         <select>
@@ -84,6 +89,7 @@
             <table class="default">
     
                 <tr>
+                    <th>Asiento</th>
                     <th>Fecha</th>
                     <th>Descripción</th>
                     <th>Cuenta</th>
@@ -95,7 +101,8 @@
 
                 <tr *ngFor="let movimiento of movimientos; let i = index"
                     class="info-tr">
-                    <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo}}</td>
+                    <td>{{ movimiento.asiento }}</td>
+                    <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo }}</td>
                     <td>{{ movimiento.concepto }}</td>
                     <td>{{ movimiento.cuentaContable }}</td>
                     <td>{{ movimiento.contrapartida }}</td>
