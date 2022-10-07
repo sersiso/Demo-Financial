@@ -1,6 +1,6 @@
 export class Movimientos {
 
-    asiento:number;
+    asiento:string;
     id:string;
     dia:string;
     mes:string;

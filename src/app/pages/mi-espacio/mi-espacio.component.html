@@ -26,13 +26,13 @@
         <div class="acciones">
 
             <div class="botones">
-                <button routerLink="/nuevo-apunte" type="button" class="puntero">
+                <button routerLink="/asiento" type="button" class="puntero">
                     <i class="fa-solid fa-pen-to-square"></i>
-                    <span>Apunte nuevo</span>
+                    <span>Asiento Nuevo</span>
                 </button>
                 <button routerLink="/cuenta" type="button" class="puntero">
                     <i class="fa-solid fa-book"></i> 
-                    <span>Nueva cuenta</span>
+                    <span>Cuenta nueva</span>
                 </button>
                 <button routerLink="/cuentas" type="button" class="puntero">
                     <i title="Ver Cuentas"  class="fa-solid fa-book-open"></i>
@@ -104,9 +104,9 @@
                     <td>{{ movimiento.asiento }}</td>
                     <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo }}</td>
                     <td>{{ movimiento.concepto }}</td>
-                    <td>{{ movimiento.cuentaContable }}</td>
-                    <td>{{ movimiento.contrapartida }}</td>
-                    <td>{{ movimiento.tipo }}</td>
+                    <td>{{ movimiento.cuentaContable | idtexto }}</td>
+                    <td>{{ movimiento.contrapartida | idtexto }}</td>
+                    <td>{{ movimiento.tipo | tipoMovimiento }}</td>
                     <td>{{ movimiento.cantidad | miles }}{{ moneda }}</td>
                     <td class="info-button flex-button">
                         <button [routerLink]="['/movimiento', movimiento.id]" class='puntero mod' title='Modificar' type="button">

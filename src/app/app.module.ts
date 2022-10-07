@@ -14,6 +14,9 @@ import { CuentaComponent } from './pages/cuenta/cuenta.component';
 import { CuentasComponent } from './pages/cuentas/cuentas.component';
 import { MilesPipe } from './pipes/miles.pipe';
 import { ModificarCuentaComponent } from './pages/modificar-cuenta/modificar-cuenta.component';
+import { AsientoComponent } from './pages/asiento/asiento.component';
+import { IdtextoPipe } from './pipes/idtexto.pipe';
+import { TipoMovimientoPipe } from './pipes/tipo-movimiento.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { ModificarCuentaComponent } from './pages/modificar-cuenta/modificar-cue
     CuentaComponent,
     CuentasComponent,
     MilesPipe,
-    ModificarCuentaComponent
+    ModificarCuentaComponent,
+    AsientoComponent,
+    IdtextoPipe,
+    TipoMovimientoPipe
   ],
   imports: [
     BrowserModule,

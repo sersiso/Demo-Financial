@@ -24,98 +24,196 @@ export class InfoService {
     deuda: 'Deuda',
   }
 
+  private tipoMovimiento = [
+    {
+      id: '1',
+      nombre: 'Cobro directo'
+    },
+    {
+      id: '2',
+      nombre: 'Pago directo'
+    },
+    {
+      id: '3',
+      nombre: 'Deuda con acreedores'
+    },
+    {
+      id: '4',
+      nombre: 'Deuda de deudores'
+    },
+    {
+      id: '5',
+      nombre: 'Venta a cliente'
+    },
+    {
+      id: '6',
+      nombre: 'Compra a proveedores'
+    }
+  ]
+
   private tipoCuenta = [
     {
       nombre: 'Cuenta bancaria',
+      apunte: 'activo',
       codigo: 'CB',
     },
     {
-      nombre: 'Cuenta Efectivo',
+      nombre: 'Dinero en efectivo',
+      apunte: 'activo',
       codigo: 'CE',
     },
     {
-      nombre: 'Cuenta Cliente',
+      nombre: 'Cliente',
+      apunte: 'activo',
       codigo: 'CC',
     },
     {
-      nombre: 'Cuenta Acreedor',
+      nombre: 'Proveedor',
+      apunte: 'pasivo',
+      codigo: 'CP',
+    },
+    {
+      nombre: 'Deudor',
+      apunte: 'activo',
+      codigo: 'CD',
+    },
+    {
+      nombre: 'Acreedor',
+      apunte: 'pasivo',
       codigo: 'CA',
     },
     {
-      nombre: 'Deudas Acreedor L/P',
+      nombre: 'Deudas proveedor a L/P',
+      apunte: 'pasivo',
+      codigo: 'DPLP',
+    },
+    {
+      nombre: 'Deudas cliente a L/P',
+      apunte: 'activo',
+      codigo: 'DCLP',
+    },
+    {
+      nombre: 'Deudas acreedor a L/P',
+      apunte: 'pasivo',
       codigo: 'DALP',
     },
     {
-      nombre: 'Deudas Cliente L/P',
-      codigo: 'DCLP',
+      nombre: 'Deudas deudor a L/P',
+      apunte: 'activo',
+      codigo: 'DDLP',
+    },
+    {
+      nombre: 'Cuenta de regularización',
+      apunte: 'regularización',
+      codigo: 'CR',
     },
     //Si se agregan más tipos, hacerlo también en la función "nombreCodigos"
   ]
 
   private movimientos:Movimientos[] = [
-    {
-      asiento: 1,
-      id: 'asd56aa822ff5sfa',
-      dia: '23',
-      mes: '09',
-      anyo: '2022',
-      cantidad: '1200',
-      concepto: 'Cobro de proyecto página web',
-      cuentaContable: 'CB1/Santander',
-      contrapartida: 'CC2/Esther',
-      tipo: 'Ingreso',
-    },
-    {
-      asiento: 2,
-      id: 'I2jdlsiHGdsljs39a',
-      dia: '26',
-      mes: '09',
-      anyo: '2022',
-      cantidad: '4312',
-      concepto: 'Cobro de proyecto tarjetas visita',
-      cuentaContable: 'CB1/Santander',
-      contrapartida: 'CC2/Esther',
-      tipo: 'Ingreso',
-    }
+     
   ];
 
   private cuentas:Cuentas[] = [
+    {
+      id: '1665060690045',
+      fechaDeCreacion: '01/01/2022',
+      tipo: {
+            nombre: 'Cuenta de regularización',
+            apunte: 'regularización',
+            codigo: 'CR',
+            },
+      identificador: '1',
+      nombreCuenta: 'Mercaderías',
+      descripcion: 'Cuenta de regularización',
+      debe:'0.00',
+      haber: '0.00',
+      saldo: '0.00'
+    },
+    {
+      id: '1665061785259',
+      fechaDeCreacion: '01/01/2022',
+      tipo: {
+            nombre: 'Cuenta de regularización',
+            apunte: 'regularización',
+            codigo: 'CR',
+            },
+      identificador: '2',
+      nombreCuenta: 'Deudas',
+      descripcion: 'Cuenta de regularización',
+      debe:'0.00',
+      haber: '0.00',
+      saldo: '0.00'
+    },
+    {
+      id: '1665138031910',
+      fechaDeCreacion: '01/01/2022',
+      tipo: {
+            nombre: 'Cuenta de regularización',
+            apunte: 'regularización',
+            codigo: 'CR',
+            },
+      identificador: '3',
+      nombreCuenta: 'Donaciones y regalos',
+      descripcion: 'Cuenta de regularización',
+      debe:'0.00',
+      haber: '0.00',
+      saldo: '0.00'
+    },
+    {
+      id: '1665138152607',
+      fechaDeCreacion: '01/01/2022',
+      tipo: {
+            nombre: 'Cuenta de regularización',
+            apunte: 'regularización',
+            codigo: 'CR',
+            },
+      identificador: '4',
+      nombreCuenta: 'Sueldos y salarios',
+      descripcion: 'Cuenta de regularización',
+      debe:'0.00',
+      haber: '0.00',
+      saldo: '0.00'
+    },
     {
       id: '1664458286047',
       fechaDeCreacion: '29/09/2022',
       tipo: {
             nombre: 'Cuenta bancaria',
+            apunte: 'activo',
             codigo: 'CB',
             },
-      identificador: '1',
+      identificador: '5',
       nombreCuenta: 'Banco Santander 0012',
       descripcion: 'Esta es la cuenta acabada en 0012',
-      debe:'2410.75',
+      debe:'3500.00',
       haber: '0.00',
-      saldo: '2410.75'
+      saldo: '3500.00'
     },
     {
       id: '1664459194500',
       fechaDeCreacion: '29/09/2022',
       tipo: {
             nombre: 'Cuenta Efectivo',
+            apunte: 'activo',
             codigo: 'CE',
             },
-      identificador: '2',
+      identificador: '6',
       nombreCuenta: 'Efectivo',
       descripcion: 'Dinero en efectivo',
-      debe: '640.50',
+      debe: '700.00',
       haber: '0.00',
-      saldo: '640.50'
+      saldo: '700.00'
     },
     {
       id: '1664459337454',
       fechaDeCreacion: '29/09/2022',
       tipo: {
               nombre: 'Cuenta Acreedor',
+              apunte: 'pasivo',
               codigo: 'CA',
             },
-      identificador: '3',
+      identificador: '7',
       nombreCuenta: 'Movistar',
       descripcion: 'Suministro de internet',
       debe: '0.00',
@@ -127,9 +225,10 @@ export class InfoService {
       fechaDeCreacion: '29/09/2022',
       tipo: {
               nombre: 'Cuenta Cliente',
+              apunte: 'activo',
               codigo: 'CC',
             },
-      identificador: '4',
+      identificador: '8',
       nombreCuenta: 'María Puertas',
       descripcion: 'Cliente que solicita diseños',
       debe: '310.20',
@@ -141,14 +240,30 @@ export class InfoService {
       fechaDeCreacion: '30/09/2022',
       tipo: {
               nombre: 'Deudas Acreedor L/P',
+              apunte: 'pasivo',
               codigo: 'DALP',
             },
-      identificador: '5',
+      identificador: '9',
       nombreCuenta: 'Banco Caixa',
       descripcion: 'Crédito con el banco',
       debe: '0.00',
       haber: '1200.00',
       saldo: '1200.00'
+    },
+    {
+      id: '1665055630546',
+      fechaDeCreacion: '06/10/2022',
+      tipo: {
+              nombre: 'Cuenta Cliente',
+              apunte: 'activo',
+              codigo: 'CC',
+            },
+      identificador: '10',
+      nombreCuenta: 'Antonio Padilla',
+      descripcion: 'Cliente para web',
+      debe: '670.00',
+      haber: '0.00',
+      saldo: '670.00'
     },
 
   ]
@@ -183,20 +298,46 @@ export class InfoService {
     return fechaCompleta;
   }
 
+  getAnyo(){
+    return this.anyo;
+  }
+
   nombreCodigos(){
     let codigos = {
-      CBanco: this.tipoCuenta[0].codigo, 
-      CEfectivo: this.tipoCuenta[1].codigo, 
-      CCliente: this.tipoCuenta[2].codigo,
-      CAcreedor: this.tipoCuenta[3].codigo, 
-      DAcreedorLP: this.tipoCuenta[4].codigo,
-      DClienteLP: this.tipoCuenta[5].codigo  
+      cb: this.tipoCuenta[0].codigo, 
+      ce: this.tipoCuenta[1].codigo, 
+      cc: this.tipoCuenta[2].codigo,
+      cp: this.tipoCuenta[3].codigo, 
+      cd: this.tipoCuenta[4].codigo,
+      ca: this.tipoCuenta[5].codigo,
+      dplp: this.tipoCuenta[6].codigo,
+      dclp: this.tipoCuenta[7].codigo,
+      dalp: this.tipoCuenta[8].codigo,
+      ddlp: this.tipoCuenta[9].codigo,
+      cr: this.tipoCuenta[10].codigo,
     }
     return codigos;
   }
 
 
   //Setters
+  setMovimientos( info:Movimientos ){
+    
+    //Guarda el asiento
+    this.movimientos.push(info);
+
+    //Modifica los saldos de las cuentas afectadas
+    
+
+
+
+
+  }
+
+  cuadrarAsiento(){
+
+  }
+
   setCuenta( info:Cuentas ){
       this.cuentas.push(info);
   }
@@ -213,6 +354,20 @@ export class InfoService {
     id = this.hora + this.dia + this.mes + this.anyo; 
     return id;
   }
+
+  textoIdCuenta( id ){
+    let indice = this.cuentas.findIndex( i => i.id === id);
+    let identificador = this.cuentas[indice].identificador;
+    let tipo = this.cuentas[indice].tipo.codigo;
+    let nombre = this.cuentas[indice].nombreCuenta;
+    return `${ identificador } / (${ tipo }) ${ nombre }`
+  }
+
+   textoTipo( tipoRecibido ){
+    let indice = this.tipoMovimiento.findIndex( i => i.id === tipoRecibido);
+    let identificador;
+    return identificador = this.tipoMovimiento[indice].nombre;
+  } 
   
   mostrarActivo(){
     let infoCuentas:any, peticion:any, codigos:any, lista = [], resultado:number;

@@ -30,4 +30,10 @@
 
 .instrucciones ul li {
     margin: 20px 0 0 0;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+.instrucciones ul li .bold {
+    color: #000;
 }

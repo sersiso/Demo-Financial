@@ -26,7 +26,7 @@ export class MiEspacioComponent implements OnInit {
 
   colorActivo:string = this.colores.verde;
   colorDisponible:string = this.colores.verde;
-  colorDeuda:string = this.colores.rojo;
+  colorDeuda:string = this.colores.verde;
   colorBalance:string = this.colores.verde;
 
 

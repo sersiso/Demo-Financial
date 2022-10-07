@@ -8,6 +8,7 @@ import { MovimientoComponent } from './pages/movimiento/movimiento.component';
 import { CuentaComponent } from './pages/cuenta/cuenta.component';
 import { CuentasComponent } from './pages/cuentas/cuentas.component';
 import { ModificarCuentaComponent } from './pages/modificar-cuenta/modificar-cuenta.component';
+import { AsientoComponent } from './pages/asiento/asiento.component';
 
 const routes: Routes = [
   { path: 'inicio', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'cuenta', component: CuentaComponent, canActivate: [ AuthGuard ] },
   { path: 'cuentas', component: CuentasComponent, canActivate: [ AuthGuard ] },
   { path: 'modificar-cuenta/:id', component: ModificarCuentaComponent, canActivate: [ AuthGuard ] },
+  { path: 'asiento', component: AsientoComponent, canActivate: [ AuthGuard ] },
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
 ];
 

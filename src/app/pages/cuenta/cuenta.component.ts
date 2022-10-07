@@ -63,7 +63,7 @@ export class CuentaComponent implements OnInit {
 
     const data = this.cuenta.getRawValue();
     this.saldo = data.cantidad + '.' + data.decimales;
-    this.tipoCuenta = data.tipo.codigo;
+    this.tipoCuenta = data.tipo.apunte;
 
     Swal.fire({
       icon: 'success',
@@ -78,14 +78,12 @@ export class CuentaComponent implements OnInit {
   }
 
   crearCuenta( datosForm: Cuentas ){
+    
 
     let debe:string;
     let haber:string;
 
-    if ( this.tipoCuenta === 'CB' || 
-          this.tipoCuenta === 'CE' || 
-          this.tipoCuenta === 'CC' || 
-          this.tipoCuenta === 'DCLP' )
+    if ( this.tipoCuenta === 'activo' )
     {
       debe = this.saldo;
       haber = '0.00';
@@ -154,7 +152,12 @@ export class CuentaComponent implements OnInit {
   }
 
   mostarListaCuentas(){
-    this.tiposCuenta = this._datos.getTipoDeCuenta();
+    let tipos = this._datos.getTipoDeCuenta();
+    tipos.forEach( resp => {
+      if ( resp.apunte === 'activo' || resp.apunte === 'pasivo' ) {
+        this.tiposCuenta.push(resp);
+      }
+    });
   }
 
   mostrarMoneda(){
