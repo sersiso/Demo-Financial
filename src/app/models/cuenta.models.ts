@@ -6,8 +6,8 @@ export class Cuentas {
     identificador:string;
     nombreCuenta:string;
     descripcion:string;
-    debe:string;
-    haber:string;
-    saldo:string;
+    debe:any;
+    haber:any;
+    saldo:any;
 
 }

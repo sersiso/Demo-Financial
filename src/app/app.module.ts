@@ -17,6 +17,7 @@ import { ModificarCuentaComponent } from './pages/modificar-cuenta/modificar-cue
 import { AsientoComponent } from './pages/asiento/asiento.component';
 import { IdtextoPipe } from './pipes/idtexto.pipe';
 import { TipoMovimientoPipe } from './pipes/tipo-movimiento.pipe';
+import { AsideComponent } from './pages/aside/aside.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TipoMovimientoPipe } from './pipes/tipo-movimiento.pipe';
     ModificarCuentaComponent,
     AsientoComponent,
     IdtextoPipe,
-    TipoMovimientoPipe
+    TipoMovimientoPipe,
+    AsideComponent
   ],
   imports: [
     BrowserModule,

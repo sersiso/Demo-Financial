@@ -9,10 +9,9 @@
 
 .info-cuenta form {
     display: flex;
-}
+} 
 
 .instrucciones {
-    width: 40%;
     padding: 0 40px 0 0;
     font-size: 15px;
     text-align: justify;
@@ -73,6 +72,6 @@
     line-height: 16px;
 }
 
-.col {
+.col, .col-2 {
     flex: 1;
 }

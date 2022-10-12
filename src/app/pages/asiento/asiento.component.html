@@ -1,7 +1,12 @@
+<div class="container-principal">
+    <aside class="animated fadeIn fast">
+        <app-aside></app-aside>
+    </aside>
+
 <div class="container nuevacuenta animated fadeIn fast">
 
     <div class="bloque-float animated fadeIn fast">
-        <h1>Asiento Nuevo</h1>
+        <h1>Asiento nuevo</h1>
         <button routerLink="/mi-espacio" class="btn-sinfondo puntero">
             <span>Atrás</span><i class="fa-solid fa-circle-arrow-left"></i>
         </button>
@@ -9,18 +14,9 @@
 
     <div class="animated fadeIn fast info-cuenta bloque-content">
 
-        <form [formGroup]="movimiento" (ngSubmit)="guardarCuenta()">
+        <form [formGroup]="movimiento" (ngSubmit)="guardarMovimiento()">
 
         <div class="col">
-
-            <div class="linea"></div>
-
-            <button class="btn puntero" type="submit">
-                <i class="fa-solid fa-floppy-disk"></i> 
-                Guardar asiento
-            </button>
-
-            <div class="linea"></div>
 
             <div class="flex-w cabecera-asiento">
 
@@ -129,10 +125,6 @@
                 Debes marcar un tipo de movimiento
             </small>
 
-        </div>
-
-        <div class="col">
-
             <div class="cuentas-contables">
                 <label>Cuenta</label>
                 <select class="caja-formulario medio"
@@ -200,10 +192,70 @@
             <small *ngIf="decimalesNoValido" class="animated fadeIn fast">
                 2 decimales
             </small>
+
+            <button class="btn puntero" type="submit">
+                <i class="fa-solid fa-floppy-disk"></i> 
+                Guardar asiento
+            </button>
             
+        </div>
+
+        <div class="col-2">
+
+            <div class="instrucciones">
+                <ul>
+                    <h2>Tipos de cuentas: ACTIVO</h2>
+                    <li>
+                        <strong class="bold">(CB) Cuenta bancaria:</strong> Refleja el dinero que entra y sale del banco.
+                    </li>
+                    <li>
+                        <strong class="bold">(CE) Dinero en efectivo:</strong> Refleja el dinero en efectivo.
+                    </li>
+                    <li>
+                        <strong class="bold">(CC) Cliente:</strong> Se recogen las deudas que tienen los clientes contigo. Se usa para 
+                        la actividad laboral.
+                    </li>
+                    <li>
+                        <strong class="bold">(CD) Deudor:</strong> Se recogen las deudas que tienen otras personas contigo, fuera de la
+                        actividad laboral (amigos, familiares, distintos servicios).
+                    </li>
+                    <li>
+                        <strong class="bold">(CCLP) Deudas cliente a L/P:</strong> Se recogen las deudas que tienen los clientes contigo, pero
+                        a largo plazo (LP), es decir, más de 1 año. Se usa para la actividad laboral.
+                    </li>
+                    <li>
+                        <strong class="bold">(DDLP) Deudas deudores a L/P:</strong> Se recogen las deudas que tienen otras personas contigo, pero
+                        a largo plazo (LP), es decir, más de 1 año. Fuera de la actividad laboral (amigos, familiares, distintos servicios).
+                    </li>
+    
+                    <div class="space"></div>
+    
+                    <h2>Tipos de cuentas: PASIVO</h2>
+                    <li>
+                        <strong class="bold">(CA) Acreedor:</strong> Utilizada para registrar las operaciones o compras realizadas a crédito (dejas a deber) 
+                        hacia otras personas (amigos, familiares, distintos servicios).
+                    </li>
+                    <li>
+                        <strong class="bold">(CP) Proveedor:</strong> Utilizada para registrar las operaciones o compras realizadas a crédito (dejas a deber) 
+                        por tu actividad laboral.
+                    </li>
+                    <li>
+                        <strong class="bold">(CPLP) Deudas proveedor a L/P:</strong> Se recogen las deudas que tienes con los proveedores, pero
+                        a largo plazo (LP), es decir, más de 1 año. Se usa para la actividad laboral.
+                    </li>
+                    <li>
+                        <strong class="bold">(CALP) Deudas acreedor a L/P:</strong> Se recogen las deudas que tienes con otras personas, pero
+                        a largo plazo (LP), es decir, más de 1 año. Fuera de la actividad laboral (amigos, familiares, distintos servicios).
+                    </li>
+                </ul>
+            </div>
+
         </div>
    
         </form>
 
     </div>
+
+</div>
+
 </div>

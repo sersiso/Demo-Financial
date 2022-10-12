@@ -1,126 +1,123 @@
-<div class="container-guard animated fadeIn fast">
 
-    <div class="saldos">
-        <ul>
-            <li>
-                <i class="fa-solid fa-wallet"></i> 
-                Mi Activo: <span [style.color]="colorActivo">{{ activo | miles }}{{ moneda }}</span>
-            </li>
-            <li>
-                <i class="fa-solid fa-wallet"></i> 
-                Dinero Disponible: <span [style.color]="colorActivo">{{ disponible | miles }}{{ moneda }}</span>
-            </li>
-            <li>
-                <i class="fa-solid fa-handshake-simple"></i> 
-                Debo: <span [style.color]="colorDeuda">{{ deuda | miles }}{{ moneda }}</span>
-            </li>
-            <li>
-                <i class="fa-solid fa-money-bills"></i> 
-                Balance: <span class="resaltado" [style.color]="colorBalance">{{ balance | miles }}{{ moneda }}</span>
-            </li>
-        </ul>
-    </div>
+<div class="container-principal">
+    <aside class="animated fadeIn fast">
+        <app-aside></app-aside>
+    </aside>
 
-    <div class="bloque">
+    <div class="container-guard animated fadeIn fast">
 
-        <div class="acciones">
-
-            <div class="botones">
-                <button routerLink="/asiento" type="button" class="puntero">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <span>Asiento Nuevo</span>
-                </button>
-                <button routerLink="/cuenta" type="button" class="puntero">
-                    <i class="fa-solid fa-book"></i> 
-                    <span>Cuenta nueva</span>
-                </button>
-                <button routerLink="/cuentas" type="button" class="puntero">
-                    <i title="Ver Cuentas"  class="fa-solid fa-book-open"></i>
-                    <span>Administrar cuentas</span>
-                </button>
-            </div>
-
-            <div class="buscador">
-
-                <form>
-                    <div class="busqueda">
-                        <input type="radio" name="asiento" value="asiento">
-                        <input type="text" placeholder="Asiento" class="corto">
-                    </div>
-
-                    <div class="busqueda">
-                        <input type="radio" name="tiempo" value="tiempo">
-                        <select>
-                            <option>Últimos 15 días</option>
-                            <option>Último mes</option>
-                            <option>Últimos 3 meses</option>
-                        </select>
-                    </div>
-
-                    <div class="busqueda">
-                        <input type="radio" name="tiempo" value="fecha">
-                        <select>
-                            <option>12</option>
-                        </select>
-                        <span> / </span>
-                        <select>
-                            <option>05</option>
-                        </select>
-                        <span> / </span>
-                        <select>
-                            <option>2022</option>
-                        </select>
-                    </div>
-
-                    <button class="bnt puntero" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-
-                </form>
-            </div>
+        <div class="saldos">
+            <ul>
+                <li>
+                    <i class="fa-solid fa-landmark"></i> 
+                    Mi Activo: <span [style.color]="colorActivo">{{ activo | miles }}{{ moneda }}</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-wallet"></i> 
+                    Dinero Disponible: <span [style.color]="colorActivo">{{ disponible | miles }}{{ moneda }}</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-handshake-simple"></i> 
+                    Debo: <span [style.color]="colorDeuda">{{ deuda | miles }}{{ moneda }}</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-money-bills"></i> 
+                    Balance: <span class="resaltado" [style.color]="colorBalance">{{ balance | miles }}{{ moneda }}</span>
+                </li>
+            </ul>
         </div>
-    
-        <div class="buscar-movimientos">
-            <h1 class="bold">Movimientos de los últimos 15 días</h1>
-        </div>
-    
-        <div class="tabla">
-            
-            <table class="default">
-    
-                <tr>
-                    <th>Asiento</th>
-                    <th>Fecha</th>
-                    <th>Descripción</th>
-                    <th>Cuenta</th>
-                    <th>Contrapartida</th>
-                    <th>Tipo</th>
-                    <th>Cantidad</th>
-                    <th></th>
-                </tr>
 
-                <tr *ngFor="let movimiento of movimientos; let i = index"
-                    class="info-tr">
-                    <td>{{ movimiento.asiento }}</td>
-                    <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo }}</td>
-                    <td>{{ movimiento.concepto }}</td>
-                    <td>{{ movimiento.cuentaContable | idtexto }}</td>
-                    <td>{{ movimiento.contrapartida | idtexto }}</td>
-                    <td>{{ movimiento.tipo | tipoMovimiento }}</td>
-                    <td>{{ movimiento.cantidad | miles }}{{ moneda }}</td>
-                    <td class="info-button flex-button">
-                        <button [routerLink]="['/movimiento', movimiento.id]" class='puntero mod' title='Modificar' type="button">
-                            <i class="fa-solid fa-pen-to-square"></i>
+        <div class="bloque">
+
+            <div class="acciones">
+
+                <div class="buscar-movimientos">
+                    <h1 class="bold">Buscar asiento</h1>
+                </div>
+
+                <div class="buscador">
+
+                    <form>
+                        <div class="busqueda">
+                            <input  type="radio" name="asiento" value="asiento">
+                            <input class="asiento" type="text" placeholder="Asiento">
+                        </div>
+
+                        <div class="busqueda">
+                            <input type="radio" name="tiempo" value="tiempo">
+                            <select>
+                                <option>Últimos 15 días</option>
+                                <option>Último mes</option>
+                                <option>Últimos 3 meses</option>
+                            </select>
+                        </div>
+
+                        <div class="busqueda">
+                            <input type="radio" name="tiempo" value="fecha">
+                            <select>
+                                <option>12</option>
+                            </select>
+                            <span> / </span>
+                            <select>
+                                <option>05</option>
+                            </select>
+                            <span> / </span>
+                            <select>
+                                <option>2022</option>
+                            </select>
+                        </div>
+
+                        <button class="bnt puntero" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
-                        <button (click)="borrarFila(movimiento.id)" class="puntero del" title="Eliminar" type="button">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
+
+                    </form>
+                </div>
+            </div>
+        
+            <div class="buscar-movimientos">
+                <h1 class="bold">Movimientos de los últimos 15 días</h1>
+            </div>
+        
+            <div class="tabla">
                 
-            </table>
+                <table class="default">
+        
+                    <tr>
+                        <th>Asiento</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Cuenta</th>
+                        <th>Contrapartida</th>
+                        <th>Tipo</th>
+                        <th class="cantidad-movimiento">Cantidad</th>
+                        <th></th>
+                    </tr>
 
+                    <tr *ngFor="let movimiento of movimientos; let i = index" title="Modificar asiento {{ movimiento.asiento }}"
+                        class="info-tr puntero"
+                        [routerLink]="['/movimiento', movimiento.id]">
+                        <td>{{ movimiento.asiento }}</td>
+                        <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo }}</td>
+                        <td>{{ movimiento.concepto }}</td>
+                        <td>{{ movimiento.cuentaContable | idtexto }}</td>
+                        <td>{{ movimiento.contrapartida | idtexto }}</td>
+                        <td>{{ movimiento.tipo | tipoMovimiento }}</td>
+                        <td class="cantidad-movimiento bold">{{ movimiento.cantidad | miles }}{{ moneda }}</td>
+<!--                         <td class="info-button flex-button">
+                            <button [routerLink]="['/movimiento', movimiento.id]" class='puntero mod' title='Modificar' type="button">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button (click)="borrarFila(movimiento.id)" class="puntero del" title="Eliminar" type="button">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td> -->
+                    </tr>
+                    
+                </table>
+
+            </div>
+            <div class="space" [style.display]="estado"></div>
         </div>
-        <div class="space" [style.display]="estado"></div>
-    </div>
-</div> 
+    </div> 
+</div>

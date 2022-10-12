@@ -48,6 +48,10 @@ export class InfoService {
     {
       id: '6',
       nombre: 'Compra a proveedores'
+    },
+    {
+      id: '7',
+      nombre: 'Nueva cuenta'
     }
   ]
 
@@ -111,10 +115,110 @@ export class InfoService {
   ]
 
   private movimientos:Movimientos[] = [
+
+    {
+      asiento: '1',
+      id: 'M-1665390469887',
+      dia: '29',
+      mes: '09',
+      anyo: '2022',
+      concepto: 'Creación de cuenta',
+      cantidad: '3500.00',
+      cuentaContable: '1664458286047',
+      contrapartida: '1665060693545',
+      tipo: '7'
+    },
+    {
+      asiento: '2',
+      id: 'M-1665390469888',
+      dia: '29',
+      mes: '09',
+      anyo: '2022',
+      concepto: 'Creación de cuenta',
+      cantidad: '700.00',
+      cuentaContable: '1664459194500',
+      contrapartida: '1665060693545',
+      tipo: '7'
+    },
+    {
+      asiento: '3',
+      id: 'M-1665390469888',
+      dia: '29',
+      mes: '09',
+      anyo: '2022',
+      concepto: 'Creación de cuenta',
+      cantidad: '43.32',
+      cuentaContable: '1664459337454',
+      contrapartida: '1665060693545',
+      tipo: '7'
+    },
+    {
+      asiento: '4',
+      id: 'M-1665390469889',
+      dia: '29',
+      mes: '09',
+      anyo: '2022',
+      concepto: 'Creación de cuenta',
+      cantidad: '310.20',
+      cuentaContable: '1664459573944',
+      contrapartida: '1665060693545',
+      tipo: '7'
+    },
+    {
+      asiento: '5',
+      id: 'M-1665390469892',
+      dia: '29',
+      mes: '09',
+      anyo: '2022',
+      concepto: 'Creación de cuenta',
+      cantidad: '1200.00',
+      cuentaContable: '1664545442338',
+      contrapartida: '1665060693545',
+      tipo: '7'
+    },
+    {
+      asiento: '6',
+      id: 'M-1665390469893',
+      dia: '29',
+      mes: '09',
+      anyo: '2022',
+      concepto: 'Creación de cuenta',
+      cantidad: '670.00',
+      cuentaContable: '1665055630546',
+      contrapartida: '1665060693545',
+      tipo: '7'
+    },
+    
      
   ];
 
   private cuentas:Cuentas[] = [
+    //REGULARIZACIÓN
+    {
+      id: '1665060693545',
+      fechaDeCreacion: '01/01/2022',
+      tipo: {
+            nombre: 'Cuenta de regularización',
+            apunte: 'regularización',
+            codigo: 'CR',
+            },
+      identificador: '1',
+      nombreCuenta: 'Apertura cuenta',
+      descripcion: 'Cuenta de regularización',
+      debe: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
+      haber: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
+      saldo: '0.00'
+    },
     {
       id: '1665060690045',
       fechaDeCreacion: '01/01/2022',
@@ -123,11 +227,21 @@ export class InfoService {
             apunte: 'regularización',
             codigo: 'CR',
             },
-      identificador: '1',
+      identificador: '2',
       nombreCuenta: 'Mercaderías',
       descripcion: 'Cuenta de regularización',
-      debe:'0.00',
-      haber: '0.00',
+      debe: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
+      haber: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
       saldo: '0.00'
     },
     {
@@ -138,11 +252,21 @@ export class InfoService {
             apunte: 'regularización',
             codigo: 'CR',
             },
-      identificador: '2',
+      identificador: '3',
       nombreCuenta: 'Deudas',
       descripcion: 'Cuenta de regularización',
-      debe:'0.00',
-      haber: '0.00',
+      debe: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
+      haber: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
       saldo: '0.00'
     },
     {
@@ -153,11 +277,21 @@ export class InfoService {
             apunte: 'regularización',
             codigo: 'CR',
             },
-      identificador: '3',
+      identificador: '4',
       nombreCuenta: 'Donaciones y regalos',
       descripcion: 'Cuenta de regularización',
-      debe:'0.00',
-      haber: '0.00',
+      debe: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
+      haber: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+      ],
       saldo: '0.00'
     },
     {
@@ -168,13 +302,24 @@ export class InfoService {
             apunte: 'regularización',
             codigo: 'CR',
             },
-      identificador: '4',
+      identificador: '5',
       nombreCuenta: 'Sueldos y salarios',
       descripcion: 'Cuenta de regularización',
-      debe:'0.00',
-      haber: '0.00',
+      debe: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
+      haber: [
+              {
+                asiento: '0',
+                cantidad: '0.00'
+              }
+            ],
       saldo: '0.00'
     },
+    //CUENTAS NORMALES
     {
       id: '1664458286047',
       fechaDeCreacion: '29/09/2022',
@@ -183,11 +328,21 @@ export class InfoService {
             apunte: 'activo',
             codigo: 'CB',
             },
-      identificador: '5',
+      identificador: '6',
       nombreCuenta: 'Banco Santander 0012',
       descripcion: 'Esta es la cuenta acabada en 0012',
-      debe:'3500.00',
-      haber: '0.00',
+      debe: [
+              {
+                asiento: '1',
+                cantidad: '3500.00'
+              },
+            ],
+      haber: [
+              {
+                asiento: '1',
+                cantidad: '0.00'
+              },
+            ],
       saldo: '3500.00'
     },
     {
@@ -198,11 +353,21 @@ export class InfoService {
             apunte: 'activo',
             codigo: 'CE',
             },
-      identificador: '6',
+      identificador: '7',
       nombreCuenta: 'Efectivo',
       descripcion: 'Dinero en efectivo',
-      debe: '700.00',
-      haber: '0.00',
+      debe: [
+              {
+                asiento: '2',
+                cantidad: '700.00'
+              }
+            ],
+      haber: [
+              {
+                asiento: '2',
+                cantidad: '0.00'
+              }
+            ],
       saldo: '700.00'
     },
     {
@@ -213,11 +378,21 @@ export class InfoService {
               apunte: 'pasivo',
               codigo: 'CA',
             },
-      identificador: '7',
+      identificador: '8',
       nombreCuenta: 'Movistar',
       descripcion: 'Suministro de internet',
-      debe: '0.00',
-      haber: '43.32',
+      debe: [
+              {
+                asiento: '3',
+                cantidad: '0.00'
+              }
+            ],
+      haber: [
+              {
+                asiento: '3',
+                cantidad: '43.32'
+              }
+            ],
       saldo: '43.32'
     },
     {
@@ -228,11 +403,21 @@ export class InfoService {
               apunte: 'activo',
               codigo: 'CC',
             },
-      identificador: '8',
+      identificador: '9',
       nombreCuenta: 'María Puertas',
       descripcion: 'Cliente que solicita diseños',
-      debe: '310.20',
-      haber: '0.00',
+      debe: [
+              {
+                asiento: '4',
+                cantidad: '310.20'
+              }
+            ],
+      haber: [
+              {
+                asiento: '4',
+                cantidad: '0.00'
+              }
+            ],
       saldo: '310.20'
     },
     {
@@ -243,11 +428,21 @@ export class InfoService {
               apunte: 'pasivo',
               codigo: 'DALP',
             },
-      identificador: '9',
+      identificador: '10',
       nombreCuenta: 'Banco Caixa',
       descripcion: 'Crédito con el banco',
-      debe: '0.00',
-      haber: '1200.00',
+      debe: [
+              {
+                asiento: '5',
+                cantidad: '0.00'
+              },
+            ],
+      haber: [
+              {
+                asiento: '5',
+                cantidad: '1200.00'
+              }
+            ],
       saldo: '1200.00'
     },
     {
@@ -258,17 +453,29 @@ export class InfoService {
               apunte: 'activo',
               codigo: 'CC',
             },
-      identificador: '10',
+      identificador: '11',
       nombreCuenta: 'Antonio Padilla',
       descripcion: 'Cliente para web',
-      debe: '670.00',
-      haber: '0.00',
+      debe: [
+              {
+                asiento: '6',
+                cantidad: '670.00'
+              }
+            ],
+      haber: [
+              {
+                asiento: '6',
+                cantidad: '0.00'
+              }
+            ],
       saldo: '670.00'
     },
 
   ]
 
-  constructor() { }
+  constructor() { 
+    
+   }
 
 
   //Getters
@@ -326,15 +533,23 @@ export class InfoService {
     //Guarda el asiento
     this.movimientos.push(info);
 
-    //Modifica los saldos de las cuentas afectadas
-    
+    let asiento = info.asiento;
+    let idCuenta = info.cuentaContable;
+    let idContrapartida = info.contrapartida;
+    let cantidad = info.cantidad;
 
+    this.getInfoCuentas().forEach( resp => {
+       
+      if ( resp.id === idCuenta ) {
+        this.setDebe( idCuenta, cantidad, asiento );
+        this.setSaldo ( idCuenta );
+      }         
+      if ( resp.id === idContrapartida) {
+        this.setHaber( idContrapartida, cantidad, asiento ); 
+        this.setSaldo ( idContrapartida );
+      } 
 
-
-
-  }
-
-  cuadrarAsiento(){
+    });
 
   }
 
@@ -342,11 +557,52 @@ export class InfoService {
       this.cuentas.push(info);
   }
 
+  setDebe( idCuenta:string, cantidad:string, asiento:string ){
+      let indice = this.cuentas.findIndex( i => i.id === idCuenta);
+      let data = { asiento: asiento, cantidad: cantidad };
+      let dataVacia = { asiento: asiento, cantidad: '0.00' };
+      this.cuentas[indice].debe.push(data);
+      this.cuentas[indice].haber.push(dataVacia);
+  }
+
+  setHaber( idCuenta:string, cantidad:string, asiento:string ){
+      let indice = this.cuentas.findIndex( i => i.id === idCuenta);
+      let data = { asiento: asiento, cantidad: cantidad };
+      let dataVacia = { asiento: asiento, cantidad: '0.00' };
+      this.cuentas[indice].debe.push(dataVacia);
+      this.cuentas[indice].haber.push(data);
+  }
+
+  setSaldo( idCuenta ){
+
+    let indice = this.cuentas.findIndex( i => i.id === idCuenta);
+    let numerosDebe:any = [];
+    let numerosHaber:any = [];
+
+    let debe = this.cuentas[indice].debe;
+    debe.forEach( resp => {
+      numerosDebe.push(parseFloat(resp.cantidad));
+    });
+
+    let haber = this.cuentas[indice].haber;
+    haber.forEach( resp => {
+      numerosHaber.push(parseFloat(resp.cantidad));
+    });
+
+    let saldo = this.sumarArray(numerosDebe) - this.sumarArray(numerosHaber);
+    if ( saldo < 0 ) {
+      saldo = Math.abs(saldo);
+      this.cuentas[indice].saldo = saldo;
+    } else {
+      this.cuentas[indice].saldo = saldo;
+    }
+
+  }
+
   modificarCuenta( info:Cuentas, idRecibido:any ){
       let indice = this.cuentas.findIndex( i => i.id === idRecibido);
       this.cuentas[indice] = info;
   }
-
   
   //Funciones 
   genenarIdAutomatico(){
@@ -360,7 +616,7 @@ export class InfoService {
     let identificador = this.cuentas[indice].identificador;
     let tipo = this.cuentas[indice].tipo.codigo;
     let nombre = this.cuentas[indice].nombreCuenta;
-    return `${ identificador } / (${ tipo }) ${ nombre }`
+    return `${ identificador } / (${ tipo }) ${ nombre }`;
   }
 
    textoTipo( tipoRecibido ){
@@ -419,11 +675,11 @@ export class InfoService {
       codigos = resp.tipo.codigo;
 
       if (codigos === 'CA' || codigos === 'DALP') {
-            listaHaber.push(Number.parseFloat(resp.saldo));
+            listaHaber.push(parseFloat(resp.saldo));
           }
 
       if (codigos === 'CB' || codigos === 'CE' || codigos === 'CC' || codigos === 'DCLP') {
-            listaDebe.push(Number.parseFloat(resp.saldo));
+            listaDebe.push(parseFloat(resp.saldo));
           }
 
     });
@@ -447,9 +703,11 @@ export class InfoService {
     termino = termino.toLocaleLowerCase();
     for (let cuenta of this.cuentas) {
       let nombreDevuelto = cuenta.nombreCuenta.toLocaleLowerCase();
-      if ( nombreDevuelto.indexOf( termino ) >=0 ){
-        cuentasArray.push( cuenta );
-      }
+      if ( cuenta.tipo.codigo != this.nombreCodigos().cr ){
+        if ( nombreDevuelto.indexOf( termino ) >=0 ){
+              cuentasArray.push( cuenta );
+            }
+      } 
     }
     return cuentasArray;
   } 

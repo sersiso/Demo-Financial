@@ -5,7 +5,6 @@ import { Cuentas } from '../../models/cuenta.models';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Movimientos } from '../../models/movimientos.models';
-import { isEmpty } from 'rxjs';
 
 @Component({
   selector: 'app-asiento',
@@ -58,7 +57,7 @@ export class AsientoComponent implements OnInit {
     for ( let d = 1; d < 32; d++ ){
       this.dias.push(d);
     }
-
+    
   }
 
   crearFormulario(){
@@ -79,7 +78,7 @@ export class AsientoComponent implements OnInit {
   }
 
   //Envío de formulario
-  guardarCuenta(){
+  guardarMovimiento(){
     
     //Validación al pulsar el botón de guardar
     if ( this.movimiento.invalid ) {
@@ -90,7 +89,6 @@ export class AsientoComponent implements OnInit {
 
     const data = this.movimiento.getRawValue();
     this.total = data.cantidad + '.' + data.decimales;
-    console.log(data);
     
      Swal.fire({
       icon: 'success',
@@ -99,11 +97,9 @@ export class AsientoComponent implements OnInit {
       showConfirmButton: false,
       }).then ( () => {
         this.crearMovimiento( data );
-
         if ( data.cuadrar === true ){
           console.log("Hace el asiento extra");
         }
-
         this.router.navigateByUrl('mi-espacio');
       }); 
 
@@ -112,7 +108,7 @@ export class AsientoComponent implements OnInit {
   crearMovimiento( datosForm: Movimientos ){
 
     const datosRecibidos: Movimientos = {
-        asiento: datosForm.asiento,
+        asiento: datosForm.asiento.toString(),
         id: datosForm.id.toString(),
         dia: datosForm.dia,
         mes: datosForm.mes,
@@ -124,9 +120,7 @@ export class AsientoComponent implements OnInit {
         tipo: datosForm.tipo
     }
 
-    let peticion = this._datos.setMovimientos(datosRecibidos);
-    console.log(datosRecibidos);
-    
+    this._datos.setMovimientos(datosRecibidos);
     
   }
 

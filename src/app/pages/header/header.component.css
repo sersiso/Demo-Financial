@@ -1,14 +1,14 @@
 header {
     background-color: #fff;
-    padding: 30px 30px;
+    padding: 1em;
     color: #839ebf;
-    border-bottom: 1px solid #dcdcdc;
+    box-shadow: 0 -1px 24px -10px rgb(184, 184, 184);
 }
 
 .menu {
     position: absolute;
     right: 30px;
-    top: 45px;
+    top: 25px;
     display: flex;
 }
 
@@ -16,7 +16,7 @@ header {
     display: inline-flex;
     margin: auto;
     color: #839ebf;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .menu li i {
@@ -24,13 +24,13 @@ header {
 }
 
 .title-user {
-    font-size: 16px;
+    font-size: 0.6em;
     margin-right: 25px;
     margin-top: 0;
 }
 
 .logo img {
-    width: 200px;
+    width: 150px;
 }
 
 .active a {

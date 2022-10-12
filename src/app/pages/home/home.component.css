@@ -4,7 +4,7 @@
 
 .col {
     background-color: #fff;
-    height: 400px;
+    height: auto;
     width: auto;
     flex: 30%;
     padding: 40px;
@@ -31,7 +31,7 @@
 }
 
 .col ul {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 26px;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .p-info {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 30px;
 }
 
@@ -64,9 +64,10 @@
 
 .slider {
     position: relative;
+    height: 800px;
 }
 
-.slider .slider-texto {
+.slider .container {
     position: absolute;
     top: 0;
     right: 0;
@@ -74,6 +75,5 @@
     bottom: 0;
     margin: auto;
     height: max-content;
-    background-color: #5f9ea0;
 }
 

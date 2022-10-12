@@ -8,19 +8,14 @@
 
         <nav>
             <ul class="menu">
-                <li>
+                 <li>
                     <h1 class="title-user">¡Hola, {{ datosEmpresa.nombre }}!
                         <span>| Año de trabajo {{ datosEmpresa.fundadaEn }}</span>
                     </h1>
                 </li>
                 <li routerLinkActive="active">
                     <a [routerLink]="['/mi-espacio']" title="Mi espacio" class="puntero">
-                        <i class="fa-solid fa-house"></i>
-                    </a>
-                </li>
-                <li routerLinkActive="active">
-                    <a title="Opciones" class="puntero">
-                        <i title="Opciones"  class="fa-solid fa-gear"></i>
+                        <i class="fa-regular fa-user"></i>
                     </a>
                 </li>
                 <li>

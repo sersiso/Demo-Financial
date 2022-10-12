@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  rutaImg:string = '../../assets/img/background-slider.jpg';
+  rutaImg:string = 'url("../../assets/img/background-slider.jpg")';
 
   constructor() { }
 

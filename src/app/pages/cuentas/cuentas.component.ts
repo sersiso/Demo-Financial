@@ -25,6 +25,8 @@ export class CuentasComponent implements OnInit {
     this.monedaUsada();
     this.recibirMovimientos();
 
+    //console.log(this.infoCuentas);
+
   }
 
   buscar( texto:string ){
@@ -33,7 +35,12 @@ export class CuentasComponent implements OnInit {
   }
 
   cuentas(){
-    this.infoCuentas = this._datos.getInfoCuentas();
+    let cuentas = this._datos.getInfoCuentas();
+    cuentas.forEach( resp => {
+      if ( resp.tipo.codigo !== this._datos.nombreCodigos().cr ){
+        this.infoCuentas.push(resp);
+      }
+    });
   }
 
   monedaUsada(){
