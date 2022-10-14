@@ -23,28 +23,20 @@
             </form>
         </div>
 
-        <h2 class="title-h2">Listado de cuentas</h2>
-
         <div class="lista-cuentas" *ngIf="!buscadorActivo">
-            <article class="cuenta-info animated fadeIn fast" *ngFor="let cuenta of infoCuentas; let i = index">
+            <article class="cuenta-info animated fadeIn fast" 
+                    *ngFor="let cuenta of infoCuentas; let i = index"
+                    [class.cuenta-pasivo]="cuenta.tipo.apunte === 'pasivo'">
+
+                    <div class="etiqueta-activo">
+                        <span [style.color]="colorPositivo" class="bold" [class.cantidad-pasivo]="cuenta.tipo.apunte === 'pasivo'">
+                            {{ cuenta.saldo | miles }}{{ moneda.simboloMoneda }}
+                        </span>
+                    </div>
+
+                    <div class="anillas"></div>
 
                 <div class="cabecera">
-
-                    <div class="info-cuentas puntero" title="Información de la cuenta">
-                        <div class="info-bocadillo">
-                            <span class="descripcion">
-                                <h3>
-                                    <span class="bold">Cuenta creada:</span>
-                                    <p>{{ cuenta.fechaDeCreacion }}</p>
-                                </h3>
-                                <h3>
-                                    <span class="bold">Información:</span>
-                                    <p>{{ cuenta.descripcion }}</p>
-                                </h3>
-                            </span>
-                        </div>
-                        <i class="fa-solid fa-circle-info"></i>
-                    </div>
                     
                     <h2 class="titulo-cuentas">
                         <span class="bold color-text nombreCuenta">{{ cuenta.nombreCuenta }}</span>
@@ -54,20 +46,14 @@
                     <div class="cantidades">
                         <div class="cantidad">
                             <span class="bold color-text debe">Debe:</span>
-                            <span class="cantidad-cuenta" *ngFor="let sumaDebe of cuenta.debe">
+                            <span class="cantidad-cuenta" *ngFor="let sumaDebe of cuenta.debe" [class.sutil]="sumaDebe.cantidad === '0.00'">
                                 ({{ sumaDebe.asiento }}) {{ sumaDebe.cantidad | miles }}{{ moneda.simboloMoneda }}
                             </span>
                         </div>
                         <div class="cantidad">
                             <span class="bold color-text haber">Haber:</span>
-                            <span class="cantidad-cuenta" *ngFor="let sumaHaber of cuenta.haber">
+                            <span class="cantidad-cuenta" *ngFor="let sumaHaber of cuenta.haber" [class.sutil]="sumaHaber.cantidad === '0.00'">
                                 ({{ sumaHaber.asiento }}) {{ sumaHaber.cantidad | miles }}{{ moneda.simboloMoneda }}
-                            </span>
-                        </div>
-                        <div class="cantidad saldo-cantidad">
-                            <span class="bold color-text">Saldo:</span>
-                            <span [style.color]="colorPositivo" class="bold">
-                                {{ cuenta.saldo | miles }}{{ moneda.simboloMoneda }}
                             </span>
                         </div>
                     </div>
@@ -75,7 +61,6 @@
                     <button type="button" title="Modificar cuenta" class="puntero btn-cuentas"
                         [routerLink]="['/modificar-cuenta', cuenta.id]">
                         <i class="fa-regular fa-pen-to-square"></i>
-                        <span>Modificar cuenta</span>
                     </button>
     
                 </div>
@@ -84,25 +69,19 @@
         </div>
 
         <div class="lista-cuentas" *ngIf="buscadorActivo">
-            <article class="cuenta-info animated fadeIn fast" *ngFor="let cuenta of cuentaBuscador; let i = index">
+            <article class="cuenta-info animated fadeIn fast" 
+                    *ngFor="let cuenta of cuentaBuscador; let i = index"
+                    [class.cuenta-pasivo]="cuenta.tipo.apunte === 'pasivo'">
+
+                    <div class="etiqueta-activo">
+                        <span [style.color]="colorPositivo" class="bold" [class.cantidad-pasivo]="cuenta.tipo.apunte === 'pasivo'">
+                            {{ cuenta.saldo | miles }}{{ moneda.simboloMoneda }}
+                        </span>
+                    </div>
+
+                    <div class="anillas"></div>
 
                 <div class="cabecera">
-    
-                    <div class="info-cuentas puntero" title="Información de la cuenta">
-                        <div class="info-bocadillo">
-                            <span class="descripcion">
-                                <h3>
-                                    <span class="bold">Cuenta creada:</span>
-                                    <p>{{ cuenta.fechaDeCreacion }}</p>
-                                </h3>
-                                <h3>
-                                    <span class="bold">Información:</span>
-                                    <p>{{ cuenta.descripcion }}</p>
-                                </h3>
-                            </span>
-                        </div>
-                        <i class="fa-solid fa-circle-info"></i>
-                    </div>
                     
                     <h2 class="titulo-cuentas">
                         <span class="bold color-text nombreCuenta">{{ cuenta.nombreCuenta }}</span>
@@ -122,18 +101,11 @@
                                 ({{ sumaHaber.asiento }}) {{ sumaHaber.cantidad | miles }}{{ moneda.simboloMoneda }}
                             </span>
                         </div>
-                        <div class="cantidad saldo-cantidad">
-                            <span class="bold color-text">Saldo:</span>
-                            <span [style.color]="colorPositivo" class="bold">
-                                {{ cuenta.saldo | miles }}{{ moneda.simboloMoneda }}
-                            </span>
-                        </div>
                     </div>
     
                     <button type="button" title="Modificar cuenta" class="puntero btn-cuentas"
                         [routerLink]="['/modificar-cuenta', cuenta.id]">
                         <i class="fa-regular fa-pen-to-square"></i>
-                        <span>Modificar cuenta</span>
                     </button>
     
                 </div>

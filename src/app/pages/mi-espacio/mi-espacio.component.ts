@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VariablesService } from 'src/app/services/variables.service';
 import { Movimientos } from '../../models/movimientos.models';
 import { InfoService } from '../../services/info.service';
 
@@ -30,12 +31,13 @@ export class MiEspacioComponent implements OnInit {
   colorBalance:string = this.colores.verde;
 
 
-  constructor( private _datos:InfoService ) { 
+  constructor( private _DATOS:InfoService,
+              public _VARIABLES:VariablesService ) { 
 
-    this.activo = this._datos.mostrarActivo();
-    this.disponible = this._datos.mostrarDisponible();
-    this.deuda = this._datos.mostrarDeuda();
-    this.balance = this._datos.mostrarSaldo();
+    this.activo = this._DATOS.mostrarActivo();
+    this.disponible = this._DATOS.mostrarDisponible();
+    this.deuda = this._DATOS.mostrarDeuda();
+    this.balance = this._DATOS.mostrarSaldo();
     
   }
 
@@ -45,11 +47,33 @@ export class MiEspacioComponent implements OnInit {
     this.recibirMoneda();
     this.recibirMovimientos();
 
+    console.log("MOVIMIENTOS:");
+    console.log(this._DATOS.getInfoMovimientos());
+
+    console.log("CUENTAS:");
+    console.log(this._DATOS.getInfoCuentas()); 
+
+  }
+
+  abrirModalCuenta:boolean = this._VARIABLES.abrirModalCuenta;
+
+  AbrirModalCuenta( termino:boolean ){
+    this._VARIABLES.abrirModalCuenta = termino;
+    this.abrirModalCuenta = this._VARIABLES.abrirModalCuenta;
   }
 
   recibirMovimientos(){
-    this.movimientos = this._datos.getInfoMovimientos();
-    if ( this.movimientos.length > 9 ){
+    let info = [];
+    let mov = this._DATOS.getInfoMovimientos();
+    mov.forEach( resp => {
+      if ( resp.tipo != '7'){
+        info.push(resp);
+      }
+    });
+
+    this.movimientos = info;
+
+    if ( info.length > 30 ){
       this.estado = 'none';
     } else {
       this.estado = 'block';
@@ -61,7 +85,7 @@ export class MiEspacioComponent implements OnInit {
   }
 
   recibirMoneda(){
-    this.moneda = this._datos.getMoneda().simboloMoneda;
+    this.moneda = this._DATOS.getMoneda().simboloMoneda;
   }
   
   seleccionarColor(){

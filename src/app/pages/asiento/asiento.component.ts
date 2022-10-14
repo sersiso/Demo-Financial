@@ -30,7 +30,7 @@ export class AsientoComponent implements OnInit {
   moneda:string;
   total:string;
   cuentas = this._datos.getInfoCuentas();
-  asiento:number = this.crearNumeroAsiento();
+  asiento:number = this._datos.crearNumeroAsiento();
   idAutomatico = this._datos.genenarIdAutomatico();
 
   //Carteles
@@ -40,6 +40,7 @@ export class AsientoComponent implements OnInit {
   mostrarCartelDeudaC:boolean = false;
   mostrarCartelVenta:boolean = false;
   mostrarCartelCompra:boolean = false;
+  mostrarCartelTraspaso:boolean = false;
   cuadrarAsiento:boolean = false;
 
   constructor( private _datos: InfoService, 
@@ -157,23 +158,6 @@ export class AsientoComponent implements OnInit {
             this.movimiento.get('decimales').touched
   }
 
-
-  //Funciones
-  crearNumeroAsiento(){
-    let identificador:number;
-    this.movimientos = this._datos.getInfoMovimientos();
-    if ( this.movimientos.length === 0 ){
-      identificador = 1;
-    } 
-    else {
-      this.movimientos.forEach( () => {
-        identificador = this.movimientos.length;
-      });
-      identificador++;
-    }
-    return identificador;
-  }
-
   mes( mes:any ){
     
     let arrayDias = [];
@@ -221,24 +205,27 @@ export class AsientoComponent implements OnInit {
       this.mostrarCartelDeudaC = false;
       this.mostrarCartelVenta = false;
       this.mostrarCartelCompra = false;
-      this.cuadrarAsiento = true;
+      this.mostrarCartelTraspaso = false;
+      this.cuadrarAsiento = false;
       
         this.cuentas.forEach( resp => {
-          if ( nombreCodigos.cb === resp.tipo.codigo || 
+          if ( 
+            nombreCodigos.cb === resp.tipo.codigo || 
             nombreCodigos.ce === resp.tipo.codigo ){
             arrayContables.push(resp);
             this.cuentasContables = arrayContables;
           }
-          if ( nombreCodigos.dclp === resp.tipo.codigo || 
-            nombreCodigos.cc === resp.tipo.codigo || 
+          if ( 
+            nombreCodigos.dclp === resp.tipo.codigo || 
+            nombreCodigos.cc === resp.tipo.codigo ||
+            nombreCodigos.cd === resp.tipo.codigo ||
+            nombreCodigos.ddlp === resp.tipo.codigo ||
             nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Donaciones y regalos' || 
             nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Sueldos y salarios'){
             arrayContrapartida.push(resp);
             this.cuentasContrapartida = arrayContrapartida;
           }
         });
-
-
 
     }
     else if ( movimiento === '2' ){
@@ -251,17 +238,23 @@ export class AsientoComponent implements OnInit {
       this.mostrarCartelDeudaC = false;
       this.mostrarCartelVenta = false;
       this.mostrarCartelCompra = false;
-      this.cuadrarAsiento = true;
+      this.mostrarCartelTraspaso = false;
+      this.cuadrarAsiento = false;
 
       this.cuentas.forEach( resp => {
-        if ( nombreCodigos.ca === resp.tipo.codigo || 
+        if ( 
+          nombreCodigos.cp === resp.tipo.codigo || 
+          nombreCodigos.ca === resp.tipo.codigo ||
+          nombreCodigos.dplp === resp.tipo.codigo || 
           nombreCodigos.dalp === resp.tipo.codigo ||
           nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Donaciones y regalos' || 
-            nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Sueldos y salarios' ){
+          nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Sueldos y salarios' ){
           arrayContables.push(resp);
           this.cuentasContables = arrayContables;
         }
-        if ( nombreCodigos.cb === resp.tipo.codigo || nombreCodigos.ce === resp.tipo.codigo ){
+        if ( 
+          nombreCodigos.cb === resp.tipo.codigo || 
+          nombreCodigos.ce === resp.tipo.codigo ){
           arrayContrapartida.push(resp);
           this.cuentasContrapartida = arrayContrapartida;
         }
@@ -278,6 +271,7 @@ export class AsientoComponent implements OnInit {
       this.mostrarCartelDeudaC = false;
       this.mostrarCartelVenta = false;
       this.mostrarCartelCompra = false;
+      this.mostrarCartelTraspaso = false;
       this.cuadrarAsiento = false;
 
       this.cuentas.forEach( resp => {
@@ -285,7 +279,9 @@ export class AsientoComponent implements OnInit {
           arrayContables.push(resp);
           this.cuentasContables = arrayContables;
         }
-        if ( nombreCodigos.ca === resp.tipo.codigo || nombreCodigos.dalp === resp.tipo.codigo ){
+        if ( 
+          nombreCodigos.ca === resp.tipo.codigo || 
+          nombreCodigos.dalp === resp.tipo.codigo ){
           arrayContrapartida.push(resp);
           this.cuentasContrapartida = arrayContrapartida;
         }
@@ -302,10 +298,13 @@ export class AsientoComponent implements OnInit {
       this.mostrarCartelDeudaC = true;
       this.mostrarCartelVenta = false;
       this.mostrarCartelCompra = false;
+      this.mostrarCartelTraspaso = false;
       this.cuadrarAsiento = false;
 
       this.cuentas.forEach( resp => {
-        if ( nombreCodigos.cc === resp.tipo.codigo || nombreCodigos.dclp === resp.tipo.codigo ){
+        if ( 
+          nombreCodigos.cd === resp.tipo.codigo || 
+          nombreCodigos.ddlp === resp.tipo.codigo ){
           arrayContables.push(resp);
           this.cuentasContables = arrayContables;
         }
@@ -326,10 +325,13 @@ export class AsientoComponent implements OnInit {
       this.mostrarCartelDeudaC = false;
       this.mostrarCartelVenta = true;
       this.mostrarCartelCompra = false;
+      this.mostrarCartelTraspaso = false;
       this.cuadrarAsiento = false;
 
       this.cuentas.forEach( resp => {
-        if ( nombreCodigos.cc === resp.tipo.codigo || nombreCodigos.dclp === resp.tipo.codigo ){
+        if ( 
+          nombreCodigos.cc === resp.tipo.codigo || 
+          nombreCodigos.dclp === resp.tipo.codigo ){
           arrayContables.push(resp);
           this.cuentasContables = arrayContables;
         }
@@ -350,6 +352,7 @@ export class AsientoComponent implements OnInit {
       this.mostrarCartelDeudaC = false;
       this.mostrarCartelVenta = false;
       this.mostrarCartelCompra = true;
+      this.mostrarCartelTraspaso = false;
       this.cuadrarAsiento = false;
 
       this.cuentas.forEach( resp => {
@@ -357,7 +360,38 @@ export class AsientoComponent implements OnInit {
           arrayContables.push(resp);
           this.cuentasContables = arrayContables;
         }
-        if ( nombreCodigos.ca === resp.tipo.codigo || nombreCodigos.dalp === resp.tipo.codigo ){
+        if ( 
+          nombreCodigos.cp === resp.tipo.codigo || 
+          nombreCodigos.dplp === resp.tipo.codigo ){
+          arrayContrapartida.push(resp);
+          this.cuentasContrapartida = arrayContrapartida;
+        }
+      });
+    }
+
+    else if ( movimiento === '8' ){
+
+      this.resetCampoSelect();
+
+      this.mostrarCartelIngreso = false;
+      this.mostrarCartelPago = false;
+      this.mostrarCartelDeudaA = false;
+      this.mostrarCartelDeudaC = false;
+      this.mostrarCartelVenta = false;
+      this.mostrarCartelCompra = false;
+      this.mostrarCartelTraspaso = true;
+      this.cuadrarAsiento = false;
+
+      this.cuentas.forEach( resp => {
+        if ( 
+          nombreCodigos.cb === resp.tipo.codigo || 
+          nombreCodigos.ce === resp.tipo.codigo ){
+          arrayContables.push(resp);
+          this.cuentasContables = arrayContables;
+        }
+        if ( 
+          nombreCodigos.cb === resp.tipo.codigo || 
+          nombreCodigos.ce === resp.tipo.codigo ){
           arrayContrapartida.push(resp);
           this.cuentasContrapartida = arrayContrapartida;
         }

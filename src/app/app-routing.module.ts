@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'mi-espacio', component: MiEspacioComponent, canActivate: [ AuthGuard ] },
   { path: 'movimiento/:id', component: MovimientoComponent, canActivate: [ AuthGuard ] },
-  { path: 'cuenta', component: CuentaComponent, canActivate: [ AuthGuard ] },
+  //{ path: 'cuenta', component: CuentaComponent, canActivate: [ AuthGuard ] },
   { path: 'cuentas', component: CuentasComponent, canActivate: [ AuthGuard ] },
   { path: 'modificar-cuenta/:id', component: ModificarCuentaComponent, canActivate: [ AuthGuard ] },
   { path: 'asiento', component: AsientoComponent, canActivate: [ AuthGuard ] },

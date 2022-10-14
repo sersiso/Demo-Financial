@@ -53,7 +53,9 @@ export class ModificarCuentaComponent implements OnInit {
 
   //Envío de formulario
   guardarCuenta(){
-    
+
+    const data = this.cuenta.getRawValue();
+
     //Validación al pulsar el botón de guardar
     if ( this.cuenta.invalid ) {
       return Object.values( this.cuenta.controls ).forEach( control =>{
@@ -61,31 +63,60 @@ export class ModificarCuentaComponent implements OnInit {
       });
     }
 
-    const data = this.cuenta.getRawValue();
-
-    let codigo:string, nombre:string;
+    let apunte:string;
+    let codigo:string; 
+    let nombre:string;
     nombre = data.tipo;
 
-    for (let n of this.tiposCuenta) {
-      if ( n.nombre === nombre ){
-        codigo = n.codigo;
+    //Si es el mismo tipo de cuenta
+    if ( this.cuentaRecuperada[0].tipo.nombre === data.tipo ||
+          this.cuentaRecuperada[0].tipo.nombre !== data.tipo &&
+          this.cuentaRecuperada[0].saldo === '0.00' ) {
+
+        for (let n of this.tiposCuenta) {
+          if ( n.nombre === nombre ){
+            codigo = n.codigo;
+            apunte = n.apunte;
+          }
+        }
+
+        data.tipo = { 
+          nombre: nombre,
+          apunte: apunte, 
+          codigo: codigo 
+        }
+        
+        Swal.fire({
+          icon: 'success',
+          text: 'Cuenta modificada',
+          timer: 2000,
+          showConfirmButton: false,
+          }).then ( () => {
+            this.modificarCuenta( data );
+            this.router.navigateByUrl('cuentas');
+          });
+
+    } 
+
+    //Si es distinto tipo de cuenta
+    else if ( this.cuentaRecuperada[0].tipo.nombre !== data.tipo &&
+               this.cuentaRecuperada[0].saldo !== '0.00' ) {
+
+      data.tipo = { 
+        nombre: this.cuentaRecuperada[0].tipo.nombre, 
+        apunte: this.cuentaRecuperada[0].tipo.apunte,
+        codigo: this.cuentaRecuperada[0].tipo.codigo 
       }
-    }
 
-    data.tipo = { 
-      nombre: nombre, 
-      codigo: codigo 
-    }
-
-    Swal.fire({
-      icon: 'success',
-      text: 'Cuenta modificada',
-      timer: 2000,
-      showConfirmButton: false,
+      Swal.fire({
+        icon: 'info',
+        text: 'No se ha podido modificar el tipo de cuenta. Sólo se puede hacer con las que tienen saldo 0',
+        showConfirmButton: true,
       }).then ( () => {
         this.modificarCuenta( data );
         this.router.navigateByUrl('cuentas');
       });
+    }
 
   }
 

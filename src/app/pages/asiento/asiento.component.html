@@ -119,6 +119,16 @@
                             <strong class="bold"> Se utiliza para la actividad laboral.</strong>
                         </p>
                     </li>
+                    <li>
+                        <input class="radio" type="radio" value="8"
+                        formControlName="tipo"
+                        (change)="tipoMovimiento( tipo8.value )"
+                        #tipo8>
+                        <span>Traspaso entre cuentas</span>
+                        <p *ngIf="mostrarCartelTraspaso" class="animated fadeIn fast">Utiliza esta opción para reflejar el paso de dinero 
+                            de un banco a otro, o si ingresas dinero efectivo en la cuenta bancaria. 
+                        </p>
+                    </li>
                 </ul>
             </div>
             <small *ngIf="tipoNoValido" class="animated fadeIn fast">
@@ -127,7 +137,7 @@
 
             <div class="cuentas-contables">
                 <label>Cuenta</label>
-                <select class="caja-formulario medio"
+                <select class="caja-formulario muylargo"
                         formControlName="cuentaContable"
                         #cuentaContable>
                         <option value="" selected disabled>Selecciona cuenta</option>
@@ -140,7 +150,7 @@
                 </small>
             
                 <label>Contrapartida</label>
-                <select class="caja-formulario medio"
+                <select class="caja-formulario muylargo"
                         formControlName="contrapartida"
                         #contrapartida>
                         <option value="" selected disabled>Selecciona cuenta</option>
@@ -169,6 +179,7 @@
                         </li>
                     </ul>
                 </div>
+                
             </div>
 
             <label>Concepto</label>
@@ -204,48 +215,32 @@
 
             <div class="instrucciones">
                 <ul>
-                    <h2>Tipos de cuentas: ACTIVO</h2>
+                    <h2>Instrucciones</h2>
                     <li>
-                        <strong class="bold">(CB) Cuenta bancaria:</strong> Refleja el dinero que entra y sale del banco.
+                        <strong class="bold">Asiento:</strong> El número de asiento es automático.
                     </li>
                     <li>
-                        <strong class="bold">(CE) Dinero en efectivo:</strong> Refleja el dinero en efectivo.
+                        <strong class="bold">Fecha de asiento:</strong> Introduce el día y el mes en el que se hizo el movimiento,
+                        el campo del año es automático.
                     </li>
                     <li>
-                        <strong class="bold">(CC) Cliente:</strong> Se recogen las deudas que tienen los clientes contigo. Se usa para 
-                        la actividad laboral.
+                        <strong class="bold">Tipo de movimiento:</strong> Elige el tipo de movimiento pinchando en el check, automáticamente
+                        te mostrará las cuentas que tienes disponibles y una breve descripción de en qué casos se utiliza ese movimiento. 
+                        <strong class="bold">Antes de realizar un asiento asegúrate que tengas la cuenta creada</strong> .
                     </li>
                     <li>
-                        <strong class="bold">(CD) Deudor:</strong> Se recogen las deudas que tienen otras personas contigo, fuera de la
-                        actividad laboral (amigos, familiares, distintos servicios).
+                        <strong class="bold">Cuenta:</strong> Es la cuenta principal a la que irá el asiento.
                     </li>
                     <li>
-                        <strong class="bold">(CCLP) Deudas cliente a L/P:</strong> Se recogen las deudas que tienen los clientes contigo, pero
-                        a largo plazo (LP), es decir, más de 1 año. Se usa para la actividad laboral.
+                        <strong class="bold">Contrapartida:</strong> Es la cuenta secundaria que cuadrará el asiento.
                     </li>
                     <li>
-                        <strong class="bold">(DDLP) Deudas deudores a L/P:</strong> Se recogen las deudas que tienen otras personas contigo, pero
-                        a largo plazo (LP), es decir, más de 1 año. Fuera de la actividad laboral (amigos, familiares, distintos servicios).
-                    </li>
-    
-                    <div class="space"></div>
-    
-                    <h2>Tipos de cuentas: PASIVO</h2>
-                    <li>
-                        <strong class="bold">(CA) Acreedor:</strong> Utilizada para registrar las operaciones o compras realizadas a crédito (dejas a deber) 
-                        hacia otras personas (amigos, familiares, distintos servicios).
+                        <strong class="bold">Concepto:</strong> Realiza una breve descripción del movimiento. 
+                        Por ejemplo: "Pago de factura 340" 
                     </li>
                     <li>
-                        <strong class="bold">(CP) Proveedor:</strong> Utilizada para registrar las operaciones o compras realizadas a crédito (dejas a deber) 
-                        por tu actividad laboral.
-                    </li>
-                    <li>
-                        <strong class="bold">(CPLP) Deudas proveedor a L/P:</strong> Se recogen las deudas que tienes con los proveedores, pero
-                        a largo plazo (LP), es decir, más de 1 año. Se usa para la actividad laboral.
-                    </li>
-                    <li>
-                        <strong class="bold">(CALP) Deudas acreedor a L/P:</strong> Se recogen las deudas que tienes con otras personas, pero
-                        a largo plazo (LP), es decir, más de 1 año. Fuera de la actividad laboral (amigos, familiares, distintos servicios).
+                        <strong class="bold">Cantidad:</strong> Introduce la cantidad exacta del movimiento. No puedes incluir letras y debe 
+                        haber dos deciales obligatoriamente.
                     </li>
                 </ul>
             </div>

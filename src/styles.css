@@ -52,8 +52,8 @@ table {
   }
   
   .fast {
-    -webkit-animation-duration: 0.4s;
-    animation-duration: 0.4s;
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
   }
@@ -79,15 +79,12 @@ table {
   }
 
   .background {
-    /* background: linear-gradient(rgb(195, 210, 226), rgb(255, 255, 255)); */
     background-color: #fff;
     height: 100%;
-    color: #839ebf;
   }
 
   .font {
     font-family: sans-serif !important; 
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif !important; */
   }
 
 .btn {
@@ -97,6 +94,7 @@ table {
   color: #fff;
   border: none;
   display: table;
+  transition: all ease-in-out 0.2s;
 }
 
 .btn-cuadrado {
@@ -159,11 +157,11 @@ table {
 }
 
 .bloque-float {
-  padding: 60px 0 0 40px;
+  padding: 2rem 0 0 40px;
   position: relative;
   display: flex;
   align-items: center;
-  margin: 0 0 40px 0;
+  margin: 0 0 2rem 0;
 }
 
 .bloque-float span {
@@ -213,7 +211,6 @@ p.p-h1 {
   align-items: center;
 }
 
-/* formularios */
 select.corto {
   width: 79%;
 }
@@ -239,25 +236,23 @@ select.corto {
 }
 
 .muylargo {
-  width: 85%;
+  width: 94%;
 }
 
 .total {
-  width: 95%;
+  width: 100%;
 }
 
 .muycorto, .corto, .largo, .muylargo, select.corto, .select-corto, .caja-formulario, .total {
-  padding: 15px 20px;
-  font-size: 16px;
+  padding: 1rem 3%;
+  font-size: 1rem;
   font-family: sans-serif;
   border: 1px solid #ccc;
   color: #839ebf;
- /*  box-shadow: 5px 5px 9px -6px #839ebf; */
 }
 
 select:focus, textarea:focus, input:focus, input[type]:focus {
   border-color: #839ebf;
-  /* box-shadow: 0 1px 1px #839ebf inset, 0 0 8px #839ebf; */
   outline: 0 none;
 }
 
@@ -295,7 +290,7 @@ small {
 }
 
 .space-empty {
-  height: 300px;
+  height: 500px;
 }
 
 .container-principal {
@@ -322,3 +317,77 @@ aside {
   color: #fff;
   transition: all ease-in-out 0.3s;
 }
+
+.no-hay {
+  background-color: #fffacd;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin: 2em 0;
+}
+
+.modalCuenta {
+  position: fixed;
+  top: 0;
+  background-color: rgba(131, 158, 191, 0.6);
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.container-modal {
+  background-color: #fff;
+  width: 600px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: max-content;
+  margin: auto;
+}
+
+.cerrar {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  color: #839ebf;
+}
+
+.botones {
+  display: flex;
+}
+
+.botones .btn {
+  margin: 0 1rem 0 0;
+}
+
+.info-cuenta span {
+  font-size: 20px;
+  padding: 0 1%;
+}
+
+.info-cuenta button.btn {
+  margin-top: 30px;
+}
+
+.instrucciones {
+  width: 40%;
+  padding: 0 40px 0 0;
+  font-size: 15px;
+  text-align: justify;
+  color: #839ebf;
+}
+
+.instrucciones ul h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.instrucciones ul li {
+  margin: 20px 0 0 0;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+

@@ -3,7 +3,8 @@ import { InfoService } from '../../services/info.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cuentas } from '../../models/cuenta.models';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { Movimientos } from 'src/app/models/movimientos.models';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-cuenta',
@@ -13,19 +14,23 @@ import { Router } from '@angular/router';
 export class CuentaComponent implements OnInit {
 
   //Variables
+  cuentaContable:string;
+  contrapartida:string;
   moneda:string;
   cuenta:FormGroup;
   tiposCuenta:any[] = [];
   cuentas:Cuentas[] = [];
   saldo:string;
+  asiento:string;
   tipoCuenta:string;
+  apareceSaldo:boolean = false;
   codigo:number = this.CrearIdCuenta();
-  idAutomatico = this._datos.genenarIdAutomatico();
-  fecha = this._datos.getFecha();
+  idAutomatico = this._DATOS.genenarIdAutomatico();
+  fecha = this._DATOS.getFecha();
 
-  constructor( private _datos: InfoService, 
+  constructor( private _DATOS: InfoService, 
               private fb: FormBuilder,
-              private router: Router ) { 
+              public _VARIABLES: VariablesService ) { 
 
     this.crearFormulario();
 
@@ -46,15 +51,14 @@ export class CuentaComponent implements OnInit {
       identificador: [ { value: this.codigo, disabled: true }, Validators.required],
       nombreCuenta: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       descripcion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      cantidad: ['', [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
-      decimales: ['', [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
+      cantidad: [{ value: '0', disabled: true }, [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+      decimales: [{ value: '00', disabled: true }, [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
     });
   }
 
   //Envío de formulario
   guardarCuenta(){
-    
-    //Validación al pulsar el botón de guardar
+  
     if ( this.cuenta.invalid ) {
       return Object.values( this.cuenta.controls ).forEach( control =>{
         control.markAsTouched();
@@ -62,6 +66,8 @@ export class CuentaComponent implements OnInit {
     }
 
     const data = this.cuenta.getRawValue();
+    this.cuentaContable = data.id.toString();
+    this.contrapartida = '1665060693545';
     this.saldo = data.cantidad + '.' + data.decimales;
     this.tipoCuenta = data.tipo.apunte;
 
@@ -72,33 +78,43 @@ export class CuentaComponent implements OnInit {
       showConfirmButton: false,
       }).then ( () => {
         this.crearCuenta( data );
-        this.router.navigateByUrl('mi-espacio');
+        this.cerrarModal( false );
       });
 
   }
 
   crearCuenta( datosForm: Cuentas ){
-    
 
-    let debe:string;
-    let haber:string;
+    let debe:any[] = [];
+    let haber:any[] = [];
 
-    if ( this.tipoCuenta === 'activo' )
-    {
-      debe = this.saldo;
-      haber = '0.00';
+    //Crea asiento de apertura
+    if ( this.tipoCuenta === 'activo' ){
+
+      this.crearAsientoApertura();
+
+      let valorDebe = { asiento: this.asiento, cantidad: this.saldo }
+      let valorHaber = { asiento: this.asiento, cantidad: '0.00' }
+      debe.push(valorDebe);
+      haber.push(valorHaber);
     } 
-    else 
-    {
-      haber = this.saldo;
-      debe = '0.00';
+
+    else if ( this.tipoCuenta === 'pasivo' ){
+
+      this.crearAsientoApertura();
+
+      let valorHaber = { asiento: this.asiento, cantidad: this.saldo }
+      let valorDebe = { asiento: this.asiento, cantidad: '0.00' }
+      debe.push(valorDebe);
+      haber.push(valorHaber);
     }
 
+    //Graba la cuenta
     const datosRecibidos: Cuentas = {
         id: datosForm.id.toString(),
         fechaDeCreacion: datosForm.fechaDeCreacion,
         tipo: datosForm.tipo,
-        identificador: datosForm.identificador,
+        identificador: datosForm.identificador.toString(),
         nombreCuenta: datosForm.nombreCuenta,
         descripcion: datosForm.descripcion,
         debe: debe,
@@ -107,10 +123,7 @@ export class CuentaComponent implements OnInit {
     }
 
     let peticion;
-    peticion = this._datos.setCuenta(datosRecibidos);
-    console.log(this._datos.getInfoCuentas());
-    
-
+    peticion = this._DATOS.setCuenta(datosRecibidos);
   }
 
   //Validaciones
@@ -139,11 +152,28 @@ export class CuentaComponent implements OnInit {
             this.cuenta.get('tipo').touched
   }
 
+  
+  crearAsientoApertura(){
+      this.asiento = this._DATOS.crearNumeroAsiento().toString();
+      const datosRecibidos: Movimientos = {
+        asiento: this.asiento,
+        id: 'M-'+ this._DATOS.genenarIdAutomatico(),
+        dia: this._DATOS.dia.toString(),
+        mes: this._DATOS.mes.toString(),
+        anyo: this._DATOS.anyo.toString(),
+        concepto: 'Creación de cuenta',
+        cantidad: this.saldo,
+        cuentaContable: this.cuentaContable,
+        contrapartida: this.contrapartida,
+        tipo: '7'
+      }
+      this._DATOS.setMovimientos(datosRecibidos);
+  }
 
-  //Funciones
+
   CrearIdCuenta(){
     let identificador:number;
-    this.cuentas =  this._datos.getInfoCuentas();
+    this.cuentas =  this._DATOS.getInfoCuentas();
     this.cuentas.forEach( () => {
       identificador = this.cuentas.length;
     });
@@ -152,7 +182,7 @@ export class CuentaComponent implements OnInit {
   }
 
   mostarListaCuentas(){
-    let tipos = this._datos.getTipoDeCuenta();
+    let tipos = this._DATOS.getTipoDeCuenta();
     tipos.forEach( resp => {
       if ( resp.apunte === 'activo' || resp.apunte === 'pasivo' ) {
         this.tiposCuenta.push(resp);
@@ -161,7 +191,12 @@ export class CuentaComponent implements OnInit {
   }
 
   mostrarMoneda(){
-    this.moneda = this._datos.getMoneda().simboloMoneda;
+    this.moneda = this._DATOS.getMoneda().simboloMoneda;
+  }
+
+  cerrarModal( termino:boolean ){
+    this._VARIABLES.abrirModalCuenta = termino;
+    this.cuenta.reset('');
   }
 
 }

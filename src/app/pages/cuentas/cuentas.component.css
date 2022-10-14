@@ -4,56 +4,52 @@
 }
 
 .cuenta-info {
-    background-color: #fff;
+    background-color: #f2f6fa;
     height: max-content;
-    border: 1px solid #dcdcdc;
-    padding: 10px 1%;
+    padding: 30px 1%;
     font-size: 16px;
-    margin: 0 0 2em 0;
+    margin: 0 0 5em 0;
     width: 100%;
-    box-shadow: 8px 8px 9px -7px #ccc;
+    box-shadow: 6px 6px 10px -8px #000;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    position: relative;
+}
+
+.cuenta-pasivo {
+    background-color: #fffef1 !important;
+    /* border: 2px solid #acaa8639; */
+}
+
+.cantidad-pasivo {
+    color: rgb(255, 176, 147) !important;
+}
+
+.etiqueta-activo {
+    position: absolute;
+    padding: 1rem 2rem;
+    right: 10px;
+    bottom: 10px;
+    z-index: 100;
+    color: #fff;
+    border: 1px solid #bfd3bf74;
+    background-color: #fff;
 }
 
 .cuenta-info .cabecera {
     padding: 1.5rem;
-    background-color: #f6f6f6;
+    background-color: transparent;
     position: relative;
-}
-
-.info-cuentas {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    font-size: 2rem;
-}
-
-.info-bocadillo .descripcion {
-    position: absolute;
-    width: 200px;
-    top: -45px;
-    right: 45px;
-    background-color: #fff;
-    height: max-content;
-    display: block;
-    border: 1px solid #ccc;
-    color: #a9a9a9;
-    font-size: 1rem;
-    padding: 1rem !important;
-    box-shadow: 5px 5px 8px #dcdcdc;
-    line-height: 24px;
-    display: none;
+    margin: -35px 0 0 0;
 }
 
 .info-bocadillo {
     position: relative;
 }
 
-.cuenta-info .cabecera h2 {
-    flex: 1;
-}
-
 .cuenta-info .cabecera span {
     padding: 0 30px 5px 0;
+    display: flex;
 }
 
 .cantidad {
@@ -94,7 +90,7 @@
 }
 
 .cantidad-cuenta {
-    font-size: 15px;
+    font-size: 1.2em;
 }
 
 .saldo-cantidad {
@@ -126,6 +122,26 @@
 
 .nombreCuenta {
     font-size: 1.5rem;
+}
+
+.anillas {
+    background-image: url("src/assets/img/anilla.svg");
+    width: 95%;
+    height: 50px;
+    background-repeat: repeat-x;
+    background-size: 20px;
+    background-color: transparent;
+    position: relative;
+    top: -55px;
+    left: 10px;
+} 
+
+.buscador-cuenta {
+    margin: 0 0 5rem 0;
+}
+
+.sutil {
+    color: #c1c1c1;
 }
 
 

@@ -1,15 +1,10 @@
-<div class="container-principal">
-    <aside class="animated fadeIn fast">
-        <app-aside></app-aside>
-    </aside>
-
-<div class="container nuevacuenta animated fadeIn fast">
+<div class="container-modal nuevacuenta animated fadeIn fast">
 
     <div class="bloque-float animated fadeIn fast">
         <h1>Cuenta nueva</h1>
-        <button routerLink="/mi-espacio" class="btn-sinfondo puntero">
-            <span>Atrás</span><i class="fa-solid fa-circle-arrow-left"></i>
-        </button>
+        <div class="cerrar" (click)="cerrarModal( false )">
+            <i title="Cerrar ventana"  class="fa-solid fa-close puntero"></i>
+        </div>
     </div>
 
     <div class="animated fadeIn fast info-cuenta bloque-content">
@@ -21,7 +16,7 @@
                     formControlName="fechaDeCreacion">
 
             <label>Nombre de la Cuenta</label>
-            <input class="muylargo" type="text" placeholder="Nombre" maxlength="30" minlength="2" required
+            <input class="muylargo" type="text" maxlength="30" minlength="2" required
                     formControlName="nombreCuenta">
                     <small *ngIf="nombreNoValido" class="animated fadeIn fast">
                         Debes introducir un nombre
@@ -29,49 +24,58 @@
 
             <label>Tipo de cuenta / Código de cuenta</label>
             <div class="flex">
-                <select class="corto"
+                <select class="total"
                         formControlName="tipo">
                     <option value="" selected>[ Selecciona un tipo de cuenta ]</option>
                     <option *ngFor="let tipo of tiposCuenta" [ngValue]="tipo" >
-                        ({{ tipo.codigo }}) / {{ tipo.nombre }}
+                        {{ tipo.nombre }}
                     </option>
                 </select>
-                <span> / </span>
+                <!-- <span> / </span>
                 <input class="muycorto" type="text" required
-                        formControlName="identificador">
+                        formControlName="identificador"> -->
             </div>
             <small *ngIf="tipoNoValido" class="animated fadeIn fast">
                 Debes introducir un tipo de cuenta
             </small>
 
             <label>Descripción</label>
-            <input class="muylargo" type="text" placeholder="Breve descripción" maxlength="50" minlength="2" required
+            <input class="muylargo" type="text" maxlength="50" minlength="2" required
                     formControlName="descripcion">
                     <small *ngIf="descripcionNoValido" class="animated fadeIn fast">
                         Debes introducir una descripción correcta
                     </small>
 
-            <label>Saldo inicial</label>
-            <input class="corto" type="text" placeholder="Saldo inicial"  maxlength="10" minlength="1" required
-                    formControlName="cantidad">
-            <span> , </span>
-            <input class="muycorto" type="text"  maxlength="2" minlength="2" required
-                    formControlName="decimales">
-            <span> {{ moneda }} </span>
-            <small *ngIf="saldoNoValido" class="animated fadeIn fast">
-                Debes introducir solo números y si no tiene saldo, pon 0,00.
-            </small>
-            <small *ngIf="decimalesNoValido" class="animated fadeIn fast">
-                2 decimales
-            </small>
+            <div class="saldo-inicial" *ngIf="apareceSaldo">
+                <label>Saldo inicial</label>
+                <input class="corto" type="text" placeholder="Saldo inicial"  maxlength="10" minlength="1" required
+                        formControlName="cantidad">
+                <span> , </span>
+                <input class="muycorto" type="text"  maxlength="2" minlength="2" required
+                        formControlName="decimales">
+                <span> {{ moneda }} </span>
+                <small *ngIf="saldoNoValido" class="animated fadeIn fast">
+                    Debes introducir solo números y si no tiene saldo, pon 0,00.
+                </small>
+                <small *ngIf="decimalesNoValido" class="animated fadeIn fast">
+                    2 decimales
+                </small>
+            </div>
 
-            <button class="btn puntero" type="submit">
-                Guardar
-            </button>
+            <div class="botones">
+                <button class="btn puntero" type="submit">
+                    Guardar
+                </button>
+                <button class="btn puntero" type="submit" (click)="cerrarModal( false )">
+                    Cancelar
+                </button>
+            </div>
+            
+            
 
         </form>
 
-        <div class="instrucciones">
+        <!-- <div class="instrucciones">
             <ul>
                 <h2>Tipos de cuentas: ACTIVO</h2>
                 <li>
@@ -117,9 +121,7 @@
                     a largo plazo (LP), es decir, más de 1 año. Fuera de la actividad laboral (amigos, familiares, distintos servicios).
                 </li>
             </ul>
-        </div>
+        </div> -->
 
     </div>
-</div>
-
 </div>
