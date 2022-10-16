@@ -2,27 +2,36 @@
     <div class="container-guard animated fadeIn fast">
 
     <div class="saldos">
+
+        <div class="buscar-movimientos">
+            <h1 class="bold">Mi estado</h1>
+        </div>
+
         <ul>
             <li>
                 <i class="fa-solid fa-landmark"></i> 
-                Mi Activo: <span [style.color]="colorActivo">{{ activo | miles }}{{ moneda }}</span>
+                Mi Activo: <span [style.color]="colorActivo" class="bold">{{ activo | miles }}{{ moneda }}</span>
             </li>
             <li>
                 <i class="fa-solid fa-wallet"></i> 
-                Dinero Disponible: <span [style.color]="colorActivo">{{ disponible | miles }}{{ moneda }}</span>
+                Dinero Disponible: <span [style.color]="colorActivo" class="bold">{{ disponible | miles }}{{ moneda }}</span>
             </li>
             <li>
                 <i class="fa-solid fa-handshake-simple"></i> 
-                Debo: <span [style.color]="colorDeuda">{{ deuda | miles }}{{ moneda }}</span>
+                Debo: <span [style.color]="colorDeuda" class="bold">{{ deuda | miles }}{{ moneda }}</span>
             </li>
             <li>
                 <i class="fa-solid fa-money-bills"></i> 
-                Balance: <span class="resaltado" [style.color]="colorBalance">{{ balance | miles }}{{ moneda }}</span>
+                Balance: <span [style.color]="colorBalance" class="bold">{{ balance | miles }}{{ moneda }}</span>
             </li>
         </ul>
     </div>
 
     <div class="bloque">
+
+        <div class="buscar-movimientos">
+            <h1 class="bold">Movimientos</h1>
+        </div>
 
 <!--             <div class="acciones">
 
@@ -70,13 +79,13 @@
             </div>
         </div> -->
     
-        <div class="buscar-movimientos">
+<!--         <div class="buscar-movimientos">
             <h1 class="bold">Últimos movimientos</h1>
-        </div>
+        </div> -->
 
         <ul class="menu-espacio">
             <li routerLinkActive="active">
-                <button [routerLink]="['/asiento']" title="Asiento nuevo" class="puntero">
+                <button (click)="AbrirModalAsiento( true )" title="Asiento nuevo" class="puntero">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
             </li>
@@ -86,8 +95,13 @@
                 </button>
             </li>
             <li routerLinkActive="active">
-                <button [routerLink]="['/cuentas']" title="Administrar cuenta" class="puntero">
+                <button (click)="AbrirModalCuentas( true )" title="Administrar cuenta" class="puntero">
                     <i title="Ver Cuentas"  class="fa-solid fa-book-open"></i>
+                </button>
+            </li>
+            <li routerLinkActive="active">
+                <button title="Administrar cuenta" class="puntero">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </li>
         </ul>
@@ -96,7 +110,7 @@
             
             <table class="default">
     
-                <tr>
+                <tr class="cabecera-tabla">
                     <th>Asiento</th>
                     <th>Fecha</th>
                     <th>Descripción</th>
@@ -107,7 +121,7 @@
                     <th></th>
                 </tr>
 
-                <tr *ngFor="let movimiento of movimientos; let i = index" title="Modificar asiento {{ movimiento.asiento }}"
+                <tr *ngFor="let movimiento of _DATOS.getInfoMovimientos(); let i = index" title="Modificar asiento {{ movimiento.asiento }}"
                     class="info-tr puntero"
                     [routerLink]="['/movimiento', movimiento.id]">
                     <td>{{ movimiento.asiento }}</td>
@@ -125,13 +139,23 @@
             </table>
 
         </div>
-
-        <div class="space" [style.display]="estado"></div>
     </div>
 
-    <div class="modalCuenta animated fadeIn fast" *ngIf="this._VARIABLES.abrirModalCuenta">
+    <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalCuenta">
         <div class="info-modal-cuenta">
             <app-cuenta></app-cuenta>
+        </div>
+    </div>
+
+    <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalAsiento">
+        <div class="info-modal-cuenta">
+            <app-asiento></app-asiento>
+        </div>
+    </div>
+
+    <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalCuentas">
+        <div class="info-modal-cuenta">
+            <app-cuentas></app-cuentas>
         </div>
     </div>
 

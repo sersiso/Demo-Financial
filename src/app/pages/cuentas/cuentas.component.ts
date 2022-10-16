@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InfoService } from 'src/app/services/info.service';
+import { InfoService } from '../../services/info.service';
+import { VariablesService } from '../../services/variables.service';
 
 @Component({
   selector: 'app-cuentas',
@@ -13,51 +14,47 @@ export class CuentasComponent implements OnInit {
   buscadorActivo:boolean = false;
   moneda:any;
   estado:string = '';
-  colores = this._datos.colores;
+  colores = this._DATOS.colores;
   negativo = false;
   colorPositivo:string = this.colores.verde;
 
-  constructor( private _datos: InfoService ) { }
+  constructor( protected _DATOS: InfoService, public _VARIABLES: VariablesService ) { }
 
   ngOnInit(): void {
 
     this.cuentas();
     this.monedaUsada();
-    this.recibirMovimientos();
 
   }
 
   buscar( texto:string ){
     this.buscadorActivo = true;
-    this.cuentaBuscador = this._datos.buscarCuenta( texto );
+    this.cuentaBuscador = this._DATOS.buscarCuenta( texto );
   }
 
   cuentas(){
-    let cuentas = this._datos.getInfoCuentas();
+    let cuentas = this._DATOS.getInfoCuentas();
     cuentas.forEach( resp => {
-      if ( resp.tipo.codigo !== this._datos.nombreCodigos().cr  ){
+      if ( resp.tipo.codigo !== this._DATOS.nombreCodigos().cr  ){
         this.infoCuentas.push(resp);
       }
     });
   }
 
   monedaUsada(){
-    this.moneda = this._datos.getMoneda();
+    this.moneda = this._DATOS.getMoneda();
   }
 
-  recibirMovimientos(){
-    if ( this.infoCuentas.length >=4 ){
-      this.estado = 'none';
-    } else {
-      this.estado = 'block';
-    }
+  cerrarModal( termino:boolean ){
+    this._VARIABLES.abrirModalCuentas = termino;
+  }
 
-    if ( this.cuentaBuscador.length <=4 ){
-      this.estado = 'block';
-    } else {
-      this.estado = 'none';
-    }
-    
+  abrirModalModificarCuenta:boolean = this._VARIABLES.abrirModalModificarCuenta;
+
+  AbrirModalModificarCuenta( termino:boolean, id:string ){
+    this._VARIABLES.abrirModalModificarCuenta = termino;
+    this.abrirModalModificarCuenta = this._VARIABLES.abrirModalModificarCuenta;
+    this._VARIABLES.idCuentaModificar = id;
   }
 
   

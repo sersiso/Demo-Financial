@@ -3,7 +3,7 @@ import { InfoService } from '../../services/info.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cuentas } from '../../models/cuenta.models';
 import Swal from 'sweetalert2';
-import { ActivatedRoute, Router } from '@angular/router';
+import { VariablesService } from '../../services/variables.service';
 
 @Component({
   selector: 'app-modificar-cuenta',
@@ -18,12 +18,11 @@ export class ModificarCuentaComponent implements OnInit {
   tiposCuenta:any[] = [];
   cuentaRecuperada:any = [];
 
-  constructor( private _datos: InfoService, 
+  constructor( private _DATOS: InfoService, 
               private fb: FormBuilder,
-              private router: Router,
-              private route: ActivatedRoute ) { 
+              public _VARIABLES: VariablesService ) { 
 
-    this.recuperarIdUrl = this.route.snapshot.paramMap.get('id');
+    this.recuperarIdUrl = this._VARIABLES.idCuentaModificar;
     this.cuentaRecuperada = this.recuperarDatos( this.recuperarIdUrl );
     this.crearFormulario();
    }
@@ -47,7 +46,7 @@ export class ModificarCuentaComponent implements OnInit {
 
   recuperarDatos( id:string ){
     let infoCuenta = [];
-    infoCuenta = this._datos.buscarCuentaId( id );
+    infoCuenta = this._DATOS.buscarCuentaId( id );
     return infoCuenta;
   }
 
@@ -93,7 +92,7 @@ export class ModificarCuentaComponent implements OnInit {
           showConfirmButton: false,
           }).then ( () => {
             this.modificarCuenta( data );
-            this.router.navigateByUrl('cuentas');
+            this.cerrarModal ( false );
           });
 
     } 
@@ -114,7 +113,7 @@ export class ModificarCuentaComponent implements OnInit {
         showConfirmButton: true,
       }).then ( () => {
         this.modificarCuenta( data );
-        this.router.navigateByUrl('cuentas');
+        this.cerrarModal( false );
       });
     }
 
@@ -135,7 +134,7 @@ export class ModificarCuentaComponent implements OnInit {
     }
 
     let peticion;
-    peticion = this._datos.modificarCuenta( datosRecibidos, this.recuperarIdUrl );
+    peticion = this._DATOS.modificarCuenta( datosRecibidos, this.recuperarIdUrl );
 
   }
 
@@ -158,7 +157,11 @@ export class ModificarCuentaComponent implements OnInit {
 
   //Funciones
   mostarListaCuentas(){
-    this.tiposCuenta = this._datos.getTipoDeCuenta();
+    this.tiposCuenta = this._DATOS.getTipoDeCuenta();
+  }
+
+  cerrarModal( termino:boolean ){
+    this._VARIABLES.abrirModalModificarCuenta = termino;
   }
 
 }

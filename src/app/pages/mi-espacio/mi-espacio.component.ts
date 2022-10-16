@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { VariablesService } from 'src/app/services/variables.service';
 import { Movimientos } from '../../models/movimientos.models';
 import { InfoService } from '../../services/info.service';
@@ -18,7 +18,6 @@ export class MiEspacioComponent implements OnInit {
 
   moneda:string;
   estado:string = 'block';
-  movimientos:Movimientos[] = [];
 
   activo:number = 0;
   disponible:number = 0;
@@ -31,7 +30,7 @@ export class MiEspacioComponent implements OnInit {
   colorBalance:string = this.colores.verde;
 
 
-  constructor( private _DATOS:InfoService,
+  constructor( protected _DATOS:InfoService,
               public _VARIABLES:VariablesService ) { 
 
     this.activo = this._DATOS.mostrarActivo();
@@ -45,7 +44,6 @@ export class MiEspacioComponent implements OnInit {
 
     this.seleccionarColor();
     this.recibirMoneda();
-    this.recibirMovimientos();
 
     console.log("MOVIMIENTOS:");
     console.log(this._DATOS.getInfoMovimientos());
@@ -56,28 +54,22 @@ export class MiEspacioComponent implements OnInit {
   }
 
   abrirModalCuenta:boolean = this._VARIABLES.abrirModalCuenta;
+  abrirModalAsiento:boolean = this._VARIABLES.abrirModalAsiento;
+  abrirModalCuentas:boolean = this._VARIABLES.abrirModalCuentas;
 
   AbrirModalCuenta( termino:boolean ){
     this._VARIABLES.abrirModalCuenta = termino;
     this.abrirModalCuenta = this._VARIABLES.abrirModalCuenta;
   }
 
-  recibirMovimientos(){
-    let info = [];
-    let mov = this._DATOS.getInfoMovimientos();
-    mov.forEach( resp => {
-      if ( resp.tipo != '7'){
-        info.push(resp);
-      }
-    });
+  AbrirModalAsiento( termino:boolean ){
+    this._VARIABLES.abrirModalAsiento = termino;
+    this.abrirModalAsiento = this._VARIABLES.abrirModalAsiento;
+  }
 
-    this.movimientos = info;
-
-    if ( info.length > 30 ){
-      this.estado = 'none';
-    } else {
-      this.estado = 'block';
-    }
+  AbrirModalCuentas( termino:boolean ){
+    this._VARIABLES.abrirModalCuentas = termino;
+    this.abrirModalCuentas = this._VARIABLES.abrirModalCuentas;
   }
 
   borrarFila( id:string ){

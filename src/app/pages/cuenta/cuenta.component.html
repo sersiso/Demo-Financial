@@ -22,7 +22,7 @@
                         Debes introducir un nombre
                     </small>
 
-            <label>Tipo de cuenta / Código de cuenta</label>
+            <label>Tipo de cuenta</label>
             <div class="flex">
                 <select class="total"
                         formControlName="tipo">
@@ -31,9 +31,6 @@
                         {{ tipo.nombre }}
                     </option>
                 </select>
-                <!-- <span> / </span>
-                <input class="muycorto" type="text" required
-                        formControlName="identificador"> -->
             </div>
             <small *ngIf="tipoNoValido" class="animated fadeIn fast">
                 Debes introducir un tipo de cuenta
@@ -46,8 +43,16 @@
                         Debes introducir una descripción correcta
                     </small>
 
-            <div class="saldo-inicial" *ngIf="apareceSaldo">
-                <label>Saldo inicial</label>
+            <label>Saldo</label>
+            <div class="flex">
+                <input type="checkbox" 
+                    (change)="saldoCheck( saldo.checked )"
+                    #saldo
+                    checked>
+                <span class="font-14">Desmarca si el saldo no es "0.00"</span>
+            </div>
+
+            <div class="saldo-inicial animated fadeIn fast" *ngIf="!apareceSaldo">
                 <input class="corto" type="text" placeholder="Saldo inicial"  maxlength="10" minlength="1" required
                         formControlName="cantidad">
                 <span> , </span>
@@ -66,62 +71,12 @@
                 <button class="btn puntero" type="submit">
                     Guardar
                 </button>
-                <button class="btn puntero" type="submit" (click)="cerrarModal( false )">
+                <button class="btn puntero" type="button" (click)="cerrarModal( false )">
                     Cancelar
                 </button>
             </div>
             
-            
-
         </form>
-
-        <!-- <div class="instrucciones">
-            <ul>
-                <h2>Tipos de cuentas: ACTIVO</h2>
-                <li>
-                    <strong class="bold">(CB) Cuenta bancaria:</strong> Refleja el dinero que entra y sale del banco.
-                </li>
-                <li>
-                    <strong class="bold">(CE) Dinero en efectivo:</strong> Refleja el dinero en efectivo.
-                </li>
-                <li>
-                    <strong class="bold">(CC) Cliente:</strong> Se recogen las deudas que tienen los clientes contigo. Se usa para 
-                    la actividad laboral.
-                </li>
-                <li>
-                    <strong class="bold">(CD) Deudor:</strong> Se recogen las deudas que tienen otras personas contigo, fuera de la
-                    actividad laboral (amigos, familiares, distintos servicios).
-                </li>
-                <li>
-                    <strong class="bold">(CCLP) Deudas cliente a L/P:</strong> Se recogen las deudas que tienen los clientes contigo, pero
-                    a largo plazo (LP), es decir, más de 1 año. Se usa para la actividad laboral.
-                </li>
-                <li>
-                    <strong class="bold">(DDLP) Deudas deudores a L/P:</strong> Se recogen las deudas que tienen otras personas contigo, pero
-                    a largo plazo (LP), es decir, más de 1 año. Fuera de la actividad laboral (amigos, familiares, distintos servicios).
-                </li>
-
-                <div class="space"></div>
-
-                <h2>Tipos de cuentas: PASIVO</h2>
-                <li>
-                    <strong class="bold">(CA) Acreedor:</strong> Utilizada para registrar las operaciones o compras realizadas a crédito (dejas a deber) 
-                    hacia otras personas (amigos, familiares, distintos servicios).
-                </li>
-                <li>
-                    <strong class="bold">(CP) Proveedor:</strong> Utilizada para registrar las operaciones o compras realizadas a crédito (dejas a deber) 
-                    por tu actividad laboral.
-                </li>
-                <li>
-                    <strong class="bold">(CPLP) Deudas proveedor a L/P:</strong> Se recogen las deudas que tienes con los proveedores, pero
-                    a largo plazo (LP), es decir, más de 1 año. Se usa para la actividad laboral.
-                </li>
-                <li>
-                    <strong class="bold">(CALP) Deudas acreedor a L/P:</strong> Se recogen las deudas que tienes con otras personas, pero
-                    a largo plazo (LP), es decir, más de 1 año. Fuera de la actividad laboral (amigos, familiares, distintos servicios).
-                </li>
-            </ul>
-        </div> -->
 
     </div>
 </div>

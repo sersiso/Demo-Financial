@@ -13,12 +13,16 @@ export class Variables {
           nombreCuenta: 'Apertura cuenta',
           descripcion: 'Cuenta de regularización',
           debe: [
-                  { asiento: '0', cantidad: '0.00' }
+                  { asiento: '0', cantidad: '0.00' },
+                  { asiento: '1', cantidad: '0.00' },
+                  { asiento: '2', cantidad: '0.00' },
                 ],
           haber: [
-                  { asiento: '0', cantidad: '0.00' }
+                  { asiento: '0', cantidad: '0.00' },
+                  { asiento: '1', cantidad: '3500.00' },
+                  { asiento: '2', cantidad: '1200.00' },
                 ],
-          saldo: '0.00'
+          saldo: '4700.00'
         },
         {
           id: '1665060690045',
@@ -33,7 +37,7 @@ export class Variables {
           haber: [
                   { asiento: '0', cantidad: '0.00' },
                 ],
-          saldo: '320.42'
+          saldo: '0.00'
         },
         {
           id: '1665061785259',
@@ -55,7 +59,7 @@ export class Variables {
           fechaDeCreacion: '01/01/2022',
           tipo: { nombre: 'Cuenta de regularización', apunte: 'regularización', codigo: 'CR' },
           identificador: '4',
-          nombreCuenta: 'Donaciones y regalos',
+          nombreCuenta: 'Prestar, donar y regalar',
           descripcion: 'Cuenta de regularización',
           debe: [
                   { asiento: '0', cantidad: '0.00' },
@@ -63,7 +67,7 @@ export class Variables {
           haber: [
                   { asiento: '0', cantidad: '0.00' },
                 ],
-          saldo: '850.00'
+          saldo: '0.00'
         },
         {
           id: '1665138152607',
@@ -82,8 +86,8 @@ export class Variables {
         },
     
         //CUENTAS NORMALES ----------------------------------------
-/*         {
-          id: '1664458286047',
+         {
+          id: '793d2d7c25124a23ac189ea595998fe9',
           fechaDeCreacion: '29/09/2022',
           tipo: {
                 nombre: 'Cuenta bancaria',
@@ -91,33 +95,64 @@ export class Variables {
                 codigo: 'CB',
                 },
           identificador: '6',
-          nombreCuenta: 'Banco Santander 0012',
-          descripcion: 'Esta es la cuenta acabada en 0012',
+          nombreCuenta: 'Banco Santander 1014',
+          descripcion: 'Nueva cuenta bancaria',
           debe: [
-                  { asiento: '1', cantidad: '0.00' },
+                  { asiento: '1', cantidad: '3500.00' },
                 ],
           haber: [
                   { asiento: '1', cantidad: '0.00' },
                 ],
-          saldo: '0.00'
-        } */
+          saldo: '3500.00'
+        },
+        {
+          id: '2e24eb1938a9462e8a39565ac218fd19',
+          fechaDeCreacion: '29/09/2022',
+          tipo: {
+                nombre: 'Dinero en efectivo',
+                apunte: 'activo',
+                codigo: 'CE',
+                },
+          identificador: '7',
+          nombreCuenta: 'Efectivo',
+          descripcion: 'Dinero debajo del colchón',
+          debe: [
+                  { asiento: '2', cantidad: '1200.00' },
+                ],
+          haber: [
+                  { asiento: '2', cantidad: '0.00' },
+                ],
+          saldo: '1200.00'
+        } 
     
       ]
 
     private movimientos:Movimientos[] = [
 
-       /*  {
+         {
           asiento: '1',
-          id: 'M-1665390469887',
+          id: 'M-e56c6d8530194cb086e5c616abb68532',
           dia: '29',
           mes: '09',
           anyo: '2022',
           concepto: 'Creación de cuenta',
           cantidad: '3500.00',
-          cuentaContable: '1664458286047',
+          cuentaContable: '793d2d7c25124a23ac189ea595998fe9',
           contrapartida: '1665060693545',
           tipo: '7'
-        }, */
+        }, 
+        {
+          asiento: '2',
+          id: 'M-e56c6d8530194cb086e6c616abb68533',
+          dia: '29',
+          mes: '09',
+          anyo: '2022',
+          concepto: 'Creación de cuenta',
+          cantidad: '1200.00',
+          cuentaContable: '2e24eb1938a9462e8a39565ac218fd19',
+          contrapartida: '1665060693545',
+          tipo: '7'
+        }, 
     ]
 
     private colores = {

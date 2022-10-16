@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InfoService } from '../../services/info.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Cuentas } from '../../models/cuenta.models';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 import { Movimientos } from '../../models/movimientos.models';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-asiento',
@@ -16,7 +15,7 @@ export class AsientoComponent implements OnInit {
   //fechas
   meses:string[] = ['01','02','03','04','05','06','07','08','09','10','11','12'];
   dias:any[] = [];
-  anyo = this._datos.getAnyo();
+  anyo = this._DATOS.getAnyo();
 
   //Formulario
   movimiento:FormGroup;
@@ -29,9 +28,9 @@ export class AsientoComponent implements OnInit {
   //Información
   moneda:string;
   total:string;
-  cuentas = this._datos.getInfoCuentas();
-  asiento:number = this._datos.crearNumeroAsiento();
-  idAutomatico = this._datos.genenarIdAutomatico();
+  cuentas = this._DATOS.getInfoCuentas();
+  asiento:number = this._DATOS.crearNumeroAsiento();
+  idAutomatico = this._DATOS.genenarIdAutomatico();
 
   //Carteles
   mostrarCartelIngreso:boolean = false;
@@ -43,9 +42,9 @@ export class AsientoComponent implements OnInit {
   mostrarCartelTraspaso:boolean = false;
   cuadrarAsiento:boolean = false;
 
-  constructor( private _datos: InfoService, 
+  constructor( private _DATOS: InfoService, 
               private fb: FormBuilder,
-              private router: Router ) { 
+              public _VARIABLES:VariablesService ) { 
 
     this.crearFormulario();
 
@@ -97,32 +96,13 @@ export class AsientoComponent implements OnInit {
       timer: 2000,
       showConfirmButton: false,
       }).then ( () => {
-        this.crearMovimiento( data );
+        this._DATOS.crearMovimiento( data, this.total );
+        this.cerrarModal( false );
         if ( data.cuadrar === true ){
           console.log("Hace el asiento extra");
         }
-        this.router.navigateByUrl('mi-espacio');
       }); 
 
-  }
-
-  crearMovimiento( datosForm: Movimientos ){
-
-    const datosRecibidos: Movimientos = {
-        asiento: datosForm.asiento.toString(),
-        id: datosForm.id.toString(),
-        dia: datosForm.dia,
-        mes: datosForm.mes,
-        anyo: datosForm.anyo,
-        concepto: datosForm.concepto,
-        cantidad: this.total,
-        cuentaContable: datosForm.cuentaContable,
-        contrapartida: datosForm.contrapartida,
-        tipo: datosForm.tipo
-    }
-
-    this._datos.setMovimientos(datosRecibidos);
-    
   }
 
   //Validaciones
@@ -191,7 +171,7 @@ export class AsientoComponent implements OnInit {
 
   tipoMovimiento( movimiento:any ){
 
-    let nombreCodigos = this._datos.nombreCodigos();
+    let nombreCodigos = this._DATOS.nombreCodigos();
     let arrayContables = [];
     let arrayContrapartida = [];
 
@@ -220,7 +200,7 @@ export class AsientoComponent implements OnInit {
             nombreCodigos.cc === resp.tipo.codigo ||
             nombreCodigos.cd === resp.tipo.codigo ||
             nombreCodigos.ddlp === resp.tipo.codigo ||
-            nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Donaciones y regalos' || 
+            nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Prestar, donar y regalar' || 
             nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Sueldos y salarios'){
             arrayContrapartida.push(resp);
             this.cuentasContrapartida = arrayContrapartida;
@@ -247,7 +227,7 @@ export class AsientoComponent implements OnInit {
           nombreCodigos.ca === resp.tipo.codigo ||
           nombreCodigos.dplp === resp.tipo.codigo || 
           nombreCodigos.dalp === resp.tipo.codigo ||
-          nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Donaciones y regalos' || 
+          nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Prestar, donar y regalar' || 
           nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Sueldos y salarios' ){
           arrayContables.push(resp);
           this.cuentasContables = arrayContables;
@@ -401,7 +381,12 @@ export class AsientoComponent implements OnInit {
   }
 
   mostrarMoneda(){
-    this.moneda = this._datos.getMoneda().simboloMoneda;
+    this.moneda = this._DATOS.getMoneda().simboloMoneda;
+  }
+
+  cerrarModal( termino:boolean ){
+    this._VARIABLES.abrirModalAsiento = termino;
+    this.movimiento.reset('');
   }
 
 }

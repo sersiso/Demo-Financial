@@ -19,56 +19,42 @@ export class InfoService {
 
    }
 
-  getMoneda(){
-    return this.moneda;
+
+  //Funciones con asientos
+  recibirMovimientos(){
+    let info = [];
+    let mov = this.getInfoMovimientos();
+    mov.forEach( resp => {
+      if ( resp.tipo != '7'){
+        info.push(resp);
+      }
+    });
+    return info;
   }
 
-  getTipoDeCuenta(){
-    return  this.tipoCuenta;
-  }
+  crearMovimiento( datosForm: Movimientos, total ){
 
-  getInfoCuentas(){
-    return this.cuentas;
-  }
-
-  getInfoMovimientos(){
-    return this.movimientos;
-  }
-
-  getFecha(){
-    let fechaCompleta:string;
-    fechaCompleta = `${this.dia}/${this.mes}/${this.anyo}`;
-    return fechaCompleta;
-  }
-
-  getAnyo(){
-    return this.anyo;
-  }
-
-  nombreCodigos(){
-    let codigos = {
-      cb: this.tipoCuenta[0].codigo, 
-      ce: this.tipoCuenta[1].codigo, 
-      cc: this.tipoCuenta[2].codigo,
-      cp: this.tipoCuenta[3].codigo, 
-      cd: this.tipoCuenta[4].codigo,
-      ca: this.tipoCuenta[5].codigo,
-      dplp: this.tipoCuenta[6].codigo,
-      dclp: this.tipoCuenta[7].codigo,
-      dalp: this.tipoCuenta[8].codigo,
-      ddlp: this.tipoCuenta[9].codigo,
-      cr: this.tipoCuenta[10].codigo,
+    const datosRecibidos: Movimientos = {
+        asiento: datosForm.asiento.toString(),
+        id: datosForm.id.toString(),
+        dia: datosForm.dia,
+        mes: datosForm.mes,
+        anyo: datosForm.anyo,
+        concepto: datosForm.concepto,
+        cantidad: total,
+        cuentaContable: datosForm.cuentaContable,
+        contrapartida: datosForm.contrapartida,
+        tipo: datosForm.tipo
     }
-    return codigos;
+
+    this.setMovimientos(datosRecibidos);
+    
   }
 
   
   setMovimientos( info:Movimientos ){
     
-    //Guarda el asiento
     this.movimientos.push(info);
-
-    //Modifica los saldos de las cuentas
     let asiento = info.asiento;
     let idCuenta = info.cuentaContable;
     let idContrapartida = info.contrapartida;
@@ -87,10 +73,6 @@ export class InfoService {
 
     });
 
-  }
-
-  setCuenta( info:Cuentas ){
-      this.cuentas.push(info);
   }
 
   setDebe( idCuenta:string, cantidad:string, asiento:string ){
@@ -135,12 +117,69 @@ export class InfoService {
 
   }
 
+
+  //Funciones para cuentas
+  setCuenta( info:Cuentas ){
+    this.cuentas.push(info);
+}
+
   modificarCuenta( info:Cuentas, idRecibido:any ){
       let indice = this.cuentas.findIndex( i => i.id === idRecibido);
       this.cuentas[indice] = info;
   }
+
+  //Getters
+  getMoneda(){
+    return this.moneda;
+  }
+
+  getTipoDeCuenta(){
+    return  this.tipoCuenta;
+  }
+
+  getInfoCuentas(){
+    let listaCuentas = [];
+    this.cuentas.forEach( resp => {
+      if ( resp.tipo.codigo !== this.nombreCodigos().cr  ){
+        listaCuentas.push(resp);
+      }
+    });
+    return listaCuentas;
+  }
+
+  getInfoMovimientos(){
+    return this.movimientos;
+  }
+
+  getFecha(){
+    let fechaCompleta:string;
+    fechaCompleta = `${this.dia}/${this.mes}/${this.anyo}`;
+    return fechaCompleta;
+  }
+
+  getAnyo(){
+    return this.anyo;
+  }
+
+  nombreCodigos(){
+    let codigos = {
+      cb: this.tipoCuenta[0].codigo, 
+      ce: this.tipoCuenta[1].codigo, 
+      cc: this.tipoCuenta[2].codigo,
+      cp: this.tipoCuenta[3].codigo, 
+      cd: this.tipoCuenta[4].codigo,
+      ca: this.tipoCuenta[5].codigo,
+      dplp: this.tipoCuenta[6].codigo,
+      dclp: this.tipoCuenta[7].codigo,
+      dalp: this.tipoCuenta[8].codigo,
+      ddlp: this.tipoCuenta[9].codigo,
+      cr: this.tipoCuenta[10].codigo,
+    }
+    return codigos;
+  }
+
   
-  //Funciones 
+  //Funciones varias
   genenarIdAutomatico(){
     let d = new Date().getTime();
     let uuid = 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

@@ -3,8 +3,8 @@ import { InfoService } from '../../services/info.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cuentas } from '../../models/cuenta.models';
 import Swal from 'sweetalert2';
-import { Movimientos } from 'src/app/models/movimientos.models';
-import { VariablesService } from 'src/app/services/variables.service';
+import { Movimientos } from '../../models/movimientos.models';
+import { VariablesService } from '../../services/variables.service';
 
 @Component({
   selector: 'app-cuenta',
@@ -23,7 +23,9 @@ export class CuentaComponent implements OnInit {
   saldo:string;
   asiento:string;
   tipoCuenta:string;
-  apareceSaldo:boolean = false;
+
+  apareceSaldo:boolean = true;
+  
   codigo:number = this.CrearIdCuenta();
   idAutomatico = this._DATOS.genenarIdAutomatico();
   fecha = this._DATOS.getFecha();
@@ -51,8 +53,8 @@ export class CuentaComponent implements OnInit {
       identificador: [ { value: this.codigo, disabled: true }, Validators.required],
       nombreCuenta: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
       descripcion: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      cantidad: [{ value: '0', disabled: true }, [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
-      decimales: [{ value: '00', disabled: true }, [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
+      cantidad: [{ value: '0', disabled: false }, [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+      decimales: [{ value: '00', disabled: false }, [Validators.pattern('[0-9]+'), Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
     });
   }
 
@@ -197,6 +199,20 @@ export class CuentaComponent implements OnInit {
   cerrarModal( termino:boolean ){
     this._VARIABLES.abrirModalCuenta = termino;
     this.cuenta.reset('');
+  }
+
+  saldoCheck( termino:boolean ){
+    this.apareceSaldo = termino;
+
+    if ( termino ) {
+      this.cuenta.controls['cantidad'].reset("0");
+      this.cuenta.controls['decimales'].reset("00");
+    } else {
+      this.cuenta.controls['cantidad'].reset("");
+      this.cuenta.controls['decimales'].reset("");
+    }
+
+
   }
 
 }

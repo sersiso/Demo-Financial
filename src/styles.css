@@ -42,50 +42,22 @@ table {
 	border-spacing: 0;
 }
 
+html {
+  height: 100%;
+}
 
-/* Animaciones */
-.animated {
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
-  
-  .fast {
-    -webkit-animation-duration: 0.2s;
-    animation-duration: 0.2s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-  
-    to {
-      opacity: 1;
-    }
-  }
-  
-  .fadeIn {
-    animation-name: fadeIn;
-  }
+.background {
+  background-color: #fff;
+  height: 100%;
+}
 
-  /* Estilos generales */
+.font {
+  font-family: sans-serif !important; 
+}
 
-  html {
-    height: 100%;
-  }
-
-  .background {
-    background-color: #fff;
-    height: 100%;
-  }
-
-  .font {
-    font-family: sans-serif !important; 
-  }
+.font-14 {
+  font-size: 14px;
+}
 
 .btn {
   padding: 10px 20px;
@@ -93,7 +65,6 @@ table {
   background-color: #839ebf;
   color: #fff;
   border: none;
-  display: table;
   transition: all ease-in-out 0.2s;
 }
 
@@ -153,14 +124,11 @@ table {
 
 .bloque {
   background-color: #fff;
-  padding: 40px;
+  padding: 2rem;
 }
 
 .bloque-float {
-  padding: 2rem 0 0 40px;
-  position: relative;
-  display: flex;
-  align-items: center;
+  padding: 2rem 0 0 2rem;
   margin: 0 0 2rem 0;
 }
 
@@ -172,9 +140,7 @@ table {
 }
 
 .bloque-content {
-  padding: 0 40px;
-  margin: 0 0 60px 0;
-  position: relative;
+  padding: 0 2rem 2rem 2rem;
 }
 
 .bold {
@@ -186,10 +152,22 @@ table {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 1.5rem;
   padding: 0;
   color: #839ebf;
 }
+
+.saldos {
+  background-color: #f7f7f7;
+  padding-bottom: 2rem;
+}
+
+.saldos h1 {
+  font-size: 1.5rem;
+  padding: 2rem 2rem 1rem 2rem;
+  color: #839ebf;
+}
+
 
 p.p-h1 {
   color: #5f9ea0;
@@ -244,8 +222,8 @@ select.corto {
 }
 
 .muycorto, .corto, .largo, .muylargo, select.corto, .select-corto, .caja-formulario, .total {
-  padding: 1rem 3%;
-  font-size: 1rem;
+  padding: 0.5rem 3%;
+  font-size: 14px;
   font-family: sans-serif;
   border: 1px solid #ccc;
   color: #839ebf;
@@ -328,7 +306,7 @@ aside {
 .modalCuenta {
   position: fixed;
   top: 0;
-  background-color: rgba(131, 158, 191, 0.6);
+  background-color: rgba(0, 0, 0, 0.3);
   right: 0;
   left: 0;
   bottom: 0;
@@ -337,6 +315,18 @@ aside {
 .container-modal {
   background-color: #fff;
   width: 600px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: max-content;
+  margin: auto;
+}
+
+.container-modal-asiento {
+  background-color: #fff;
+  width: 800px;
   position: absolute;
   top: 0;
   right: 0;
@@ -355,39 +345,382 @@ aside {
 }
 
 .botones {
-  display: flex;
+  text-align: right;
 }
 
 .botones .btn {
-  margin: 0 1rem 0 0;
+  margin: 0 0 0 1rem;
+}
+
+.etiqueta-activo {
+  margin-right: 1rem;
 }
 
 .info-cuenta span {
-  font-size: 20px;
   padding: 0 1%;
 }
 
 .info-cuenta button.btn {
-  margin-top: 30px;
+  margin-top: 3rem;
 }
 
-.instrucciones {
-  width: 40%;
-  padding: 0 40px 0 0;
-  font-size: 15px;
+.content-flex {
+  flex: 1;
+}
+
+.lista-cuentas {
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.lista-cuentas::-webkit-scrollbar {
+  background-color: #fff;
+  width: 16px;
+}
+
+.lista-cuentas::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+.lista-cuentas::-webkit-scrollbar-thumb {
+  background-color: #839ebf;
+  border-radius: 16px;
+  border: 4px solid #fff;
+}
+.lista-cuentas::-webkit-scrollbar-button {
+  display: none;
+}
+
+.asiento input {
+  width: 50px;
+  text-align: center;
+}
+
+.asiento {
+  margin: 0 20px 0 0;
+}
+
+.fecha select {
+  width: 100px;
+  margin: 0 7px 0 0;
+}
+
+.cabecera-asiento {
+  padding: 0 1% 0 0;
+}
+
+.radiobutton span {
+  font-size: 14px;
+}
+
+.radio {
+  margin: 10px 0 0 0;
+}
+
+.radiobutton ul li p {
+  font-size: 13px;
+  padding: 10px 30% 10px 20px;
   text-align: justify;
   color: #839ebf;
+  line-height: 16px;
 }
 
-.instrucciones ul h2 {
-  font-size: 20px;
+.col {
+  flex: 1;
+}
+
+.content-asiento {
+  display: flex;
+}
+
+.cuenta-info {
+  background-color: #f2f6fa;
+  height: max-content;
+  width: 100%;
+  margin-bottom: 0.2rem;
+  transition: all ease-in-out 0.5s;
+}
+
+.cuenta-pasivo {
+  background-color: #fffef1 !important;
+}
+
+.cantidad-pasivo {
+  color: rgb(255, 176, 147) !important;
+}
+
+.cuenta-info .cabecera {
+  padding: 0.5rem 1.5rem;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.info-cabecera {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+}
+
+.cantidad {
+  width: 100%;
+}
+
+.cantidades {
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+}
+
+.cantidades span {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.mostrar-cuentas h2.title-h2 {
+  display: block;
+  padding: 0 0 5px 0;
+  margin: 20px 0 0 0;
+  color: #839ebf;
   font-weight: bold;
 }
 
-.instrucciones ul li {
-  margin: 20px 0 0 0;
+.space {
+  height: 400px;
+}
+
+.cabecera button {
+  margin-right: 1px;
+}
+
+.debe, .haber {
+  border-bottom: 1px solid #ccc;
+  margin: 0 0 10px 0;
+}
+
+.cantidad-cuenta {
+  font-size: 1.2em;
+}
+
+.saldo-cantidad {
+  padding: 0 0 0 2rem;
+  width: fit-content !important;
+}
+
+.btn-cuentas {
+  font-size: 1.5em;
+  color: #839ebf;
+  background-color: transparent;
+  border: none;
+  transition: all ease-in-out 0.5s;
+}
+
+.btn-cuentas:hover {
+  color: #455467;
+  transition: all ease-in-out 0.5s;
+}
+
+.btn-cuentas span {
+  font-size: 0.7em;
+  padding: 0 0 0 0.5em !important;
+}
+
+.nombreCuenta {
+  font-size: 1rem;
+  padding-right: 1rem;
+}
+
+.buscador-cuenta {
+  margin: 0 0 1rem 0;
+}
+
+.sutil {
+  color: #c1c1c1;
+}
+
+.saldos ul {
+  padding: 0 2rem 0 2rem;
+}
+
+.saldos ul li {
+  color: #839ebf;
+  font-size: 1rem;
+  text-align: left;
+  padding-right: 2rem;
+  margin: 0.5rem 0;
+}
+
+.saldos ul li i {
+  font-size: 1rem;
+  margin-right: 0.3em;
+}
+
+.bloque h1 {
+  font-size: 1.2em;
+  padding: 15px 0 15px 0;
+  color: #839ebf;
+  background-color: #fff;
+}
+
+.tabla {
+  display: flex;
   font-size: 16px;
-  line-height: 18px;
+  text-align: left;
+  color: #000;
+  margin: 1rem 0 0 0;
+}
+
+.tabla table {
+  flex: 1;
+}
+
+.cabecera-tabla {
+  background-color: #fff !important;
+}
+
+.tabla table tr td, .tabla table tr th {
+  padding: 0.5rem 1rem;
+}
+
+.tabla table tr{
+  background-color: #f2f6fa;
+  transition: all ease-in-out 0.2s;
+  color: #839ebf;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  border-bottom: 3px solid #fff;
+}
+
+.tabla table tr:hover{
+  transition: all ease-in-out 0.2s;
+  color: #000;
+}
+
+.tabla table tr th {
+  color: #000;
+  font-weight: bold;
+  padding: 10px 10px;
+}
+
+.flex-button {
+  display: flex;
+}
+
+.tabla table tr td button {
+  flex: 1;
+  margin: 0 1px;
+  width: 35px;
+  height: 35px;
+  font-size: 15px;
+}
+
+.info-tr:hover {
+  color: #000;
+  transition: all ease-in-out 0.2s;
+  background-color: #f1f1f1;
+}
+
+.mod, .del {
+  color: #fff;
+  background-color: #839ebf;
+  border: none;
+  padding: 10px;
+  transition: all ease-in-out 0.3s;
+}
+
+.del:hover {
+  transition: all ease-in-out 0.3s;
+  background-color: #ff0000;
+}
+
+.mod:hover {
+  transition: all ease-in-out 0.3s;
+  background-color: #455467;
+}
+
+.acciones button {
+  width: max-content;
+  height: 50px;
+  margin-right: 10px;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  color: #455467;
+  transition: all ease-in-out 0.3s;
+  font-size: 15px;
+}
+
+.acciones button span {
+  font-size: 15px;
+  padding: 0 5px;
+}
+
+.acciones button:hover {
+  transition: all ease-in-out 0.3s;
+  color: #839ebf;
+}
+
+.acciones {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+}
+
+.buscador form {
+  display: flex;
+  align-items: center;
+}
+
+.busqueda {
+  width: max-content;
+  margin: 0 30px 0 0;
 }
 
 
+.buscador form label {
+  display: block;
+}
+
+.busqueda select, .busqueda input {
+  padding: 1em 2em;
+  border: 1px solid #ccc;
+  margin: 0 0 0 1em;
+}
+
+.space {
+  width: 100%;
+  height: 500px;
+  display: table;
+}
+
+.cantidad-movimiento {
+  text-align: right;
+  color: rgb(95, 158, 160);
+}
+
+.pasivo {
+  color: rgb(255, 176, 147) !important;
+}
+
+.menu-espacio {
+  display: flex;
+}
+
+.menu-espacio li {
+  margin: 0 0.5rem 0 0;
+}
+
+.menu-espacio li button {
+  font-size: 1rem;
+  background-color: transparent;
+  border: 1px solid #839ebf;
+  color: #839ebf;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+}
+
+.saldo-inicial {
+  margin: 1rem 0 0 0;
+}
