@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Cuentas } from '../models/cuenta.models';
 import { Movimientos } from '../models/movimientos.models';
 import { Variables } from './variables';
@@ -118,6 +118,118 @@ export class InfoService {
   }
 
 
+  modificarAsiento( info:Movimientos, idRecibido:any, trasladoAsiento:boolean, antiguas:any ){
+
+    const indice = this.movimientos.findIndex( i => i.id === idRecibido);
+    this.movimientos[indice] = info;
+
+    let idcuentaContable = info.cuentaContable;
+    let idcontrapartida = info.contrapartida;
+    let asiento = info.asiento;
+    let cantidad = info.cantidad;
+
+    const a = this.cuentas.findIndex( i => i.id === idcuentaContable);
+    const b = this.cuentas.findIndex( i => i.id === idcontrapartida );
+
+    if ( trasladoAsiento === true ){
+
+      //Elimina el asiento de cuenta contable
+      const indiceCuenta = this.cuentas.findIndex( i => i.id === antiguas.cuentaContable );
+      const iCtaDebe = this.cuentas[indiceCuenta].debe.findIndex( i => i.asiento === asiento );
+      const iCtahaber = this.cuentas[indiceCuenta].haber.findIndex( i => i.asiento === asiento );
+      
+      this.cuentas[indiceCuenta].debe.splice(iCtaDebe,1);
+      this.cuentas[indiceCuenta].haber.splice(iCtahaber,1);
+
+      //Elimina el asiento de contrapartida
+      const indiceContrapartida = this.cuentas.findIndex( i => i.id === antiguas.contrapartida );
+      const iContraDebe = this.cuentas[indiceContrapartida].debe.findIndex( i => i.asiento === asiento );
+      const iContraHaber = this.cuentas[indiceContrapartida].debe.findIndex( i => i.asiento === asiento );
+
+      this.cuentas[indiceContrapartida].debe.splice(iContraDebe,1);
+      this.cuentas[indiceContrapartida].haber.splice(iContraHaber,1);
+
+      this.setSaldo( antiguas.cuentaContable );
+      this.setSaldo( antiguas.contrapartida );
+
+      //Inserta nuevos asientos
+      this.setDebe( info.cuentaContable, info.cantidad, info.asiento );
+      this.setHaber( info.contrapartida, info.cantidad, info.asiento );
+      this.setSaldo( info.cuentaContable );
+      this.setSaldo( info.contrapartida );
+
+    } else {
+
+      this.cuentas[a].debe.forEach( resp => {
+        if ( resp.asiento === asiento && resp.cantidad != '0.00' ){
+          resp.cantidad = cantidad;
+        } 
+      });
+  
+      this.cuentas[a].haber.forEach( resp => {
+        if ( resp.asiento === asiento && resp.cantidad != '0.00' ){
+          resp.cantidad = cantidad;
+        } 
+      });
+  
+      this.cuentas[b].debe.forEach( resp => {
+        if ( resp.asiento === asiento && resp.cantidad != '0.00' ){
+          resp.cantidad = cantidad;
+        } 
+      });
+  
+      this.cuentas[b].haber.forEach( resp => {
+        if ( resp.asiento === asiento && resp.cantidad != '0.00' ){
+          resp.cantidad = cantidad;
+        } 
+      });
+  
+      this.setSaldo( idcuentaContable );
+      this.setSaldo( idcontrapartida );
+  
+      console.log(this.movimientos[indice]);
+      
+    }
+
+}
+
+  borrarAsiento( idMovimiento:string ){
+
+    const indice = this.movimientos.findIndex( i => i.id === idMovimiento );
+
+    //Elimina los movimientos en cuenta
+    const cuentaContable = this.movimientos[indice].cuentaContable;
+    const contrapartida = this.movimientos[indice].contrapartida;
+    const asiento = this.movimientos[indice].asiento;
+
+    //Elimina el asiento de cuenta contable
+    const indiceCuenta = this.cuentas.findIndex( i => i.id === cuentaContable );
+    const iCtaDebe = this.cuentas[indiceCuenta].debe.findIndex( i => i.asiento === asiento );
+    const iCtahaber = this.cuentas[indiceCuenta].haber.findIndex( i => i.asiento === asiento );
+    
+    this.cuentas[indiceCuenta].debe.splice(iCtaDebe,1);
+    this.cuentas[indiceCuenta].haber.splice(iCtahaber,1);
+
+    //Elimina el asiento de contrapartida
+    const indiceContrapartida = this.cuentas.findIndex( i => i.id === contrapartida );
+    const iContraDebe = this.cuentas[indiceContrapartida].debe.findIndex( i => i.asiento === asiento );
+    const iContraHaber = this.cuentas[indiceContrapartida].debe.findIndex( i => i.asiento === asiento );
+
+    this.cuentas[indiceContrapartida].debe.splice(iContraDebe,1);
+    this.cuentas[indiceContrapartida].haber.splice(iContraHaber,1);
+
+    this.setSaldo( cuentaContable );
+    this.setSaldo( contrapartida );
+
+    //Elimina el movimiento
+    this.movimientos.splice(indice,1);
+
+    console.log(this.movimientos);
+    console.log(this.cuentas[indiceCuenta]);
+    console.log(this.cuentas[indiceContrapartida]);
+    
+  }
+
   //Funciones para cuentas
   setCuenta( info:Cuentas ){
     this.cuentas.push(info);
@@ -145,6 +257,10 @@ export class InfoService {
       }
     });
     return listaCuentas;
+  }
+
+  getInfoCuentasAll(){
+    return this.cuentas;
   }
 
   getInfoMovimientos(){
@@ -195,7 +311,8 @@ export class InfoService {
     let identificador = this.cuentas[indice].identificador;
     let tipo = this.cuentas[indice].tipo.codigo;
     let nombre = this.cuentas[indice].nombreCuenta;
-    return `${ identificador } / (${ tipo }) ${ nombre }`;
+    return `${ nombre }`;
+    /* return `${ identificador } / (${ tipo }) ${ nombre }`; */
   }
 
    textoTipo( tipoRecibido ){
@@ -204,7 +321,7 @@ export class InfoService {
     return identificador = this.tipoMovimiento[indice].nombre;
   } 
   
-  mostrarActivo(){
+  public mostrarActivo(){
     let infoCuentas:any, peticion:any, codigos:any, lista = [], resultado:number;
     infoCuentas = this.getInfoCuentas();
     peticion =  infoCuentas.forEach( resp =>{
@@ -217,7 +334,7 @@ export class InfoService {
     return resultado;
   }
 
-  mostrarDisponible(){
+  public mostrarDisponible(){
     let infoCuentas:any, peticion:any, codigos:any, lista = [], resultado:number;
     infoCuentas = this.getInfoCuentas();
     let codigosDinero = this.nombreCodigos();
@@ -231,7 +348,7 @@ export class InfoService {
     return resultado;
   }
 
-  mostrarDeuda(){
+  public mostrarDeuda(){
     let infoCuentas:any, peticion:any, codigos:any, lista = [], resultado:number;
     infoCuentas = this.getInfoCuentas();
     peticion =  infoCuentas.forEach( resp =>{
@@ -245,7 +362,7 @@ export class InfoService {
 
   }
 
-  mostrarSaldo(){
+  public mostrarSaldo(){
 
     let infoCuentas:any, peticion:any, codigos:any, listaDebe = [], listaHaber = [];
     let debe, haber, resultado:number;
@@ -278,7 +395,10 @@ export class InfoService {
         return suma;
   }
 
+  terminoEnviado:string;
+
   buscarCuenta( termino:string ){
+    this.terminoEnviado = termino;
     let cuentasArray = [];
     termino = termino.toLocaleLowerCase();
     for (let cuenta of this.cuentas) {
@@ -303,6 +423,16 @@ export class InfoService {
     }
     return cuentasArray;
   } 
+
+  buscaIDporNombre( termino:string ){
+    let cuentas = this.getInfoCuentasAll(), id;
+    cuentas.forEach( resp => {
+      if ( resp.nombreCuenta === termino ){
+        id = resp.id;
+      }
+    });
+    return id;
+  }
 
   crearNumeroAsiento(){
     let identificador:number;

@@ -143,7 +143,7 @@
                             #cuentaContable>
                             <option value="" selected disabled>Selecciona cuenta</option>
                             <option *ngFor="let cuenta of cuentasContables" [ngValue]="cuenta.id"> 
-                                {{ cuenta.identificador }} / ({{ cuenta.tipo.codigo }}) {{ cuenta.nombreCuenta }} 
+                                {{ cuenta.nombreCuenta }} 
                             </option>
                     </select>
                     <small *ngIf="cuentaNoValido" class="animated fadeIn fast">
@@ -156,7 +156,7 @@
                             #contrapartida>
                             <option value="" selected disabled>Selecciona cuenta</option>
                             <option *ngFor="let cuenta of cuentasContrapartida" [ngValue]="cuenta.id"> 
-                                {{ cuenta.identificador }} / ({{ cuenta.tipo.codigo }}) {{ cuenta.nombreCuenta }} 
+                               {{ cuenta.nombreCuenta }} 
                             </option>
                     </select>
                     <small *ngIf="contrapartidaNoValido" class="animated fadeIn fast">

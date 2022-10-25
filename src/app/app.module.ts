@@ -18,6 +18,8 @@ import { AsientoComponent } from './pages/asiento/asiento.component';
 import { IdtextoPipe } from './pipes/idtexto.pipe';
 import { TipoMovimientoPipe } from './pipes/tipo-movimiento.pipe';
 import { AsideComponent } from './pages/aside/aside.component';
+import { VistacuentaComponent } from './pages/vistacuenta/vistacuenta.component';
+import { NombreCuentaPipe } from './pipes/nombre-cuenta.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { AsideComponent } from './pages/aside/aside.component';
     AsientoComponent,
     IdtextoPipe,
     TipoMovimientoPipe,
-    AsideComponent
+    AsideComponent,
+    VistacuentaComponent,
+    NombreCuentaPipe
   ],
   imports: [
     BrowserModule,

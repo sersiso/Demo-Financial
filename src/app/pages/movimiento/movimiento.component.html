@@ -1,10 +1,236 @@
-<div class="container-principal">
-    <aside class="animated fadeIn fast">
-        <app-aside></app-aside>
-    </aside>
+<div class="container-modal-asiento nuevacuenta animated fadeIn fast">
 
-<section class="container nuevacuenta animated fadeIn fast">
+    <div class="bloque-float animated fadeIn fast">
+        <h1>Modificar
+            <p class="p-h1">
+                Asiento número: "{{ infoMovimiento.asiento }}"
+            </p>
+        </h1>
+        <div class="cerrar" (click)="cerrarModal( false )">
+            <i title="Cerrar ventana"  class="fa-solid fa-close puntero"></i>
+        </div>
+    </div>
 
-</section>
+    <div class="animated fadeIn fast info-cuenta bloque-content">
+
+        <form [formGroup]="cambioMovimiento" (ngSubmit)="modificarMovimiento()">
+
+        <div class="content-asiento">
+
+            <div class="col">
+
+                <div class="cabecera-asiento">
+                        
+                    <div class="fecha content-flex">
+                        <label>Fecha de asiento</label>
+                        <div class="fecha-asiento content-flex">
+                            <select class="caja-formulario"
+                                    formControlName="dia">
+                                    <option *ngFor="let dia of dias" [value]="dia">{{ dia }} </option>
+                            </select>
+                            <select class="caja-formulario" 
+                                    formControlName="mes"
+                                    (change)="mes( mesSeleccionado.value )"
+                                    #mesSeleccionado>
+                                    <option value="" selected disabled>Mes</option>
+                                    <option *ngFor="let mes of meses" [value]="mes"> {{ mes }} </option>
+                            </select>
+                            <select class="caja-formulario"
+                                    formControlName="anyo">
+                                    <option [ngValue]="anyo"> {{ anyo }}</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                </div>
+                <small *ngIf="fechaNoValido" class="animated fadeIn fast">
+                    Debes introducir la fecha correcta
+                </small>
+    
+                <label>Tipo de movimiento</label>
+                <div class="radiobutton" *ngIf="infoMovimiento.tipo === '7'">
+                    <ul>
+                        <li>
+                            <p>
+                                No se puede modificar el tipo de movimiento porque corresponde
+                                a un asiento de "creación de cuenta".
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="radiobutton" *ngIf="infoMovimiento.tipo != '7'">
+                    <ul>
+                        <li>
+                            <input class="radio" type="radio" value="1"
+                            formControlName="tipo"
+                            (change)="tipoMovimiento( tipo1.value )"
+                            #tipo1>
+                            <span>Cobro directo</span>
+                            <p *ngIf="mostrarCartelIngreso" class="animated fadeIn fast">Si marcas esta opción será para hacer un asiento
+                                de ingreso a tu favor. Se utiliza para cobrar clientes, deudores, salarios, regalos y donaciones.
+                            </p>
+                        </li>
+                        <li>
+                            <input class="radio" type="radio" value="2"
+                            formControlName="tipo"
+                            (change)="tipoMovimiento( tipo2.value )"
+                            #tipo2>
+                            <span>Pago directo</span>
+                            <p *ngIf="mostrarCartelPago" class="animated fadeIn fast">Si marcas esta opción será para anotar una salida de dinero. 
+                                Se utiliza con cuentas de proveedores, acreedores, salarios, regalos y donaciones.
+                            </p>
+                        </li>
+                        <li>
+                            <input class="radio" type="radio" value="3"
+                            formControlName="tipo"
+                            (change)="tipoMovimiento( tipo3.value )"
+                            #tipo3>
+                            <span>Deuda con acreedores</span>
+                            <p *ngIf="mostrarCartelDeudaA" class="animated fadeIn fast">Si marcas esta opción será para dejar a deber
+                                dinero a acreedores (amigos, familiares, empresas de servicios). <strong class="bold">Se utiliza para todo lo que no sea actividad laboral.</strong> 
+                            </p>
+                        </li>
+                        <li>
+                            <input class="radio" type="radio" value="4"
+                            formControlName="tipo"
+                            (change)="tipoMovimiento( tipo4.value )"
+                            #tipo4>
+                            <span>Deuda de deudores </span>
+                            <p *ngIf="mostrarCartelDeudaC" class="animated fadeIn fast">Con esta opción marcada se hará un anote
+                                que reflejará una deuda contigo, es decir, te deben dinero (amigos, familiares, empresas de servicios). 
+                                <strong class="bold">Se utiliza para todo lo que no sea actividad laboral.</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <input class="radio" type="radio" value="5"
+                            formControlName="tipo"
+                            (change)="tipoMovimiento( tipo5.value )"
+                            #tipo5>
+                            <span>Venta a cliente</span>
+                            <p *ngIf="mostrarCartelVenta" class="animated fadeIn fast">Utiliza esta opción para anotar un movimiento 
+                                en el que tú hayas vendido y te haya dejado a deber algún cliente. 
+                                <strong class="bold"> Se utiliza para la actividad laboral.</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <input class="radio" type="radio" value="6"
+                            formControlName="tipo"
+                            (change)="tipoMovimiento( tipo6.value )"
+                            #tipo6>
+                            <span>Compra a proveedor</span>
+                            <p *ngIf="mostrarCartelCompra" class="animated fadeIn fast">Utiliza esta opción para anotar un movimiento en el que tú
+                                hayas dejado a deber dinero a algún proveedor. 
+                                <strong class="bold"> Se utiliza para la actividad laboral.</strong>
+                            </p>
+                        </li>
+                        <li>
+                            <input class="radio" type="radio" value="8"
+                            formControlName="tipo"
+                            (change)="tipoMovimiento( tipo8.value )"
+                            #tipo8>
+                            <span>Traspaso entre cuentas</span>
+                            <p *ngIf="mostrarCartelTraspaso" class="animated fadeIn fast">Utiliza esta opción para reflejar el paso de dinero 
+                                de un banco a otro, o si ingresas dinero efectivo en la cuenta bancaria. 
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <small *ngIf="tipoNoValido" class="animated fadeIn fast">
+                    Debes marcar un tipo de movimiento
+                </small>
+                
+            </div>
+    
+            <div class="col">
+    
+                <div class="cuentas-contables">
+                    <label>Cuenta</label>
+                    <select class="caja-formulario total"
+                            formControlName="cuentaContable">
+                            <option *ngFor="let cuenta of cuentasContables"
+                            [selected]="cuenta.id === infoMovimiento.cuentaContable"
+                            >
+                                {{ cuenta.id | nombreCuenta }} 
+                            </option>
+                    </select>
+                    <small *ngIf="cuentaNoValido" class="animated fadeIn fast">
+                        Debes seleccionar una cuenta
+                    </small>
+                
+                    <label>Contrapartida</label>
+                    <select class="caja-formulario total"
+                            formControlName="contrapartida">
+                            <option *ngFor="let cuenta of cuentasContrapartida"
+                            [selected]="cuenta.id === infoMovimiento.contrapartida"
+                            >
+                               {{ cuenta.id | nombreCuenta }} 
+                            </option>
+                    </select>
+                    <small *ngIf="contrapartidaNoValido" class="animated fadeIn fast">
+                        Debes seleccionar una cuenta
+                    </small>
+    
+                    <div class="radiobutton animated fadeIn fast padtop" *ngIf="cuadrarAsiento">
+                        <ul>
+                            <li>
+                                <input class="radio" type="checkbox"
+                                formControlName="cuadrar"
+                                [checked]="cuadrar.value"
+                                #cuadrar
+                                >
+                                <span>Cuadrar asiento</span>
+                                <p>
+                                    Si marcas "cuadrar asiento" realizará un asiento automático que cuadrará
+                                    la cuenta de la contrapartida. Si no lo marcas y quieres que la contrapartida esté 
+                                    cuadrada, deberás hacerlo manual.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+    
+                <label>Concepto</label>
+                <input class="muylargo" type="text" maxlength="50" minlength="2" required
+                        formControlName="concepto">
+                <small *ngIf="conceptoNoValido" class="animated fadeIn fast">
+                    No puede superar los 50 caracteres y debes rellenarlo
+                </small>
+    
+    
+                <label>Cantidad</label>
+                <input class="corto" type="text"  maxlength="10" minlength="1" required
+                        formControlName="cantidad">
+                <span> , </span>
+                <input class="muycorto" type="text"  maxlength="2" minlength="2" required
+                        formControlName="decimales">
+                <span> {{ moneda }} </span>
+                <small *ngIf="cantidadNoValido" class="animated fadeIn fast">
+                    Debes introducir solo números y si no tiene saldo, pon 0,00.
+                </small>
+                <small *ngIf="decimalesNoValido" class="animated fadeIn fast">
+                    2 decimales
+                </small>
+                
+            </div>
+
+        </div>
+
+        <div class="botones">
+            <button class="btn puntero" type="submit">
+                Guardar
+            </button>
+            <button class="btn-delete puntero" type="button" (click)="borrarMovimiento( infoMovimiento.id )">
+                Eliminar
+            </button>
+            <button class="btn puntero" type="button" (click)="cerrarModal( false )">
+                Cancelar
+            </button>
+        </div>
+   
+        </form>
+
+    </div>
 
 </div>

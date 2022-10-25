@@ -3,7 +3,7 @@ import { InfoService } from '../../services/info.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Movimientos } from '../../models/movimientos.models';
-import { VariablesService } from 'src/app/services/variables.service';
+import { VariablesService } from '../../services/variables.service';
 
 @Component({
   selector: 'app-asiento',
@@ -28,7 +28,7 @@ export class AsientoComponent implements OnInit {
   //Información
   moneda:string;
   total:string;
-  cuentas = this._DATOS.getInfoCuentas();
+  cuentas = this._DATOS.getInfoCuentasAll();
   asiento:number = this._DATOS.crearNumeroAsiento();
   idAutomatico = this._DATOS.genenarIdAutomatico();
 
@@ -166,6 +166,8 @@ export class AsientoComponent implements OnInit {
   resetCampoSelect(){
     this.movimiento.controls['cuentaContable'].reset('');
     this.movimiento.controls['contrapartida'].reset('');
+    this.cuentasContables = [];
+    this.cuentasContrapartida = [];
   }
 
 
@@ -227,6 +229,7 @@ export class AsientoComponent implements OnInit {
           nombreCodigos.ca === resp.tipo.codigo ||
           nombreCodigos.dplp === resp.tipo.codigo || 
           nombreCodigos.dalp === resp.tipo.codigo ||
+          nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Créditos' ||
           nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Prestar, donar y regalar' || 
           nombreCodigos.cr === resp.tipo.codigo && resp.nombreCuenta === 'Sueldos y salarios' ){
           arrayContables.push(resp);

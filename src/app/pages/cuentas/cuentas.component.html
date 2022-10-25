@@ -16,9 +16,13 @@
                 <input class="largo" type="text" placeholder="¿Cómo se llama la cuenta?" #buscarTexto
                 (keyup)="buscar(buscarTexto.value)">
             </form>
+            <button type="button" title="Eliminar Cuenta" class="puntero btn-cuentas actualizar"
+                (click)="actualizar()">
+                <i class="fa-solid fa-rotate"></i>
+            </button>
         </div>
 
-        <div class="lista-cuentas" *ngIf="!buscadorActivo">
+        <div class="lista-cuentas animated fadeIn fast" *ngIf="!buscadorActivo">
             <article class="cuenta-info animated fadeIn fast" 
                     *ngFor="let cuenta of _DATOS.getInfoCuentas(); let i = index"
                     [class.cuenta-pasivo]="cuenta.tipo.apunte === 'pasivo'">
@@ -29,21 +33,6 @@
                         <span class="bold color-text nombreCuenta">{{ cuenta.nombreCuenta }}</span>
                         <span class="color-text"> {{ cuenta.identificador }} / ({{ cuenta.tipo.codigo }}) {{ cuenta.tipo.nombre }}</span>
                     </h2>
-    
-                    <!-- <div class="cantidades">
-                        <div class="cantidad">
-                            <span class="bold color-text debe">Debe:</span>
-                            <span class="cantidad-cuenta" *ngFor="let sumaDebe of cuenta.debe" [class.sutil]="sumaDebe.cantidad === '0.00'">
-                                ({{ sumaDebe.asiento }}) {{ sumaDebe.cantidad | miles }}{{ moneda.simboloMoneda }}
-                            </span>
-                        </div>
-                        <div class="cantidad">
-                            <span class="bold color-text haber">Haber:</span>
-                            <span class="cantidad-cuenta" *ngFor="let sumaHaber of cuenta.haber" [class.sutil]="sumaHaber.cantidad === '0.00'">
-                                ({{ sumaHaber.asiento }}) {{ sumaHaber.cantidad | miles }}{{ moneda.simboloMoneda }}
-                            </span>
-                        </div>
-                    </div> -->
 
                     <div class="info-cabecera">
                         <div class="etiqueta-activo">
@@ -53,7 +42,7 @@
                         </div>
 
                         <button type="button" title="Modificar cuenta" class="puntero btn-cuentas"
-                            [routerLink]="['/modificar-cuenta', cuenta.id]">
+                            (click)="AbrirModalVistaCuenta( true, cuenta.id )">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
         
@@ -63,7 +52,7 @@
                         </button>
 
                         <button type="button" title="Eliminar Cuenta" class="puntero btn-cuentas"
-                        [routerLink]="['/modificar-cuenta', cuenta.id]">
+                            (click)="eliminarCuenta( cuenta.id )">
                         <i class="fa-solid fa-trash-can"></i>
                         </button>
 
@@ -95,18 +84,18 @@
                         </div>
 
                         <button type="button" title="Modificar cuenta" class="puntero btn-cuentas"
-                            [routerLink]="['/modificar-cuenta', cuenta.id]">
+                            (click)="AbrirModalVistaCuenta( true, cuenta.id )">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
         
                         <button type="button" title="Modificar cuenta" class="puntero btn-cuentas"
-                            [routerLink]="['/modificar-cuenta', cuenta.id]">
+                            (click)="AbrirModalModificarCuenta( true, cuenta.id )">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </button>
 
                         <button type="button" title="Eliminar Cuenta" class="puntero btn-cuentas"
-                        [routerLink]="['/modificar-cuenta', cuenta.id]">
-                        <i class="fa-solid fa-trash-can"></i>
+                            [routerLink]="['/modificar-cuenta', cuenta.id]">
+                            <i class="fa-solid fa-trash-can"></i>
                         </button>
 
                     </div>
@@ -114,11 +103,26 @@
                 </div>
                 
             </article>
+
+            <div class="no-registro animated fadeIn fast" *ngIf="cuentaBuscador.length === 0">
+                No se encuentran coincidencias
+            </div>
+
+        </div>
+
+        <div class="no-registro animated fadeIn fast" *ngIf="_DATOS.getInfoCuentas().length < 1">
+            No hay cuentas creadas
         </div>
 
         <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalModificarCuenta">
             <div class="info-modal-cuenta">
                 <app-modificar-cuenta></app-modificar-cuenta>
+            </div>
+        </div>
+
+        <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalVistaCuenta">
+            <div class="info-modal-cuenta">
+                <app-vistacuenta></app-vistacuenta>
             </div>
         </div>
 

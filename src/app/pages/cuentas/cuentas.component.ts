@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { InfoService } from '../../services/info.service';
 import { VariablesService } from '../../services/variables.service';
 
@@ -27,9 +28,48 @@ export class CuentasComponent implements OnInit {
 
   }
 
+  terminoBuscado:string = '';
+
   buscar( texto:string ){
+    this.terminoBuscado = texto;
     this.buscadorActivo = true;
     this.cuentaBuscador = this._DATOS.buscarCuenta( texto );
+  }
+
+  actualizar() {
+    this.buscar( this.terminoBuscado );
+  }
+
+  eliminarCuenta( id:string ){
+
+    const cuentas = this._DATOS.getInfoCuentasAll();
+    const indice = cuentas.findIndex( i => i.id === id );
+    const longitud = cuentas[indice].debe.length;
+
+    if ( cuentas[indice].saldo != '0.00' || longitud >1 ) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'No se puede eliminar',
+        text: 'Debe tener saldo 0.00 y sin movimientos',
+        showConfirmButton: true,
+        });
+        console.log(longitud);
+        
+    } 
+    else if ( cuentas[indice].saldo === '0.00' && longitud === 1 ){
+      Swal.fire({
+        icon: 'question',
+        title: 'Eliminar cuenta',
+        text: '¿Deseas borrar la cuenta?',
+        showConfirmButton: true,
+        showCancelButton: true,
+        }).then ( resp => {
+          if ( resp.value ){
+            cuentas.splice(indice,1);
+          }
+        });
+    }
+
   }
 
   cuentas(){
@@ -57,10 +97,11 @@ export class CuentasComponent implements OnInit {
     this._VARIABLES.idCuentaModificar = id;
   }
 
-  
-
-
-
-
+  abrirModalVistaCuenta:boolean = this._VARIABLES.abrirModalVistaCuenta;
+  AbrirModalVistaCuenta( termino:boolean, id:string ){
+    this._VARIABLES.abrirModalVistaCuenta = termino;
+    this.abrirModalVistaCuenta = this._VARIABLES.abrirModalVistaCuenta;
+    this._VARIABLES.idCuentaVisualizar = id;
+  }
 
 }

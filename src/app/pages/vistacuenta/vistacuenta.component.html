@@ -1,0 +1,62 @@
+<div class="container-modal nuevacuenta animated fadeIn fast">
+
+    <div class="bloque-float animated fadeIn fast">
+        <h1>Movimientos de cuenta
+            <p class="p-h1">
+                {{ movimientoCuenta[0].nombreCuenta }}
+            </p>
+            <span class="info">
+                {{ movimientoCuenta[0].descripcion }}
+            </span>
+        </h1>
+        <div class="cerrar" (click)="cerrarModal( false )">
+            <i title="Cerrar ventana"  class="fa-solid fa-close puntero"></i>
+        </div>
+    </div>
+
+    <div class="animated fadeIn fast mostrar-cuentas bloque-content">
+        
+        <table class="container-tabla">
+
+            <tr class="bold cabecera-tr">
+                <th>Asiento</th>
+                <th>Debe</th>
+                <th>Haber</th>
+            </tr>
+        
+            <tr class="overflow" >
+                <td class="tabla-cuenta" *ngFor="let cantidades of movimientoCuenta">
+                    <span *ngFor="let asiento of cantidades.debe">
+                        {{ asiento.asiento }}
+                    </span>
+                </td>
+                <td class="tabla-cuenta" *ngFor="let cantidades of movimientoCuenta">
+                    <span *ngFor="let asiento of cantidades.debe">
+                        {{ asiento.cantidad | miles }} {{ moneda.simboloMoneda }}
+                    </span>
+                </td>
+                <td class="tabla-cuenta" *ngFor="let cantidades of movimientoCuenta">
+                    <span *ngFor="let asiento of cantidades.haber">
+                        {{ asiento.cantidad | miles }} {{ moneda.simboloMoneda }}
+                    </span>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="saldo-cuenta bold">
+            <span class="color-text">SALDO:</span>
+            <span [style.color]="colorCifra" class="saldo-lista"> 
+                {{ movimientoCuenta[0].saldo | miles }} {{ moneda.simboloMoneda }} 
+            </span>
+        </div>
+
+        <div class="botones">
+            <button class="btn puntero" type="button" (click)="cerrarModal( false )">
+                Salir
+            </button>
+        </div>
+
+    </div>
+
+</div>

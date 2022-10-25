@@ -16,7 +16,7 @@
                     formControlName="fechaDeCreacion">
 
             <label>Nombre de la Cuenta</label>
-            <input class="muylargo" type="text" maxlength="30" minlength="2" required
+            <input class="muylargo" type="text" maxlength="30" placeholder="¿Qué nombre le quieres poner?"  minlength="2" required
                     formControlName="nombreCuenta">
                     <small *ngIf="nombreNoValido" class="animated fadeIn fast">
                         Debes introducir un nombre
@@ -37,13 +37,13 @@
             </small>
 
             <label>Descripción</label>
-            <input class="muylargo" type="text" maxlength="50" minlength="2" required
+            <input class="muylargo" type="text" maxlength="50" placeholder="¿Para qué es la cuenta?" minlength="2" required
                     formControlName="descripcion">
                     <small *ngIf="descripcionNoValido" class="animated fadeIn fast">
                         Debes introducir una descripción correcta
                     </small>
 
-            <label>Saldo</label>
+           <!--  <label>Saldo</label>
             <div class="flex">
                 <input type="checkbox" 
                     (change)="saldoCheck( saldo.checked )"
@@ -65,7 +65,7 @@
                 <small *ngIf="decimalesNoValido" class="animated fadeIn fast">
                     2 decimales
                 </small>
-            </div>
+            </div> -->
 
             <div class="botones">
                 <button class="btn puntero" type="submit">

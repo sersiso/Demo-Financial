@@ -49,12 +49,13 @@ export class MiEspacioComponent implements OnInit {
     console.log(this._DATOS.getInfoMovimientos());
 
     console.log("CUENTAS:");
-    console.log(this._DATOS.getInfoCuentas()); 
+    console.log(this._DATOS.getInfoCuentas());
 
   }
 
   abrirModalCuenta:boolean = this._VARIABLES.abrirModalCuenta;
   abrirModalAsiento:boolean = this._VARIABLES.abrirModalAsiento;
+  abrirModalModificarAsiento:boolean = this._VARIABLES.abrirModalAsiento;
   abrirModalCuentas:boolean = this._VARIABLES.abrirModalCuentas;
 
   AbrirModalCuenta( termino:boolean ){
@@ -65,6 +66,12 @@ export class MiEspacioComponent implements OnInit {
   AbrirModalAsiento( termino:boolean ){
     this._VARIABLES.abrirModalAsiento = termino;
     this.abrirModalAsiento = this._VARIABLES.abrirModalAsiento;
+  }
+
+  AbrirModalModificarAsiento( termino:boolean, id:string ){
+    this._VARIABLES.idAsientoVisualizar = id;
+    this._VARIABLES.abrirModalModificarAsiento = termino;
+    this.abrirModalModificarAsiento = this._VARIABLES.abrirModalModificarAsiento;
   }
 
   AbrirModalCuentas( termino:boolean ){

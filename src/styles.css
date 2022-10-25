@@ -68,6 +68,15 @@ html {
   transition: all ease-in-out 0.2s;
 }
 
+.btn-delete {
+  padding: 10px 20px;
+  font-size: 17px;
+  background-color: #be5757;
+  color: #fff;
+  border: none;
+  transition: all ease-in-out 0.2s;
+}
+
 .btn-cuadrado {
   padding: 20px;
   font-size: 17px;
@@ -198,7 +207,7 @@ select.corto {
 }
 
 .muycorto {
-  width: 3%;
+  width: 20px;
 }
 
 .corto {
@@ -233,6 +242,22 @@ select:focus, textarea:focus, input:focus, input[type]:focus {
   border-color: #839ebf;
   outline: 0 none;
 }
+
+::placeholder { 
+  color: rgb(182, 182, 182); 
+}
+
+:-ms-input-placeholder { 
+  color: rgb(182, 182, 182); 
+} /* IE 10+ */
+
+::-webkit-input-placeholder { 
+  color: rgb(182, 182, 182); 
+} /* WebKit */
+
+::-moz-placeholder { 
+  color: rgb(182, 182, 182);  
+} /* Firefox 19+ */
 
 label {
   display: block;
@@ -348,7 +373,7 @@ aside {
   text-align: right;
 }
 
-.botones .btn {
+.botones .btn, .botones .btn-delete {
   margin: 0 0 0 1rem;
 }
 
@@ -360,7 +385,7 @@ aside {
   padding: 0 1%;
 }
 
-.info-cuenta button.btn {
+.info-cuenta button.btn, .info-cuenta button.btn-delete {
   margin-top: 3rem;
 }
 
@@ -532,7 +557,29 @@ aside {
 }
 
 .buscador-cuenta {
+  display: flex;
   margin: 0 0 1rem 0;
+  align-items: flex-end;
+}
+
+.buscador-cuenta form {
+  width: 100%;
+}
+
+span.info {
+  font-size: 1rem;
+  color: #ccc;
+  padding: 0 0 2rem 0;
+}
+
+.actualizar {
+  justify-content: flex-end;
+}
+
+.buscador-cuenta {
+  display: flex;
+  margin: 0 0 1rem 0;
+  align-items: flex-end;
 }
 
 .sutil {
@@ -541,6 +588,7 @@ aside {
 
 .saldos ul {
   padding: 0 2rem 0 2rem;
+  display: flex;
 }
 
 .saldos ul li {
@@ -573,6 +621,39 @@ aside {
 
 .tabla table {
   flex: 1;
+}
+
+.tabla-cuenta span {
+  display: flex;
+  padding: 0.5rem 0 0 0;
+  color: #839ebf;
+}
+
+.overflow {
+  font-size: 14px;
+  max-height: 300px;
+  overflow-x: auto;
+}
+
+.container-tabla {
+  width: 100%;
+  text-align: left;
+  margin: 0 0 0.5rem 0;
+}
+
+.saldo-cuenta {
+  padding: 1rem 0 0 0;
+  border-top: 1px solid #ccc;
+}
+
+.saldo-lista {
+  padding: 0 0 0 0.5rem;
+}
+
+.cabecera-tr th {
+  padding: 0 0 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+  color: #839ebf;
 }
 
 .cabecera-tabla {
@@ -723,4 +804,13 @@ aside {
 
 .saldo-inicial {
   margin: 1rem 0 0 0;
+}
+
+.no-registro {
+  text-align: center;
+  background-color: #8fbc8f54;
+  font-size: 1rem;
+  padding: 1rem 1rem;
+  margin: 2rem auto;
+  color: rgb(95, 158, 160);
 }

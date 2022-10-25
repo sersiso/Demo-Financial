@@ -10,19 +10,27 @@
         <ul>
             <li>
                 <i class="fa-solid fa-landmark"></i> 
-                Mi Activo: <span [style.color]="colorActivo" class="bold">{{ activo | miles }}{{ moneda }}</span>
+                Mi Activo: <span [style.color]="colorActivo" class="bold">
+                    {{ _DATOS.mostrarActivo() | miles }}{{ moneda }}
+                </span>
             </li>
             <li>
                 <i class="fa-solid fa-wallet"></i> 
-                Dinero Disponible: <span [style.color]="colorActivo" class="bold">{{ disponible | miles }}{{ moneda }}</span>
+                Dinero Disponible: <span [style.color]="colorActivo" class="bold">
+                    {{ _DATOS.mostrarDisponible() | miles }}{{ moneda }}
+                </span>
             </li>
             <li>
                 <i class="fa-solid fa-handshake-simple"></i> 
-                Debo: <span [style.color]="colorDeuda" class="bold">{{ deuda | miles }}{{ moneda }}</span>
+                Debo: <span [style.color]="colorDeuda" class="bold">
+                    {{ _DATOS.mostrarDeuda() | miles }}{{ moneda }}
+                </span>
             </li>
             <li>
                 <i class="fa-solid fa-money-bills"></i> 
-                Balance: <span [style.color]="colorBalance" class="bold">{{ balance | miles }}{{ moneda }}</span>
+                Balance: <span [style.color]="colorBalance" class="bold">
+                    {{ _DATOS.mostrarSaldo() | miles }}{{ moneda }}
+                </span>
             </li>
         </ul>
     </div>
@@ -33,7 +41,7 @@
             <h1 class="bold">Movimientos</h1>
         </div>
 
-<!--             <div class="acciones">
+        <!-- <div class="acciones">
 
             <div class="buscar-movimientos">
                 <h1 class="bold">Buscar asiento</h1>
@@ -79,7 +87,7 @@
             </div>
         </div> -->
     
-<!--         <div class="buscar-movimientos">
+            <!--         <div class="buscar-movimientos">
             <h1 class="bold">Últimos movimientos</h1>
         </div> -->
 
@@ -121,9 +129,9 @@
                     <th></th>
                 </tr>
 
-                <tr *ngFor="let movimiento of _DATOS.getInfoMovimientos(); let i = index" title="Modificar asiento {{ movimiento.asiento }}"
-                    class="info-tr puntero"
-                    [routerLink]="['/movimiento', movimiento.id]">
+                <tr *ngFor="let movimiento of _DATOS.recibirMovimientos(); let i = index" title="Modificar asiento {{ movimiento.asiento }}"
+                    class="info-tr puntero" 
+                    (click)="AbrirModalModificarAsiento( true, movimiento.id )">
                     <td>{{ movimiento.asiento }}</td>
                     <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo }}</td>
                     <td>{{ movimiento.concepto }}</td>
@@ -139,6 +147,12 @@
             </table>
 
         </div>
+
+
+        <div class="no-registro animated fadeIn fast" *ngIf="_DATOS.recibirMovimientos().length < 1">
+           No se han introducido asientos
+        </div>
+
     </div>
 
     <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalCuenta">
@@ -156,6 +170,12 @@
     <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalCuentas">
         <div class="info-modal-cuenta">
             <app-cuentas></app-cuentas>
+        </div>
+    </div>
+
+    <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalModificarAsiento">
+        <div class="info-modal-cuenta">
+            <app-movimiento></app-movimiento>
         </div>
     </div>
 
