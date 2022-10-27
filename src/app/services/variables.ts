@@ -42,12 +42,14 @@ export class Variables {
           debe: [
                   { asiento: '0', cantidad: '0.00' },
                   { asiento: '6', cantidad: '0.00' },
+                  { asiento: '11', cantidad: '230.40' },
                 ],
           haber: [
                   { asiento: '0', cantidad: '0.00' },
                   { asiento: '6', cantidad: '350.00' },
+                  { asiento: '11', cantidad: '0.00' },
                 ],
-          saldo: '350.00'
+          saldo: '119.60'
         },
         {
           id: '1665061785259',
@@ -73,11 +75,13 @@ export class Variables {
           descripcion: 'Cuenta de regularización',
           debe: [
                   { asiento: '0', cantidad: '0.00' },
+                  { asiento: '8', cantidad: '0.00' },
                 ],
           haber: [
                   { asiento: '0', cantidad: '0.00' },
+                  { asiento: '8', cantidad: '650.46' },
                 ],
-          saldo: '0.00'
+          saldo: '650.46'
         },
         {
           id: '1665138152607',
@@ -88,11 +92,15 @@ export class Variables {
           descripcion: 'Cuenta de regularización',
           debe: [
                   { asiento: '0', cantidad: '0.00' },
+                  { asiento: '9', cantidad: '0.00' },
+                  { asiento: '10', cantidad: '0.00' },
                 ],
           haber: [
                   { asiento: '0', cantidad: '0.00' },
+                  { asiento: '9', cantidad: '1200.50' },
+                  { asiento: '10', cantidad: '1200.50' },
                 ],
-          saldo: '0.00'
+          saldo: '2401.00'
         },
         {
           id: '1665138152648',
@@ -124,11 +132,15 @@ export class Variables {
           descripcion: 'Nueva cuenta bancaria',
           debe: [
                   { asiento: '1', cantidad: '0.00' },
+                  { asiento: '9', cantidad: '1200.50' },
+                  { asiento: '10', cantidad: '1200.50' },
                 ],
           haber: [
                   { asiento: '1', cantidad: '0.00' },
+                  { asiento: '9', cantidad: '0.00' },
+                  { asiento: '10', cantidad: '0.00' },
                 ],
-          saldo: '0.00'
+          saldo: '2401.00'
         },
         {
           id: '2e24eb1938a9462e8a39565ac218fd19',
@@ -143,11 +155,13 @@ export class Variables {
           descripcion: 'Dinero debajo del colchón',
           debe: [
                   { asiento: '2', cantidad: '00.00' },
+                  { asiento: '8', cantidad: '650.46' },
                 ],
           haber: [
                   { asiento: '2', cantidad: '0.00' },
+                  { asiento: '8', cantidad: '0.00' },
                 ],
-          saldo: '0.00'
+          saldo: '650.46'
         },
         {
           id: '2e24eb193832442e8a39565ac218as40',
@@ -162,11 +176,13 @@ export class Variables {
           descripcion: 'Proveedor de papelería',
           debe: [
                   { asiento: '3', cantidad: '0.00' },
+                  { asiento: '11', cantidad: '0.00' },
                 ],
           haber: [
                   { asiento: '3', cantidad: '0.00' },
+                  { asiento: '11', cantidad: '230.40' },
                 ],
-          saldo: '0.00'
+          saldo: '230.40'
         }, 
         {
           id: '2e24eb193832442e8a39565ac218as55',
@@ -316,6 +332,54 @@ export class Variables {
           contrapartida: '1665060693545',
           tipo: '7'
         }, 
+        {
+          asiento: '8',
+          id: 'M-78b57a004a544262a79ead577f0c9e27',
+          dia: '09',
+          mes: '10',
+          anyo: '2022',
+          concepto: 'Dinero guardado en la hucha',
+          cantidad: '650.46',
+          cuentaContable: '2e24eb1938a9462e8a39565ac218fd19',
+          contrapartida: '1665138031910',
+          tipo: '1'
+        }, 
+        {
+          asiento: '9',
+          id: 'M-5fb1a2dfe9634dd4848ce0f211126d8d',
+          dia: '04',
+          mes: '10',
+          anyo: '2022',
+          concepto: 'Nómina Octubre',
+          cantidad: '1200.50',
+          cuentaContable: '793d2d7c25124a23ac189ea595998fe9',
+          contrapartida: '1665138152607',
+          tipo: '1'
+        }, 
+        {
+          asiento: '10',
+          id: 'M-5fb1a2dfe9634dd4668ce0f21115d834',
+          dia: '03',
+          mes: '11',
+          anyo: '2022',
+          concepto: 'Nómina Noviembre',
+          cantidad: '1200.50',
+          cuentaContable: '793d2d7c25124a23ac189ea595998fe9',
+          contrapartida: '1665138152607',
+          tipo: '1'
+        }, 
+        {
+          asiento: '11',
+          id: 'M-f7b8ae1be1044fada17fc42704da1de6',
+          dia: '01',
+          mes: '11',
+          anyo: '2022',
+          concepto: 'Dejo a deber Factura 55',
+          cantidad: '230.40',
+          cuentaContable: '1665060690045',
+          contrapartida: '2e24eb193832442e8a39565ac218as40',
+          tipo: '6'
+        }, 
         
     ]
 
@@ -424,24 +488,80 @@ export class Variables {
         //Si se agregan más tipos, hacerlo también en la función "nombreCodigos"
     ]
 
+  mesesNombres:any[] = [
+      {
+        nombre:'Enero',
+        mes: '01',
+      },
+      {
+        nombre:'Febrero',
+        mes: '02',
+      },
+      {
+        nombre:'Marzo',
+        mes: '03',
+      },
+      {
+        nombre:'Abril',
+        mes: '04',
+      },
+      {
+        nombre:'Mayo',
+        mes: '05',
+      },
+      {
+        nombre:'Junio',
+        mes: '06',
+      },
+      {
+        nombre:'Julio',
+        mes: '07',
+      },
+      {
+        nombre:'Agosto',
+        mes: '08',
+      },
+      {
+        nombre:'Septiembre',
+        mes: '09',
+      },
+      {
+        nombre:'Octubre',
+        mes: '10',
+      },
+      {
+        nombre:'Noviembre',
+        mes: '11',
+      },
+      {
+        nombre:'Diciembre',
+        mes: '12',
+      }            
+];
 
-    datosAnuales = {
-        anyo: 2022,
-        asientos: [
-                
-                  ],
-        cuentas: [
-  
-                  ]
-              }
+    datosAnuales:any = [
+      {
+        anyo: '2022',
+        diario: {
+          movimientos: this.movimientos
+                  },
+        mayor: {
+          cuentas: this.cuentas
+                },
+      }
+    ] 
   
 
     getCuentasVariables(){
-        return this.cuentas;
+      const anyoDeTrabajo = '2022';
+      let indice = this.datosAnuales.findIndex( i => i.anyo === anyoDeTrabajo);
+      return this.datosAnuales[indice].mayor.cuentas;
     }
 
     getMovimientosVariables(){
-        return this.movimientos;
+      const anyoDeTrabajo = '2022';
+      let indice = this.datosAnuales.findIndex( i => i.anyo === anyoDeTrabajo);
+      return this.datosAnuales[indice].diario.movimientos;
     }
 
     getTipoCuentaVariables(){
@@ -458,6 +578,10 @@ export class Variables {
 
     getMonedaVariables(){
         return this.moneda;
+    }
+
+    getMesesNombres(){
+      return this.mesesNombres;
     }
 
 

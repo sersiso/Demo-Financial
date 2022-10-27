@@ -55,7 +55,7 @@ export class AsientoComponent implements OnInit {
     this.mostrarMoneda();
 
     for ( let d = 1; d < 32; d++ ){
-      this.dias.push(d);
+      this.dias.push(this._DATOS.zeroFill(d,2));
     }
     
   }
@@ -144,19 +144,19 @@ export class AsientoComponent implements OnInit {
 
     if ( mes === '02' ) {
       for ( let d = 1; d < 29; d++ ){
-        arrayDias.push(d);
+        arrayDias.push(this._DATOS.zeroFill(d,2));
       }
       this.dias = arrayDias;
     }
     else if ( mes === '04' || mes === '06' || mes === '09' || mes === '11' ) {
       for ( let d = 1; d < 31; d++ ){
-        arrayDias.push(d);
+        arrayDias.push(this._DATOS.zeroFill(d,2));
       }
       this.dias = arrayDias;
     }
     else {
       for ( let d = 1; d < 32; d++ ){
-        arrayDias.push(d);
+        arrayDias.push(this._DATOS.zeroFill(d,2));
       }
       this.dias = arrayDias;
     }

@@ -218,14 +218,14 @@
         </div>
 
         <div class="botones">
-            <button class="btn puntero" type="submit">
+            <button class="btn puntero" title="Guardar cambios" type="submit">
                 Guardar
             </button>
-            <button class="btn-delete puntero" type="button" (click)="borrarMovimiento( infoMovimiento.id )">
-                Eliminar
-            </button>
-            <button class="btn puntero" type="button" (click)="cerrarModal( false )">
+            <button class="btn puntero" title="Cerrar ventana" type="button" (click)="cerrarModal( false )">
                 Cancelar
+            </button>
+            <button class="btn-delete puntero" title="Borrar asiento" type="button" (click)="borrarMovimiento( infoMovimiento.id )">
+                <i class="fa-solid fa-trash-can"></i>
             </button>
         </div>
    

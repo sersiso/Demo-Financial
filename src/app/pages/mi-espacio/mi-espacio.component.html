@@ -41,56 +41,6 @@
             <h1 class="bold">Movimientos</h1>
         </div>
 
-        <!-- <div class="acciones">
-
-            <div class="buscar-movimientos">
-                <h1 class="bold">Buscar asiento</h1>
-            </div>
-
-            <div class="buscador">
-
-                <form>
-                    <div class="busqueda">
-                        <input  type="radio" name="asiento" value="asiento">
-                        <input class="asiento" type="text" placeholder="Asiento">
-                    </div>
-
-                    <div class="busqueda">
-                        <input type="radio" name="tiempo" value="tiempo">
-                        <select>
-                            <option>Últimos 15 días</option>
-                            <option>Último mes</option>
-                            <option>Últimos 3 meses</option>
-                        </select>
-                    </div>
-
-                    <div class="busqueda">
-                        <input type="radio" name="tiempo" value="fecha">
-                        <select>
-                            <option>12</option>
-                        </select>
-                        <span> / </span>
-                        <select>
-                            <option>05</option>
-                        </select>
-                        <span> / </span>
-                        <select>
-                            <option>2022</option>
-                        </select>
-                    </div>
-
-                    <button class="bnt puntero" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-
-                </form>
-            </div>
-        </div> -->
-    
-            <!--         <div class="buscar-movimientos">
-            <h1 class="bold">Últimos movimientos</h1>
-        </div> -->
-
         <ul class="menu-espacio">
             <li routerLinkActive="active">
                 <button (click)="AbrirModalAsiento( true )" title="Asiento nuevo" class="puntero">
@@ -108,16 +58,20 @@
                 </button>
             </li>
             <li routerLinkActive="active">
-                <button title="Administrar cuenta" class="puntero">
+                <button (click)="AbrirModalBusqueda( true )" title="Buscar" class="puntero">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </li>
+            <li class="puntero filtro" title="Borrar datos del filtro" (click)="actualizar()" *ngIf="buscador">
+                <span> / </span>
+                <span>Quitar Filtro</span>
+            </li>
         </ul>
     
-        <div class="tabla">
+        <div class="tabla animated fadeIn fast">
             
-            <table class="default">
-    
+            <table class="default animated fadeIn fast" *ngIf="!buscador">
+
                 <tr class="cabecera-tabla">
                     <th>Asiento</th>
                     <th>Fecha</th>
@@ -126,12 +80,11 @@
                     <th>Contrapartida</th>
                     <th>Tipo</th>
                     <th class="cantidad-movimiento">Cantidad</th>
-                    <th></th>
                 </tr>
 
-                <tr *ngFor="let movimiento of _DATOS.recibirMovimientos(); let i = index" title="Modificar asiento {{ movimiento.asiento }}"
-                    class="info-tr puntero" 
-                    (click)="AbrirModalModificarAsiento( true, movimiento.id )">
+
+                <tr *ngFor="let movimiento of _DATOS.recibirMovimientos(); let i = index" title="Modificar asiento {{ movimiento.asiento }}" class="info-tr puntero" 
+                (click)="AbrirModalModificarAsiento( true, movimiento.id, movimiento.tipo )">
                     <td>{{ movimiento.asiento }}</td>
                     <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo }}</td>
                     <td>{{ movimiento.concepto }}</td>
@@ -143,14 +96,43 @@
                         {{ movimiento.cantidad | miles }}{{ moneda }}
                     </td>
                 </tr>
-                
+            
             </table>
 
-        </div>
+            <div class="no-registro animated fadeIn fast" *ngIf="_DATOS.recibirMovimientos().length < 1">
+                No se han introducido asientos
+            </div>
 
+            <table class="default animated fadeIn fast" *ngIf="buscador">
+    
+                    <tr class="cabecera-tabla">
+                        <th>Asiento</th>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Cuenta</th>
+                        <th>Contrapartida</th>
+                        <th>Tipo</th>
+                        <th class="cantidad-movimiento">Cantidad</th>
+                    </tr>
 
-        <div class="no-registro animated fadeIn fast" *ngIf="_DATOS.recibirMovimientos().length < 1">
-           No se han introducido asientos
+                    <tr *ngFor="let movi of movimientoBuscado" title="Modificar asiento {{ movi.asiento }}" class="info-tr puntero" 
+                    (click)="AbrirModalModificarAsiento( true, movi.id, movi.tipo )">
+                        <td>{{ movi.asiento }}</td>
+                        <td>{{ movi.dia +'/'+ movi.mes +'/'+ movi.anyo }}</td>
+                        <td>{{ movi.concepto }}</td>
+                        <td>{{ movi.cuentaContable | idtexto }}</td>
+                        <td>{{ movi.contrapartida | idtexto }}</td>
+                        <td>{{ movi.tipo | tipoMovimiento }}</td>
+                        <td class="cantidad-movimiento bold"
+                            [class.pasivo]="movi.tipo === '2' || 
+                            movi.tipo === '3' || 
+                            movi.tipo === '6' ">
+                            {{ movi.cantidad | miles }}{{ moneda }}
+                        </td>
+                    </tr>
+
+            </table>
+
         </div>
 
     </div>
@@ -176,6 +158,91 @@
     <div class="modalCuenta animated pulse" *ngIf="this._VARIABLES.abrirModalModificarAsiento">
         <div class="info-modal-cuenta">
             <app-movimiento></app-movimiento>
+        </div>
+    </div>
+
+    <div class="modalCuenta animated pulse" *ngIf="modalBusqueda">
+        <div class="info-modal-cuenta">
+
+            <div class="container-modal-busqueda nuevacuenta animated fadeIn fast">
+                <div class="bloque-float animated fadeIn fast">
+                    <h1>Buscar movimiento</h1>
+                    <div class="cerrar" (click)="cerrarModal( false )">
+                        <i title="Cerrar ventana"  class="fa-solid fa-close puntero"></i>
+                    </div>
+                </div>
+            
+                <div class="animated fadeIn fast info-cuenta bloque-content">
+            
+                    <form [formGroup]="busqueda" class="busqueda" (ngSubmit)="buscar()">
+            
+                        <label class="puntero" (click)="busquedaAsiento()">
+                            <span>Número de asiento</span>
+                            <div class="hide-asiento animated fadeIn fast" *ngIf="abrirAsiento">
+                                <input type="text" class="corto" maxlength="4" minlength="1"
+                                formControlName="asiento">
+                            </div>
+                            <small *ngIf="asientoNoValido" class="animated fadeIn fast">
+                                No puedes introducir letras
+                            </small>
+                        </label>
+
+                        <label class="puntero" (click)="busquedaTiempo()">
+                            <span>Meses</span>
+                            <div class="hide-asiento animated fadeIn fast" *ngIf="abrirTiempo">
+                                <select class="corto"
+                                formControlName="tiempo">
+                                    <option value="" selected disabled>Selecciona tiempo</option>
+                                    <option *ngFor="let meses of mesesNombres" [value]="meses.mes">
+                                         {{ meses.nombre }}
+                                    </option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label class="puntero" style="border-bottom: 1px solid #ccc;" (click)="busquedaFecha()">
+                            <span>Fecha determinada</span>
+                            <div class="hide-asiento animated fadeIn fast" *ngIf="abrirFecha">
+                                <select class="caja-formulario"
+                                        formControlName="dia">
+                                        <option value="" selected disabled>día</option>
+                                        <option *ngFor="let dia of dias"> {{ dia }} </option>
+                                </select>
+                                <span class="separar-fecha">
+                                    /
+                                </span>
+                                <select class="caja-formulario" 
+                                        formControlName="mes"
+                                        (change)="mes( mesSeleccionado.value )"
+                                        #mesSeleccionado>
+                                        <option value="" selected disabled>Mes</option>
+                                        <option *ngFor="let mes of meses" [value]="mes"> {{ mes }} </option>
+                                </select>
+                                <span class="separar-fecha">
+                                    /
+                                </span>
+                                <select class="caja-formulario"
+                                        formControlName="anyo">
+                                        <option value="" selected disabled>Año</option>
+                                        <option [ngValue]="anyo"> {{ anyo }}</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <div class="botones">
+                            <button class="btn puntero" type="submit">
+                                Buscar
+                            </button>
+                            <button class="btn puntero" type="button" (click)="cerrarModal( false )">
+                                Cancelar
+                            </button>
+                        </div>
+                        
+                    </form>
+            
+                </div>
+            </div>
+
         </div>
     </div>
 

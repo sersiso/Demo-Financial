@@ -14,6 +14,7 @@ export class InfoService {
   private tipoCuenta = new Variables().getTipoCuentaVariables();
   private movimientos:Movimientos[] = new Variables().getMovimientosVariables();
   private cuentas:Cuentas[] = new Variables().getCuentasVariables();
+  private mesesNombres:any[] = new Variables().getMesesNombres();
 
   constructor() { 
 
@@ -25,7 +26,7 @@ export class InfoService {
     let info = [];
     let mov = this.getInfoMovimientos();
     mov.forEach( resp => {
-      if ( resp.tipo != '7'){
+      if ( resp.tipo != '7' && resp.mes === this.mes.toString() ){
         info.push(resp);
       }
     });
@@ -267,10 +268,22 @@ export class InfoService {
     return this.movimientos;
   }
 
+  getMesesNombres(){
+     return this.mesesNombres;
+  }
+
   getFecha(){
     let fechaCompleta:string;
     fechaCompleta = `${this.dia}/${this.mes}/${this.anyo}`;
     return fechaCompleta;
+  }
+
+  zeroFill( number, width ){
+    width -= number.toString().length;
+    if ( width > 0 ){
+      return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+    }
+    return number + ""; 
   }
 
   getAnyo(){
