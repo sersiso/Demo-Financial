@@ -19,8 +19,6 @@ export class VistacuentaComponent implements OnInit {
 
     this.recuperarIdUrl = this._VARIABLES.idCuentaVisualizar;
     this.movimientoCuenta = _DATOS.buscarCuentaId( this.recuperarIdUrl );
-    console.log(this.movimientoCuenta);
-    
    }
 
   ngOnInit(): void {
@@ -29,7 +27,6 @@ export class VistacuentaComponent implements OnInit {
 
   monedaUsada(){
     this.moneda = this._DATOS.getMoneda();
-    console.log(this.moneda);
   }
 
   cerrarModal( termino:boolean ){

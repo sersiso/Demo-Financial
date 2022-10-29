@@ -20,6 +20,7 @@ import { TipoMovimientoPipe } from './pipes/tipo-movimiento.pipe';
 import { AsideComponent } from './pages/aside/aside.component';
 import { VistacuentaComponent } from './pages/vistacuenta/vistacuenta.component';
 import { NombreCuentaPipe } from './pipes/nombre-cuenta.pipe';
+import { MesesPipe } from './pipes/meses.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NombreCuentaPipe } from './pipes/nombre-cuenta.pipe';
     TipoMovimientoPipe,
     AsideComponent,
     VistacuentaComponent,
-    NombreCuentaPipe
+    NombreCuentaPipe,
+    MesesPipe
   ],
   imports: [
     BrowserModule,

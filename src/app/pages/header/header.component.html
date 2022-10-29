@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li routerLinkActive="active">
-                    <a title="Opciones" class="puntero">
+                    <a title="Opciones" (click)="noDisponible()" class="puntero">
                         <i title="Opciones"  class="fa-solid fa-gear"></i>
                     </a>
                 </li>
@@ -38,6 +38,10 @@
         </h1>
 
         <nav>
+            <div class="mano animated jackInTheBox fast" *ngIf="empezar">
+                <span>Puedes comenzar iniciando la sesión aquí</span>
+                <i class="fa-regular fa-hand-point-right"></i>
+            </div>
             <ul class="menu">
                 <li routerLink="/login">
                     <i title="Iniciar sesion" class="fa-solid fa-user puntero"></i>

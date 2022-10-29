@@ -53,7 +53,7 @@ html {
 }
 
 .background {
-  background-color: #f7f7f7;
+  background-color: #fff;
 /*   background: rgb(255,255,255);
   background: -moz-linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(172,207,226,1) 100%);
   background: -webkit-linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(172,207,226,1) 100%);
@@ -303,10 +303,6 @@ small {
   padding-top: 20px;
 }
 
-.space {
-  height: 50px;
-}
-
 .space-empty {
   height: 500px;
 }
@@ -524,10 +520,6 @@ aside {
   margin: 20px 0 0 0;
   color: #839ebf;
   font-weight: bold;
-}
-
-.space {
-  height: 400px;
 }
 
 .cabecera button {
@@ -763,9 +755,9 @@ span.info {
 }
 
 .space {
-  width: 100%;
-  height: 500px;
-  display: table;
+    width: 100%;
+    height: 400px;
+    display: table;
 }
 
 .cantidad-movimiento {
@@ -791,8 +783,22 @@ span.info {
   border: 1px solid #839ebf;
   color: #839ebf;
   border-radius: 5px;
-  width: 40px;
+  width: max-content;
   height: 40px;
+  padding: 0 1rem;
+  transition: all ease-in-out 0.3s;
+}
+
+.menu-espacio li button:hover {
+  border: 1px solid #8d939c;
+  color: #8d939c;
+  background-color: #f9f9f9;
+  transition: all ease-in-out 0.3s;
+}
+
+.btn-span {
+  font-size: 14px;
+  padding-left: 0.5rem;
 }
 
 .saldo-inicial {
@@ -855,4 +861,24 @@ span.info {
   margin: 0 0 0 0.5rem;
 }
 
+.mano {
+  position: absolute;
+  z-index: 100;
+  top: 20px;
+  background-color: #fff;
+  right: 120px;
+  width: 240px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.mano i {
+  font-size: 2rem;
+}
+
+.mano i {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
 

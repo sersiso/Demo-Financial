@@ -99,7 +99,7 @@ export class AsientoComponent implements OnInit {
         this._DATOS.crearMovimiento( data, this.total );
         this.cerrarModal( false );
         if ( data.cuadrar === true ){
-          console.log("Hace el asiento extra");
+          
         }
       }); 
 

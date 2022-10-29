@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   datosEmpresa:empresaModel;
   currentRoute: string;
   imgLogo:string = '../../assets/img/logo-financial-demo.svg';
+  empezar:boolean = false;
 
   constructor( public auth: LoginService, 
               private router: Router) { }
@@ -21,7 +22,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
 
     this.datosEmpresa = this.auth.getEmpresa();
+
+    setTimeout( ()=> this.empezar = true, 5000 );
     
+  }
+
+  noDisponible(){
+    Swal.fire({
+      icon: 'info',
+      text: '¡Ops! Esta opción todavía no está disponible',
+      showConfirmButton: true
+      })
   }
 
   salir(){

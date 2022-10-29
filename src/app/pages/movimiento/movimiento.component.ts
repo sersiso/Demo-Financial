@@ -155,8 +155,6 @@ export class MovimientoComponent implements OnInit {
         cuentaContable: this.infoMovimiento.cuentaContable,
         contrapartida: this.infoMovimiento.contrapartida
       }
-
-      console.log(info);
       
       Swal.fire({
         icon: 'success',

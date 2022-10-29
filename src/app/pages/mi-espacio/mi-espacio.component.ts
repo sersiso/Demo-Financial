@@ -44,6 +44,7 @@ export class MiEspacioComponent implements OnInit {
   dias:any[] = [];
   mesesNombres:any[] = this._DATOS.getMesesNombres();
   anyo = this._DATOS.getAnyo();
+  mesActual = this._DATOS.getMes().toString();
 
 
   constructor( protected _DATOS:InfoService,
@@ -66,12 +67,6 @@ export class MiEspacioComponent implements OnInit {
     for ( let d = 1; d < 32; d++ ){
       this.dias.push(this._DATOS.zeroFill(d,2));
     }
-
-    console.log("MOVIMIENTOS:");
-    console.log(this._DATOS.getInfoMovimientos());
-
-    console.log("CUENTAS:");
-    console.log(this._DATOS.getInfoCuentas());
 
   }
 
@@ -107,10 +102,6 @@ export class MiEspacioComponent implements OnInit {
   AbrirModalCuentas( termino:boolean ){
     this._VARIABLES.abrirModalCuentas = termino;
     this.abrirModalCuentas = this._VARIABLES.abrirModalCuentas;
-  }
-
-  borrarFila( id:string ){
-    console.log(id);
   }
 
   recibirMoneda(){
@@ -216,8 +207,6 @@ export class MiEspacioComponent implements OnInit {
     }
 
     const data = this.busqueda.getRawValue();
-    console.log(data);
-    
 
     if ( data.asiento != '' ){
       const asiento = 1;

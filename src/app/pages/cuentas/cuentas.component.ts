@@ -53,7 +53,6 @@ export class CuentasComponent implements OnInit {
         text: 'Debe tener saldo 0.00 y sin movimientos',
         showConfirmButton: true,
         });
-        console.log(longitud);
         
     } 
     else if ( cuentas[indice].saldo === '0.00' && longitud === 1 ){

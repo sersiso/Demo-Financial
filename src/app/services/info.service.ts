@@ -49,6 +49,8 @@ export class InfoService {
     }
 
     this.setMovimientos(datosRecibidos);
+
+    console.log(datosRecibidos);
     
   }
 
@@ -187,8 +189,6 @@ export class InfoService {
   
       this.setSaldo( idcuentaContable );
       this.setSaldo( idcontrapartida );
-  
-      console.log(this.movimientos[indice]);
       
     }
 
@@ -224,16 +224,14 @@ export class InfoService {
 
     //Elimina el movimiento
     this.movimientos.splice(indice,1);
-
-    console.log(this.movimientos);
-    console.log(this.cuentas[indiceCuenta]);
-    console.log(this.cuentas[indiceContrapartida]);
     
   }
 
   //Funciones para cuentas
   setCuenta( info:Cuentas ){
     this.cuentas.push(info);
+    console.log(info);
+    
 }
 
   modificarCuenta( info:Cuentas, idRecibido:any ){
@@ -460,6 +458,10 @@ export class InfoService {
       identificador++;
     }
     return identificador;
+  }
+
+  getMes(){
+    return this.mes;
   }
 
   //Variables para fechas
