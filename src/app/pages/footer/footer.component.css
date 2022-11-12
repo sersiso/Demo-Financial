@@ -3,32 +3,8 @@ footer {
     background-color: #fff;
     padding: 30px;
     color: #000;
-    border-top: 1px solid #dcdcdc;
 }
 
-.logo-footer {
-    width: 200px;
-}
-
-.col-footer {
-    display: flex;
-}
-
-.info-footer {
-    width: inherit;
-    text-align: center;
-}
-
-.info-footer h2 {
-    width: 200px;
-    margin: 20px auto;
-    font-size: 14px;
-    line-height: 20px;
-}
-
-.info-footer ul li {
-    width: 200px;
-    margin: 20px auto;
-    font-size: 12px;
-    line-height: 20px;
+.texto-footer {
+    font-size: 11px;
 }

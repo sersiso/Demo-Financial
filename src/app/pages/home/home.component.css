@@ -1,27 +1,45 @@
 .columnas-3 {
     display: flex;
+    margin: 0 20px;
 }
 
 .col {
-    background-color: #fff;
+    background-color: #f1f1f1a6;
     height: auto;
     width: auto;
     flex: 30%;
     padding: 40px;
-    border-radius: 10px;
-    margin: 40px 10px;
+    margin: 40px 20px;
     color: #839ebf;
-    border: 1px solid #dcdcdc;
 }
 
-.home h1 {
-    font-size: 30px;
+.home .texto-slider h1 {
+    font-size: 2.5rem;
     text-align: center;
-    line-height: 60px;
-    margin: 40px auto auto;
-    color: #fff;
-    width: 80%;
+    color: #5f9ea0;
+    padding: 40px 60px 10px 60px;
+    height: max-content;
+}
+
+.home .texto-slider h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 30px;
+    color: #839ebf;
     padding: 40px 60px;
+    height: max-content;
+}
+
+.texto-slider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    height: max-content;
+    width: 50%;
+    background-color: #fff;
 }
 
 .col h2 {
@@ -63,17 +81,12 @@
 }
 
 .slider {
-    position: relative;
-    height: 800px;
+    display: table;
 }
 
-.slider .container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-    height: max-content;
+.slider-img {
+    position: relative;
 }
+
+
 

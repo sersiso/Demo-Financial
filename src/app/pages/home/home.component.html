@@ -1,6 +1,19 @@
-<div class="slider home animated fadeIn fast" [style.background]="rutaImg">
+<div class="slider home animated fadeIn fast">
+
+    <div class="slider-img animated fadeIn fast">
+        <img [src]="rutaImg" *ngIf="movil == false">
+        <img [src]="rutaImgMovil" *ngIf="movil == true">
+        <div class="texto-slider animated fadeInDown fast">
+            <h1>¡Bienvenid@!</h1> 
+            <h2>Este proyecto está hecho por <span class="bold">Sergio Sierra</span>. 
+                Es una versión demo de una aplicación contable realizada en Angular 14.2.3</h2>
+        </div>
+    </div>
+
     <div class="container animated fadeIn fast home">
+
         <div class="columnas-3">
+
             <div class="col">
                 <h2 class="bold">¿Qué es este el proyecto?</h2>
                 <p class="p-info"><strong class="bold">Es la versión demo de una aplicación contable hecha en Angular</strong>, la cual de forma muy 
@@ -9,15 +22,17 @@
                     pero se puede llegar a operar con las cuentas y los movimientos para ver su comportamiento.
                 </p>
             </div>
+
             <div class="col">
                 <h2 class="bold">¿Qué tecnología he usado?</h2>
                 <ul>
-                    <li><i class="fa-brands fa-html5"></i><span>HTML personalizo</span></li>
+                    <li><i class="fa-brands fa-html5"></i><span>HTML personalizado</span></li>
                     <li><i class="fa-brands fa-css3-alt"></i><span>CSS y responsive design</span></li>
                     <li><i class="fa-brands fa-angular"></i><span>Framework Angular</span></li>
                     <li><i class="fa-brands fa-font-awesome"></i><span>Iconos Fontawesome</span></li>
                 </ul>
             </div>
+
             <div class="col">
                 <h2 class="bold">¿Qué funciones tiene?</h2>
                 <ul>
@@ -27,6 +42,8 @@
                     <li><i class="fa-solid fa-file-contract"></i><span>Balance final</span></li>
                 </ul>
             </div>
+
         </div>
+
     </div>
 </div>

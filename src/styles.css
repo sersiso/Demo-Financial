@@ -882,3 +882,74 @@ span.info {
   margin-left: 1rem;
 }
 
+
+
+/* ------------------------------------ */
+/* DISPOSITIVOS MOVILES */
+/* ------------------------------------ */
+
+/* web */
+@media all and (max-width: 1680px){
+
+
+
+}
+
+
+@media all and (max-width: 1400px){
+
+.texto-slider {
+  width: 95% !important;
+}
+
+.container {
+  width: 100% !important;
+}
+  
+}
+  
+  
+
+/* iPad - tablet */
+@media all and (max-width: 1024px){
+
+.columnas-3 {
+  display: table !important;
+}
+
+.home .texto-slider h1 {
+  font-size: 2rem !important;
+  padding: 1.5rem 1rem 1rem 1rem !important;
+}
+
+.home .texto-slider h2 {
+  font-size: 1rem !important;
+  padding: 1rem !important;
+}
+
+.texto-slider {
+  width: 85% !important;
+}
+
+  
+}
+  
+  
+
+/* Movil */  
+
+@media all and (max-width: 710px) and (min-width: 220px) {
+
+  
+
+  
+}
+  
+  
+  
+@media all and (max-width: 480px) and (min-width: 220px) {
+
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

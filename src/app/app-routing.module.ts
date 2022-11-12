@@ -18,7 +18,7 @@ const routes: Routes = [
     RouterModule.forRoot( routes, { onSameUrlNavigation: 'reload' } )
   ],
   exports: [
-    RouterModule
+    RouterModule,
   ]
 })
 export class AppRoutingModule { }
