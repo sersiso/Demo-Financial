@@ -891,6 +891,9 @@ span.info {
 /* web */
 @media all and (max-width: 1680px){
 
+.saldos ul li {
+  font-size: 15px;
+}
 
 
 }
@@ -905,6 +908,7 @@ span.info {
 .container {
   width: 100% !important;
 }
+
   
 }
   
@@ -931,6 +935,9 @@ span.info {
   width: 85% !important;
 }
 
+.saldos ul {
+ display: table;
+}
   
 }
   
@@ -940,9 +947,98 @@ span.info {
 
 @media all and (max-width: 710px) and (min-width: 220px) {
 
-  
+.menu-espacio {
+  display: table;
+  width: 100%;
+}
 
-  
+.menu-espacio li {
+  margin: 0 0.5rem 0.5rem 0;
+  width: 100%;
+}
+
+.menu-espacio li button {
+  width: 100%;
+}
+
+.container-modal-asiento {
+  width: 98%;
+  height: 600px;
+}
+
+.content-asiento {
+  display: table;
+  width: 100%;
+}
+
+.container-modal {
+  width: 98%;
+  height: 600px;
+}
+
+.tabla table tr td, .tabla table tr th {
+  display: flex;
+}
+
+.info-tr td h2 {
+  color: #3b8189;
+  font-weight: bold;
+  margin: 0 1rem 0 0;
+}
+
+.tabla table .cabecera-movil {
+    background-color: #839ebf;
+    transition: all ease-in-out 0.2s;
+    color: #fff;
+    border-bottom: 3px solid #fff;
+    padding: 10px 1rem;
+}
+
+.tabla table tr {
+  font-size: 13px;
+}
+
+.tabla table tr td, .tabla table tr th {
+  padding: 5px 1rem;
+}
+
+.tabla table tr {
+  border-bottom: 1rem solid #fff;
+}
+
+.filtro span {
+  margin: 2rem 0 0 0.5rem;
+}
+
+h2.titulo-cuentas {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1% 5%;
+}
+
+.nombreCuenta {
+  font-size: 0.7rem;
+}
+
+.color-text {
+  font-size: 11px;
+  padding: 5px 0 0 0;
+}
+
+.info-cuenta {
+  overflow-x: auto;
+  height: 400px;
+}
+
+.fecha select {
+  width: 70px;
+}
+
+.container-modal-busqueda {
+  height: 350px;
+}
+
+
 }
   
   

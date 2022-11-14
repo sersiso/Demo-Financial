@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VariablesService } from '../../services/variables.service';
 import { InfoService } from '../../services/info.service';
 import Swal from 'sweetalert2';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-mi-espacio',
@@ -39,6 +40,10 @@ export class MiEspacioComponent implements OnInit {
   movimientoBuscado:any[] = [];
   buscador:boolean = false;
 
+  escritorio:boolean = true;
+  movil:boolean = false;
+  screenSize:string = '710';
+
   fechas
   meses:string[] = ['01','02','03','04','05','06','07','08','09','10','11','12'];
   dias:any[] = [];
@@ -49,7 +54,8 @@ export class MiEspacioComponent implements OnInit {
 
   constructor( protected _DATOS:InfoService,
               public _VARIABLES:VariablesService,
-              private fb:FormBuilder ) { 
+              private fb:FormBuilder,
+              public breakpointObserver: BreakpointObserver ) { 
 
     this.activo = this._DATOS.mostrarActivo();
     this.disponible = this._DATOS.mostrarDisponible();
@@ -68,6 +74,22 @@ export class MiEspacioComponent implements OnInit {
       this.dias.push(this._DATOS.zeroFill(d,2));
     }
 
+    this.sizeScreen();
+
+  }
+
+  sizeScreen(){
+    this.breakpointObserver
+    .observe( [`(max-width: ${ this.screenSize }px)`] )
+    .subscribe( ( state:BreakpointState )=>{
+      if ( state.matches ){
+        this.movil = true;
+        this.escritorio = false;
+      } else {
+        this.movil = false;
+        this.escritorio = true;
+      }
+    });
   }
 
   abrirModalCuenta:boolean = this._VARIABLES.abrirModalCuenta;

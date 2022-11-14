@@ -3,6 +3,7 @@ import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { empresaModel } from 'src/app/models/empresa.models';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-header',
@@ -15,16 +16,29 @@ export class HeaderComponent implements OnInit {
   currentRoute: string;
   imgLogo:string = '../../assets/img/logo-financial-demo.svg';
   empezar:boolean = false;
+  screenSize:string = '710';
 
   constructor( public auth: LoginService, 
-              private router: Router) { }
+              private router: Router,
+              public breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
 
     this.datosEmpresa = this.auth.getEmpresa();
+    this.sizeScreen();
 
-    setTimeout( ()=> this.empezar = true, 5000 );
-    
+  }
+
+  sizeScreen(){
+    this.breakpointObserver
+    .observe( [`(max-width: ${ this.screenSize }px)`] )
+    .subscribe( ( state:BreakpointState )=>{
+      if ( state.matches ){
+        this.empezar = false;
+      } else {
+        setTimeout( ()=> this.empezar = true, 5000 );
+      }
+    });
   }
 
   noDisponible(){

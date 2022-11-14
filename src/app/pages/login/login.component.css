@@ -73,3 +73,21 @@ span {
 
 
 
+
+/* Movil */  
+
+@media all and (max-width: 710px) and (min-width: 220px) {
+
+    .center-login {
+        width: 70%;
+        padding: 7%;
+    }
+    
+    .center-login input {
+        width: 86%;
+    }
+    
+  }
+
+
+

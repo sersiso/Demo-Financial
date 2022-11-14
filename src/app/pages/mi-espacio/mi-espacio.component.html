@@ -65,12 +65,12 @@
         </ul>
     
         <div class="tabla animated fadeIn fast">
+
+            <h1 *ngIf="!buscador">Movimientos de "{{ mesActual | meses }}"</h1>
             
             <table class="default animated fadeIn fast" *ngIf="!buscador">
 
-                <h1>Movimientos de "{{ mesActual | meses }}"</h1>
-
-                <tr class="cabecera-tabla">
+                <tr class="cabecera-tabla" *ngIf="escritorio">
                     <th>Asiento</th>
                     <th>Fecha</th>
                     <th>Descripción</th>
@@ -81,18 +81,41 @@
                 </tr>
 
 
-                <tr *ngFor="let movimiento of _DATOS.recibirMovimientos(); let i = index" title="Modificar asiento {{ movimiento.asiento }}" class="info-tr puntero" 
+                <tr *ngFor="let movimiento of _DATOS.recibirMovimientos(); let i = index" 
+                title="Modificar asiento {{ movimiento.asiento }}" class="info-tr puntero" 
                 (click)="AbrirModalModificarAsiento( true, movimiento.id, movimiento.tipo )">
-                    <td>{{ movimiento.asiento }}</td>
-                    <td>{{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo }}</td>
-                    <td>{{ movimiento.concepto }}</td>
-                    <td>{{ movimiento.cuentaContable | idtexto }}</td>
-                    <td>{{ movimiento.contrapartida | idtexto }}</td>
-                    <td>{{ movimiento.tipo | tipoMovimiento }}</td>
+
+                    <td class="cabecera-movil" *ngIf="movil">Información de asiento</td>
+                    <td>
+                        <h2 *ngIf="movil">Asiento:</h2>
+                        {{ movimiento.asiento }}
+                    </td>
+                    <td>
+                        <h2 *ngIf="movil">Fecha:</h2>
+                        {{ movimiento.dia +'/'+ movimiento.mes +'/'+ movimiento.anyo }}
+                    </td>
+                    <td>
+                        <h2 *ngIf="movil">Descripción:</h2>
+                        {{ movimiento.concepto }}
+                    </td>
+                    <td>
+                        <h2 *ngIf="movil">Cuenta:</h2>
+                        {{ movimiento.cuentaContable | idtexto }}
+                    </td>
+                    <td>
+                        <h2 *ngIf="movil">Contrapartida:</h2>
+                        {{ movimiento.contrapartida | idtexto }}
+                    </td>
+                    <td>
+                        <h2 *ngIf="movil">Tipo:</h2>
+                        {{ movimiento.tipo | tipoMovimiento }}
+                    </td>
                     <td class="cantidad-movimiento bold"
                         [class.pasivo]="movimiento.tipo === '2' || movimiento.tipo === '3' || movimiento.tipo === '6' ">
+                        <h2 *ngIf="movil">Cantidad:</h2>
                         {{ movimiento.cantidad | miles }}{{ moneda }}
                     </td>
+
                 </tr>
             
             </table>
@@ -105,7 +128,7 @@
 
                     <h1>Movimientos con filtro</h1>
     
-                    <tr class="cabecera-tabla">
+                    <tr class="cabecera-tabla" *ngIf="escritorio">
                         <th>Asiento</th>
                         <th>Fecha</th>
                         <th>Descripción</th>
@@ -117,18 +140,38 @@
 
                     <tr *ngFor="let movi of movimientoBuscado" title="Modificar asiento {{ movi.asiento }}" class="info-tr puntero" 
                     (click)="AbrirModalModificarAsiento( true, movi.id, movi.tipo )">
-                        <td>{{ movi.asiento }}</td>
-                        <td>{{ movi.dia +'/'+ movi.mes +'/'+ movi.anyo }}</td>
-                        <td>{{ movi.concepto }}</td>
-                        <td>{{ movi.cuentaContable | idtexto }}</td>
-                        <td>{{ movi.contrapartida | idtexto }}</td>
-                        <td>{{ movi.tipo | tipoMovimiento }}</td>
+
+                        <td class="cabecera-movil" *ngIf="movil">Información de asiento</td>
+                        <td>
+                            <h2 *ngIf="movil">Asiento:</h2>
+                            {{ movi.asiento }}
+                        </td>
+                        <td>
+                            <h2 *ngIf="movil">Fecha:</h2>
+                            {{ movi.dia +'/'+ movi.mes +'/'+ movi.anyo }}
+                        </td>
+                        <td>
+                            <h2 *ngIf="movil">Descripción:</h2>
+                            {{ movi.concepto }}
+                        </td>
+                        <td>
+                            <h2 *ngIf="movil">Cuenta:</h2>
+                            {{ movi.cuentaContable | idtexto }}
+                        </td>
+                        <td>
+                            <h2 *ngIf="movil">Contrapartida:</h2>
+                            {{ movi.contrapartida | idtexto }}
+                        </td>
+                        <td>
+                            <h2 *ngIf="movil">Tipo:</h2>
+                            {{ movi.tipo | tipoMovimiento }}
+                        </td>
                         <td class="cantidad-movimiento bold"
-                            [class.pasivo]="movi.tipo === '2' || 
-                            movi.tipo === '3' || 
-                            movi.tipo === '6' ">
+                            [class.pasivo]="movi.tipo === '2' || movi.tipo === '3' || movi.tipo === '6' ">
+                            <h2 *ngIf="movil">Cantidad:</h2>
                             {{ movi.cantidad | miles }}{{ moneda }}
                         </td>
+
                     </tr>
 
             </table>

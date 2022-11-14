@@ -152,7 +152,7 @@ export class Variables {
                 },
           identificador: '8',
           nombreCuenta: 'EFECTIVO',
-          descripcion: 'Dinero debajo del colchón',
+          descripcion: 'Dinero en efectivo',
           debe: [
                   { asiento: '2', cantidad: '00.00' },
                   { asiento: '8', cantidad: '650.46' },

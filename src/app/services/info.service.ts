@@ -1,7 +1,9 @@
 import { Injectable, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Cuentas } from '../models/cuenta.models';
 import { Movimientos } from '../models/movimientos.models';
 import { Variables } from './variables';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,8 @@ export class InfoService {
   private moneda:moneda = new Variables().getMonedaVariables();
   private tipoMovimiento = new Variables().getTipoMovimientoVariables();
   private tipoCuenta = new Variables().getTipoCuentaVariables();
-  private movimientos:Movimientos[] = new Variables().getMovimientosVariables();
+  //private movimientos:Observable<Movimientos[]> = new Variables().getMovimientosVariables();
+  private movimientos = new Variables().getMovimientosVariables();
   private cuentas:Cuentas[] = new Variables().getCuentasVariables();
   private mesesNombres:any[] = new Variables().getMesesNombres();
 
@@ -262,7 +265,7 @@ export class InfoService {
     return this.cuentas;
   }
 
-  getInfoMovimientos(){
+  getInfoMovimientos():Observable<any>{
     return this.movimientos;
   }
 
