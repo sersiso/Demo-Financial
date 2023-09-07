@@ -10,18 +10,20 @@ import { Variables } from './variables';
 })
 export class InfoService {
 
+  //Variables para fechas
+  hoy = new Date();
+  dia = this.hoy.getDate();
+  mes = this.hoy.getMonth() + 1;
+  anyo = this.hoy.getFullYear();
+  hora = this.hoy.getTime();
+
   colores:colores = new Variables().getColoresVariables();
   private moneda:moneda = new Variables().getMonedaVariables();
   private tipoMovimiento = new Variables().getTipoMovimientoVariables();
   private tipoCuenta = new Variables().getTipoCuentaVariables();
-  //private movimientos:Observable<Movimientos[]> = new Variables().getMovimientosVariables();
   private movimientos = new Variables().getMovimientosVariables();
   private cuentas:Cuentas[] = new Variables().getCuentasVariables();
   private mesesNombres:any[] = new Variables().getMesesNombres();
-
-  constructor() { 
-
-   }
 
 
   //Funciones con asientos
@@ -29,7 +31,7 @@ export class InfoService {
     let info = [];
     let mov = this.getInfoMovimientos();
     mov.forEach( resp => {
-      if ( resp.tipo != '7' && resp.mes === this.mes.toString() ){
+      if ( resp.tipo != '7' && resp.mes === this.mes.toString().padStart(2, '0') ){
         info.push(resp);
       }
     });
@@ -43,7 +45,7 @@ export class InfoService {
         id: datosForm.id.toString(),
         dia: datosForm.dia,
         mes: datosForm.mes,
-        anyo: datosForm.anyo,
+        anyo: datosForm.anyo.toString(),
         concepto: datosForm.concepto,
         cantidad: total,
         cuentaContable: datosForm.cuentaContable,
@@ -466,13 +468,6 @@ export class InfoService {
   getMes(){
     return this.mes;
   }
-
-  //Variables para fechas
-  hoy = new Date();
-  dia = this.hoy.getDate();
-  mes = this.hoy.getMonth() + 1;
-  anyo = this.hoy.getFullYear();
-  hora = this.hoy.getTime();
 
 }
 

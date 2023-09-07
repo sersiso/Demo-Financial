@@ -49,7 +49,7 @@ export class MiEspacioComponent implements OnInit {
   dias:any[] = [];
   mesesNombres:any[] = this._DATOS.getMesesNombres();
   anyo = this._DATOS.getAnyo();
-  mesActual = this._DATOS.getMes().toString();
+  mesActual = this._DATOS.getMes().toString().padStart(2, '0');
 
 
   constructor( protected _DATOS:InfoService,

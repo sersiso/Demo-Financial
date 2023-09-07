@@ -1,5 +1,6 @@
-import { Cuentas } from "../models/cuenta.models"
-import { Movimientos } from "../models/movimientos.models"
+import { Cuentas } from "../models/cuenta.models";
+import { Movimientos } from "../models/movimientos.models";
+import { InfoService } from './info.service';
 
 export class Variables {
 
@@ -383,6 +384,9 @@ export class Variables {
         
     ]
 
+    private cuentas2023:Cuentas[] = this.cuentas;
+    private movimientos2023:Movimientos[] = [];
+
     private colores = {
         verde: '#5f9ea0',
         rojo: '#ff7f50',
@@ -548,19 +552,32 @@ export class Variables {
         mayor: {
           cuentas: this.cuentas
                 },
+      },
+      {
+        anyo: '2023',
+        diario: {
+          movimientos: this.movimientos2023
+                  },
+        mayor: {
+          cuentas: this.cuentas2023
+                },
       }
     ] 
+
+    anyo() {
+      const hoy = new Date();
+      const anyoDeTrabajo = hoy.getFullYear();
+      return anyoDeTrabajo;
+    }
   
 
     getCuentasVariables(){
-      const anyoDeTrabajo = '2022';
-      let indice = this.datosAnuales.findIndex( i => i.anyo === anyoDeTrabajo);
+      let indice = this.datosAnuales.findIndex( i => i.anyo === this.anyo().toString());
       return this.datosAnuales[indice].mayor.cuentas;
     }
 
     getMovimientosVariables(){
-      const anyoDeTrabajo = '2022';
-      let indice = this.datosAnuales.findIndex( i => i.anyo === anyoDeTrabajo);
+      let indice = this.datosAnuales.findIndex( i => i.anyo === this.anyo().toString());
       return this.datosAnuales[indice].diario.movimientos;
     }
 
