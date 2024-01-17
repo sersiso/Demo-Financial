@@ -387,6 +387,9 @@ export class Variables {
     private cuentas2023:Cuentas[] = this.cuentas;
     private movimientos2023:Movimientos[] = [];
 
+    private cuentas2024:Cuentas[] = this.cuentas2023;
+    private movimientos2024:Movimientos[] = [];
+
     private colores = {
         verde: '#5f9ea0',
         rojo: '#ff7f50',
@@ -560,6 +563,15 @@ export class Variables {
                   },
         mayor: {
           cuentas: this.cuentas2023
+                },
+      },
+      {
+        anyo: '2024',
+        diario: {
+          movimientos: this.movimientos2024
+                  },
+        mayor: {
+          cuentas: this.cuentas2024
                 },
       }
     ] 
