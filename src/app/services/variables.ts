@@ -388,7 +388,56 @@ export class Variables {
     private movimientos2023:Movimientos[] = [];
 
     private cuentas2024:Cuentas[] = this.cuentas2023;
-    private movimientos2024:Movimientos[] = [];
+    private movimientos2024:Movimientos[] = [
+      {
+        asiento: '1',
+        id: 'M-5fb1a2dfe9634dd4668ce0f21115d834',
+        dia: '02',
+        mes: '01',
+        anyo: '2024',
+        concepto: 'Nómina Enero',
+        cantidad: '1200.50',
+        cuentaContable: '793d2d7c25124a23ac189ea595998fe9',
+        contrapartida: '1665138152607',
+        tipo: '1'
+      }, 
+      {
+        asiento: '2',
+        id: 'M-f7b8ae1be1044fada17fc42704da1de6',
+        dia: '27',
+        mes: '01',
+        anyo: '2024',
+        concepto: 'Dejo a deber Factura 66',
+        cantidad: '230.40',
+        cuentaContable: '1665060690045',
+        contrapartida: '2e24eb193832442e8a39565ac218as40',
+        tipo: '6'
+      },
+      {
+        asiento: '3',
+        id: 'M-5fb1a2dfe9634dd4668ce0f21115d834',
+        dia: '02',
+        mes: '02',
+        anyo: '2024',
+        concepto: 'Nómina Enero',
+        cantidad: '1200.50',
+        cuentaContable: '793d2d7c25124a23ac189ea595998fe9',
+        contrapartida: '1665138152607',
+        tipo: '1'
+      }, 
+      {
+        asiento: '4',
+        id: 'M-f7b8ae1be1044fada17fc42704da1de6',
+        dia: '27',
+        mes: '02',
+        anyo: '2024',
+        concepto: 'Dejo a deber Factura 56',
+        cantidad: '230.40',
+        cuentaContable: '1665060690045',
+        contrapartida: '2e24eb193832442e8a39565ac218as40',
+        tipo: '6'
+      },
+    ];
 
     private colores = {
         verde: '#5f9ea0',
