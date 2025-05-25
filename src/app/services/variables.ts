@@ -622,6 +622,15 @@ export class Variables {
         mayor: {
           cuentas: this.cuentas2024
                 },
+      },
+      {
+        anyo: '2025',
+        diario: {
+          movimientos: this.movimientos2024
+                  },
+        mayor: {
+          cuentas: this.cuentas2024
+                },
       }
     ] 
 
